@@ -1,0 +1,6 @@
+framework module Pods_My_Foody_Body {
+  umbrella header "Pods-My_Foody_Body-umbrella.h"
+
+  export *
+  module * { export * }
+}
