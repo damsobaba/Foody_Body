@@ -22,6 +22,24 @@
 		CE08AB6125D5DEFC00C6F688 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */; };
 		CE08AB6225D5DEFC00C6F688 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */; };
 		CE231A9DC06B55DFF858E6DE /* Pods_My_Foody_Body.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D1D7069B7F9923940A8C83 /* Pods_My_Foody_Body.framework */; };
+		CE75918225DBCD0C0056A779 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75918125DBCD0C0056A779 /* AuthManager.swift */; };
+		CE75918725DBCD290056A779 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75918625DBCD290056A779 /* Api.swift */; };
+		CE88A1F125DD542C00BFB8F8 /* PeopleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A1F025DD542C00BFB8F8 /* PeopleTableViewController.swift */; };
+		CE88A1F625DD545D00BFB8F8 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A1F525DD545D00BFB8F8 /* UserTableViewCell.swift */; };
+		CE88A1FB25DD54C700BFB8F8 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A1FA25DD54C700BFB8F8 /* MessageTableViewController.swift */; };
+		CE88A20025DD556700BFB8F8 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A1FF25DD556700BFB8F8 /* StorageService.swift */; };
+		CE88A20825DD55D900BFB8F8 /* Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A20725DD55D900BFB8F8 /* Reference.swift */; };
+		CE88A20D25DD560500BFB8F8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A20C25DD560500BFB8F8 /* Extensions.swift */; };
+		CE88A21225DD574800BFB8F8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A21125DD574800BFB8F8 /* User.swift */; };
+		CEE3B07925DD9F5F00834968 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B07825DD9F5F00834968 /* ProfileTableViewController.swift */; };
+		CEE3B07E25DD9FC400834968 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B07D25DD9FC400834968 /* ChatViewController.swift */; };
+		CEE3B08325DDA05200834968 /* ChatViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B08225DDA05200834968 /* ChatViewControllerExtension.swift */; };
+		CEE3B08925DDA14500834968 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B08825DDA14500834968 /* MessageTableViewCell.swift */; };
+		CEE3B09125DDA1D300834968 /* InboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B09025DDA1D300834968 /* InboxTableViewCell.swift */; };
+		CEE3B09625DDA35300834968 /* Inbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B09525DDA35300834968 /* Inbox.swift */; };
+		CEE3B09B25DDA3D600834968 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B09A25DDA3D600834968 /* Message.swift */; };
+		CEE3B0A025DDA3FE00834968 /* MessageApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B09F25DDA3FE00834968 /* MessageApi.swift */; };
+		CEE3B0A525DDA42A00834968 /* InboxApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B0A425DDA42A00834968 /* InboxApi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +79,24 @@
 		CE08AA4F25D5BDEC00C6F688 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		CE08AA5425D5BE1600C6F688 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE75918125DBCD0C0056A779 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		CE75918625DBCD290056A779 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Api.swift; path = /Users/adammabrouki/Desktop/P12/My_Foody_Body/My_Foody_Body/Model/Api.swift; sourceTree = "<absolute>"; };
+		CE88A1F025DD542C00BFB8F8 /* PeopleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewController.swift; sourceTree = "<group>"; };
+		CE88A1F525DD545D00BFB8F8 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		CE88A1FA25DD54C700BFB8F8 /* MessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
+		CE88A1FF25DD556700BFB8F8 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		CE88A20725DD55D900BFB8F8 /* Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reference.swift; sourceTree = "<group>"; };
+		CE88A20C25DD560500BFB8F8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CE88A21125DD574800BFB8F8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CEE3B07825DD9F5F00834968 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		CEE3B07D25DD9FC400834968 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		CEE3B08225DDA05200834968 /* ChatViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewControllerExtension.swift; sourceTree = "<group>"; };
+		CEE3B08825DDA14500834968 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		CEE3B09025DDA1D300834968 /* InboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxTableViewCell.swift; sourceTree = "<group>"; };
+		CEE3B09525DDA35300834968 /* Inbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inbox.swift; sourceTree = "<group>"; };
+		CEE3B09A25DDA3D600834968 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		CEE3B09F25DDA3FE00834968 /* MessageApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageApi.swift; sourceTree = "<group>"; };
+		CEE3B0A425DDA42A00834968 /* InboxApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxApi.swift; sourceTree = "<group>"; };
 		CF83C5BEF9CF584AEDACCA84 /* Pods-My_Foody_Body.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My_Foody_Body.release.xcconfig"; path = "Target Support Files/Pods-My_Foody_Body/Pods-My_Foody_Body.release.xcconfig"; sourceTree = "<group>"; };
 		D6D7EA244DF92C2DCE711974 /* Pods_My_Foody_BodyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_Foody_BodyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D750B56A01332DC904EAFFAD /* Pods_My_Foody_Body_My_Foody_BodyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_Foody_Body_My_Foody_BodyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,12 +159,13 @@
 		CE08AA0325D5BC6D00C6F688 /* My_Foody_Body */ = {
 			isa = PBXGroup;
 			children = (
-				CE08AA0425D5BC6D00C6F688 /* AppDelegate.swift */,
+				CE88A20C25DD560500BFB8F8 /* Extensions.swift */,
 				CE08AA0625D5BC6D00C6F688 /* SceneDelegate.swift */,
-				CE08AA0825D5BC6D00C6F688 /* ViewController.swift */,
-				CE08AA4F25D5BDEC00C6F688 /* SignUpViewController.swift */,
-				CE08AA5425D5BE1600C6F688 /* SignInViewController.swift */,
-				CE08AA0A25D5BC6D00C6F688 /* Main.storyboard */,
+				CE08AA0425D5BC6D00C6F688 /* AppDelegate.swift */,
+				CEE3B06825DD80ED00834968 /* Model */,
+				CEE3B06F25DD85A500834968 /* Log-in */,
+				CEE3B07025DD85DD00834968 /* Controller */,
+				CEE3B08725DDA09500834968 /* View */,
 				CE08AA0D25D5BC7000C6F688 /* Assets.xcassets */,
 				CE08AA0F25D5BC7000C6F688 /* LaunchScreen.storyboard */,
 				CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */,
@@ -153,6 +190,55 @@
 				CE08AA2825D5BC7000C6F688 /* Info.plist */,
 			);
 			path = My_Foody_BodyUITests;
+			sourceTree = "<group>";
+		};
+		CEE3B06825DD80ED00834968 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE75918625DBCD290056A779 /* Api.swift */,
+				CE88A21125DD574800BFB8F8 /* User.swift */,
+				CEE3B09525DDA35300834968 /* Inbox.swift */,
+				CEE3B09A25DDA3D600834968 /* Message.swift */,
+				CEE3B09F25DDA3FE00834968 /* MessageApi.swift */,
+				CEE3B0A425DDA42A00834968 /* InboxApi.swift */,
+				CE88A20725DD55D900BFB8F8 /* Reference.swift */,
+				CE88A1FF25DD556700BFB8F8 /* StorageService.swift */,
+				CE75918125DBCD0C0056A779 /* AuthManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEE3B06F25DD85A500834968 /* Log-in */ = {
+			isa = PBXGroup;
+			children = (
+				CE08AA5425D5BE1600C6F688 /* SignInViewController.swift */,
+				CE08AA4F25D5BDEC00C6F688 /* SignUpViewController.swift */,
+			);
+			path = "Log-in";
+			sourceTree = "<group>";
+		};
+		CEE3B07025DD85DD00834968 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CE08AA0825D5BC6D00C6F688 /* ViewController.swift */,
+				CE88A1FA25DD54C700BFB8F8 /* MessageTableViewController.swift */,
+				CEE3B07D25DD9FC400834968 /* ChatViewController.swift */,
+				CEE3B08225DDA05200834968 /* ChatViewControllerExtension.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CEE3B08725DDA09500834968 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE88A1F025DD542C00BFB8F8 /* PeopleTableViewController.swift */,
+				CEE3B08825DDA14500834968 /* MessageTableViewCell.swift */,
+				CEE3B09025DDA1D300834968 /* InboxTableViewCell.swift */,
+				CEE3B07825DD9F5F00834968 /* ProfileTableViewController.swift */,
+				CE88A1F525DD545D00BFB8F8 /* UserTableViewCell.swift */,
+				CE08AA0A25D5BC6D00C6F688 /* Main.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E26BF593879DBCE8EE56F3C0 /* Frameworks */ = {
@@ -418,10 +504,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE3B0A525DDA42A00834968 /* InboxApi.swift in Sources */,
 				CE08AA0925D5BC6D00C6F688 /* ViewController.swift in Sources */,
+				CEE3B09125DDA1D300834968 /* InboxTableViewCell.swift in Sources */,
+				CE88A1F625DD545D00BFB8F8 /* UserTableViewCell.swift in Sources */,
+				CEE3B07E25DD9FC400834968 /* ChatViewController.swift in Sources */,
+				CE88A1FB25DD54C700BFB8F8 /* MessageTableViewController.swift in Sources */,
+				CE88A20D25DD560500BFB8F8 /* Extensions.swift in Sources */,
+				CEE3B09B25DDA3D600834968 /* Message.swift in Sources */,
 				CE08AA0525D5BC6D00C6F688 /* AppDelegate.swift in Sources */,
+				CEE3B0A025DDA3FE00834968 /* MessageApi.swift in Sources */,
 				CE08AA5025D5BDEC00C6F688 /* SignUpViewController.swift in Sources */,
+				CEE3B07925DD9F5F00834968 /* ProfileTableViewController.swift in Sources */,
+				CE88A21225DD574800BFB8F8 /* User.swift in Sources */,
+				CE75918225DBCD0C0056A779 /* AuthManager.swift in Sources */,
 				CE08AA5525D5BE1600C6F688 /* SignInViewController.swift in Sources */,
+				CEE3B08925DDA14500834968 /* MessageTableViewCell.swift in Sources */,
+				CEE3B08325DDA05200834968 /* ChatViewControllerExtension.swift in Sources */,
+				CE75918725DBCD290056A779 /* Api.swift in Sources */,
+				CE88A1F125DD542C00BFB8F8 /* PeopleTableViewController.swift in Sources */,
+				CE88A20825DD55D900BFB8F8 /* Reference.swift in Sources */,
+				CE88A20025DD556700BFB8F8 /* StorageService.swift in Sources */,
+				CEE3B09625DDA35300834968 /* Inbox.swift in Sources */,
 				CE08AA0725D5BC6D00C6F688 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,7 +632,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -583,7 +687,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -602,6 +706,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3NYLP3F6GN;
 				INFOPLIST_FILE = My_Foody_Body/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -609,7 +714,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adammab.My-Foody-Body";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -622,6 +727,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3NYLP3F6GN;
 				INFOPLIST_FILE = My_Foody_Body/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -629,7 +735,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adammab.My-Foody-Body";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

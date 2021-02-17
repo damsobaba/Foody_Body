@@ -8,6 +8,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import ProgressHUD
 class SignUpViewController: UIViewController {
     
     
@@ -61,60 +62,56 @@ class SignUpViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
-    
-    @IBAction func SignUpButtonTapped(_ sender: Any) {
-        
-        guard let imageSelected = self.image else {
-            print("Avatar")
+    func validateFields() {
+        guard let username = self.fullnameTextField.text, !username.isEmpty else {
+            ProgressHUD.showError(ERROR_EMPTY_USERNAME)
             return
         }
-        guard let imageData = imageSelected.jpegData(compressionQuality: 0.4) else { return }
-        
-        Auth.auth().createUser(withEmail: "test14@gmail.com", password: "123456") { (authDataResult, error) in
-            if error != nil {
-                print(error!.localizedDescription)
-                return
-            }
-            if let authData = authDataResult {
-                print(authData.user.email)
-                var dict: Dictionary<String, Any> =  [
-                    "uid": authData.user.uid,
-                    "email": authData.user.email!,
-                    "profileImageUrl": "",
-                    "status": "Welcome "
-                ]
-                let storageRef = Storage.storage().reference(forURL: "gs://foody-body-be872.appspot.com")
-                let storageProfileRef = storageRef.child("profile").child(authData.user.uid)
-                
-                
-                let metadata = StorageMetadata()
-                metadata.contentType = "image/jpg"
-                storageProfileRef.putData(imageData,metadata: metadata,completion: {(StorageMetadata,error) in
-                    if error != nil {
-                        print(error?.localizedDescription)
-                        return
-                    }
-                    storageProfileRef.downloadURL { (url, error) in
-                        if let metaImageUrl = url?.absoluteString {
-                           dict["profileImageUrl"] = metaImageUrl
-                            Database.database().reference().child("users")
-                                .child(authData.user.uid).updateChildValues(dict, withCompletionBlock: { (error, ref) in
-                                if error == nil {
-                                    print("Done")
-                                }
-                            })
-                        }
-                    }
-                })
-                
-                
-            }
+        guard let email = self.emailTextField.text, !email.isEmpty else {
+            ProgressHUD.showError(ERROR_EMPTY_EMAIL)
+            
+            return
+        }
+        guard let password = self.passwordTextField.text, !password.isEmpty else {
+            ProgressHUD.showError(ERROR_EMPTY_PASSWORD)
+            
+            return
         }
         
     }
+    
+    func signUp(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+  
+        ProgressHUD.show("Loading...")
 
+        Api.User.signUp(withUsername: self.fullnameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!, image: self.image, onSuccess: {
+            ProgressHUD.dismiss()
+            onSuccess()
+        }) { (errorMessage) in
+            onError(errorMessage)
+
+        }
+       
+    }
+    @IBAction func signUpButtonDidTapped(_ sender: Any) {
+        self.view.endEditing(true)
+        self.validateFields()
+        self.signUp(onSuccess: {
+            (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
+        }) { (errorMessage) in
+            ProgressHUD.showError(errorMessage)
+        }
+        
+    }
+    
 }
+
+
+
 extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageSelected = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
@@ -130,3 +127,4 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
         picker.dismiss(animated: true, completion: nil)
     }
 }
+

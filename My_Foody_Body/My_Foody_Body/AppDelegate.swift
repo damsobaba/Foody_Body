@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,9 +17,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+      configureInitialViewController()
+
         return true
     }
-
+    
+    func configureInitialViewController(){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        var initialVc:UIViewController?
+        let storyboard=UIStoryboard(name: "Main", bundle: nil)
+        
+        if Auth.auth().currentUser != nil {
+            let homeVC = storyboard.instantiateViewController(withIdentifier:  IDENTIFIER_TABBAR )
+            initialVc = homeVC
+        }
+        else{
+            let loginVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_MAIN)
+            initialVc = loginVC
+        }
+        
+        if #available(iOS 13.0, *) {
+            if let scene = UIApplication.shared.connectedScenes.first{
+                guard let windowScene = (scene as? UIWindowScene) else { return }
+                let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
+                window.windowScene = windowScene
+                window.rootViewController = initialVc
+                window.makeKeyAndVisible()
+                appDelegate.window = window
+            }
+        }
+        else
+        {
+            appDelegate.window?.rootViewController = initialVc
+            appDelegate.window?.makeKeyAndVisible()
+        }
+    }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
