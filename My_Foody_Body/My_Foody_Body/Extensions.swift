@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UIKit
 import SDWebImage
 
 extension UIImageView {
@@ -75,7 +75,6 @@ func timeAgoSinceDate(_ date:Date, currentDate:Date, numericDates:Bool) -> Strin
         return "\(components.second!) seconds ago"
     } else { return "Just now" }
 }
-
 
 
 

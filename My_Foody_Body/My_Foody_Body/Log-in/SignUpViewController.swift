@@ -8,7 +8,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
-import ProgressHUD
+
 class SignUpViewController: UIViewController {
     
     
@@ -68,16 +68,17 @@ class SignUpViewController: UIViewController {
     
     func validateFields() {
         guard let username = self.fullnameTextField.text, !username.isEmpty else {
-            ProgressHUD.showError(ERROR_EMPTY_USERNAME)
+         presentAlert(title: "", message: "please enter a username")
             return
         }
         guard let email = self.emailTextField.text, !email.isEmpty else {
-            ProgressHUD.showError(ERROR_EMPTY_EMAIL)
+            
+            presentAlert(title: "", message: "Please enter a valide email")
             
             return
         }
         guard let password = self.passwordTextField.text, !password.isEmpty else {
-            ProgressHUD.showError(ERROR_EMPTY_PASSWORD)
+            presentAlert(title: "", message: "Please enter a valid password")
             
             return
         }
@@ -86,10 +87,10 @@ class SignUpViewController: UIViewController {
     
     func signUp(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
   
-        ProgressHUD.show("Loading...")
+      
 
         Api.User.signUp(withUsername: self.fullnameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!, image: self.image, onSuccess: {
-            ProgressHUD.dismiss()
+            self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Loading")
             onSuccess()
         }) { (errorMessage) in
             onError(errorMessage)
@@ -103,7 +104,7 @@ class SignUpViewController: UIViewController {
         self.signUp(onSuccess: {
             (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
         }) { (errorMessage) in
-            ProgressHUD.showError(errorMessage)
+            self.presentAlert(title: "Error", message: "They have been a error please try again")
         }
         
     }

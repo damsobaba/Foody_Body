@@ -7,7 +7,7 @@
 
 
 import UIKit
-import ProgressHUD
+
 class SignInViewController: UIViewController {
 
     
@@ -37,22 +37,22 @@ class SignInViewController: UIViewController {
     func validateFields() {
         
         guard let email = self.emailTextField.text, !email.isEmpty else {
-            ProgressHUD.showError(ERROR_EMPTY_EMAIL)
+   
+            presentAlert(title: "Error", message: "please enter a email adress ")
             
             return
         }
         guard let password = self.passwordTextField.text, !password.isEmpty else {
-            ProgressHUD.showError(ERROR_EMPTY_PASSWORD)
-            
+            presentAlert(title: "Error", message: "please enter a valid password ")
             return
         }
         
     }
     
     func signIn(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-        ProgressHUD.show("Loading...")
+     
         Api.User.signIn(email: self.emailTextField.text!, password: passwordTextField.text!, onSuccess: {
-            ProgressHUD.dismiss()
+            self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Loading")
             onSuccess()
         }) { (errorMessage) in
             onError(errorMessage)
@@ -65,7 +65,8 @@ class SignInViewController: UIViewController {
         self.signIn(onSuccess: {
             (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
         }) { (errorMessage) in
-            ProgressHUD.showError(errorMessage)
+         
+            self.presentAlert(title: "Error", message: "They have been error")
         }
     }
     

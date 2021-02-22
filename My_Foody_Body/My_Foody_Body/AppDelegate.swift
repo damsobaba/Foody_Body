@@ -17,13 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-      configureInitialViewController()
+     configureInitialViewController()
 
         return true
     }
     
     func configureInitialViewController(){
-        
+        DispatchQueue.main.async {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         var initialVc:UIViewController?
         let storyboard=UIStoryboard(name: "Main", bundle: nil)
@@ -33,11 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             initialVc = homeVC
         }
         else{
-            let loginVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_MAIN)
+            let loginVC = storyboard.instantiateViewController(withIdentifier:  IDENTIFIER_MAIN)
             initialVc = loginVC
         }
         
-        if #available(iOS 13.0, *) {
+//        if #available(iOS 14.1, *) {
             if let scene = UIApplication.shared.connectedScenes.first{
                 guard let windowScene = (scene as? UIWindowScene) else { return }
                 let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
@@ -46,11 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 window.makeKeyAndVisible()
                 appDelegate.window = window
             }
-        }
-        else
-        {
-            appDelegate.window?.rootViewController = initialVc
-            appDelegate.window?.makeKeyAndVisible()
+//        }
+//        else
+//        {
+//            appDelegate.window?.rootViewController = initialVc
+//            appDelegate.window?.makeKeyAndVisible()
+//        }
+//        }
         }
     }
     func applicationWillResignActive(_ application: UIApplication) {

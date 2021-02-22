@@ -9,10 +9,12 @@
 import Foundation
 import FirebaseAuth
 import Firebase
-import ProgressHUD
+//import ProgressHUD
 import FirebaseStorage
 
 class AuthManager {
+    
+
     
     var currentUserId: String {
         return Auth.auth().currentUser != nil ? Auth.auth().currentUser!.uid : ""
@@ -31,11 +33,7 @@ class AuthManager {
     
     func signUp (withUsername username: String, email: String, password: String, image: UIImage?, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
-            if error != nil {
-                ProgressHUD.showError(error!.localizedDescription)
-                
-                return
-            }
+            if error != nil { return }
             if let authData = authDataResult {
               
                 let dict: Dictionary<String, Any> =  [
@@ -43,14 +41,10 @@ class AuthManager {
                     EMAIL: authData.user.email!,
                     USERNAME: username,
                     PROFILE_IMAGE_URL: "",
-                    STATUS: "Welcome to Foody-Body"
+                    STATUS: "Hello, I'm a new foody-body 😊 "
                 ]
                 
-                guard let imageSelected = image else {
-                    ProgressHUD.showError(ERROR_EMPTY_PHOTO)
-
-                    return
-                }
+                guard let imageSelected = image else { return }
                 
                 guard let imageData = imageSelected.jpegData(compressionQuality: 0.4) else {
                     return
@@ -81,23 +75,10 @@ class AuthManager {
         }
     }
     
-    func resetPassword(email: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-            if error == nil {
-                onSuccess()
-            } else {
-                onError(error!.localizedDescription)
-            }
-        }
-    }
+
     
     func logOut() {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            ProgressHUD.showError(error.localizedDescription)
-            return
-        }
+        try? Auth.auth().signOut()
         (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
         
     }

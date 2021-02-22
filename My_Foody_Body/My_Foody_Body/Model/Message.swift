@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Foundation
+
 
 class Message {
     var id: String
@@ -17,9 +17,9 @@ class Message {
     var imageUrl: String
     var height: Double
     var width: Double
-    var videoUrl: String
+//    var videoUrl: String
     
-    init(id: String, from: String, to: String, date: Double, text: String, imageUrl: String, height: Double, width: Double, videoUrl: String) {
+    init(id: String, from: String, to: String, date: Double, text: String, imageUrl: String, height: Double, width: Double) {
         self.id = id
         self.from = from
         self.to = to
@@ -28,7 +28,7 @@ class Message {
         self.imageUrl = imageUrl
         self.height = height
         self.width = width
-        self.videoUrl = videoUrl
+//        self.videoUrl = videoUrl
     }
     
     static func transformMessage(dict: [String: Any], keyId: String) -> Message? {
@@ -42,10 +42,10 @@ class Message {
         let imageUrl = (dict["imageUrl"] as? String) == nil ? "" : (dict["imageUrl"]! as! String)
         let height = (dict["height"] as? Double) == nil ? 0 : (dict["height"]! as! Double)
         let width = (dict["width"] as? Double) == nil ? 0 : (dict["width"]! as! Double)
-        let videoUrl = (dict["videoUrl"] as? String) == nil ? "" : (dict["videoUrl"]! as! String)
+//        let videoUrl = (dict["videoUrl"] as? String) == nil ? "" : (dict["videoUrl"]! as! String)
         
         
-        let message = Message(id: keyId, from: from, to: to, date: date, text: text, imageUrl: imageUrl, height: height, width: width, videoUrl: videoUrl)
+        let message = Message(id: keyId, from: from, to: to, date: date, text: text, imageUrl: imageUrl, height: height, width: width)
         return message
     }
 }

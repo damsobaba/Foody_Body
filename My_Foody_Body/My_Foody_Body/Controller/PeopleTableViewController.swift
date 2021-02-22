@@ -10,9 +10,7 @@ import UIKit
 class PeopleTableViewController: UITableViewController {
 
     var users: [User] = []
-    var searchController: UISearchController = UISearchController(searchResultsController: nil)
-    var searchResults: [User] = []
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
    
@@ -24,9 +22,6 @@ class PeopleTableViewController: UITableViewController {
     func setupTableView() {
         tableView.tableFooterView = UIView()
     }
-    
-    
-   
     
     
     func setupNavigationBar() {
@@ -47,13 +42,14 @@ class PeopleTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+
         return self.users.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserTableViewCell", for: indexPath) as! UserTableViewCell
         let user = users[indexPath.row]
+        cell.controller = self
         cell.loadData(user)
         
         return cell
@@ -71,7 +67,7 @@ class PeopleTableViewController: UITableViewController {
             chatVC.partnerId = cell.user.uid
             self.navigationController?.pushViewController(chatVC, animated: true)
             
-            // utiliser la methode du P10
+        
             
         }
 

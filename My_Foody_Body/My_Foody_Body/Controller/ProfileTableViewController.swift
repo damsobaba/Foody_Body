@@ -6,17 +6,17 @@
 //
 
 import UIKit
-import ProgressHUD
+
 
 class ProfileTableViewController: UITableViewController {
-
+    
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var statusTextField: UITextField!
     
     var image: UIImage?
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,15 +57,17 @@ class ProfileTableViewController: UITableViewController {
             self.statusTextField.text = user.status
             self.avatar.loadImage(user.profileImageUrl)
         }
-  
+        
     }
+    
+    
     
     @IBAction func logoutBtnDidTapped(_ sender: Any) {
         Api.User.logOut()
     }
     
     @IBAction func saveBtnDidTapped(_ sender: Any) {
-        ProgressHUD.show("Loading...")
+        
         
         
         var dict = Dictionary<String, Any>()
@@ -82,18 +84,20 @@ class ProfileTableViewController: UITableViewController {
         Api.User.saveUserProfile(dict: dict, onSuccess: {
             if let img = self.image {
                 StorageService.savePhotoProfile(image: img, uid: Api.User.currentUserId, onSuccess: {
-                    ProgressHUD.showSuccess()
+                    
                 }) { (errorMessage) in
-                    ProgressHUD.showError(errorMessage)
+                    
+                    self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             } else {
-                ProgressHUD.showSuccess()
+                self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
             }
             
         }) { (errorMessage) in
-            ProgressHUD.showError(errorMessage)
+            self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
         }
         
+        self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
     }
     
 }

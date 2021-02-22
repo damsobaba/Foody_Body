@@ -38,18 +38,14 @@ extension ChatViewController {
         tableView.dataSource = self
     }
     
+    
+    
     func setupInputContainer() {
-        let mediaImg = UIImage(named: "attachment_icon")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        mediaButton.setImage(mediaImg, for: UIControl.State.normal)
-        mediaButton.tintColor = .lightGray
-        
-        let micImg = UIImage(named: "mic")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        audioButton.setImage(micImg, for: UIControl.State.normal)
-        audioButton.tintColor = .lightGray
-        
         setupInputTextView()
     }
     
+    
+    /// manualy changing the input of the text view
     func setupInputTextView() {
         
         inputTextView.delegate = self
@@ -75,31 +71,56 @@ extension ChatViewController {
         inputTextView.addSubview(placeholderLbl)
         
     }
+
     
+    /// navigation bar set up
     func setupNativationBar() {
         navigationItem.largeTitleDisplayMode = .never
-        let containView = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
-        avatarImageView.image = imagePartner
+        
+
+        
+        let containView = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 36));     avatarImageView.image = imagePartner
         avatarImageView.contentMode = .scaleAspectFill
         avatarImageView.layer.cornerRadius = 18
         avatarImageView.clipsToBounds = true
         containView.addSubview(avatarImageView)
-        
+
+
         let rightBarButton = UIBarButtonItem(customView: containView)
-        self.navigationItem.rightBarButtonItem = rightBarButton
+        let detailButton = UIBarButtonItem(title: "Detail" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(detailDidtaped))
+        navigationItem.rightBarButtonItems = [detailButton, rightBarButton]
+     
+        
         
         topLabel.textAlignment = .center
         topLabel.numberOfLines = 0
         
-        let attributed = NSMutableAttributedString(string: partnerUsername + "\n" , attributes: [.font : UIFont.systemFont(ofSize: 17), .foregroundColor: UIColor.black])
+        let attributed = NSMutableAttributedString(string: partnerUsername , attributes: [.font : UIFont.systemFont(ofSize: 17), .foregroundColor: UIColor.black])
         
-        attributed.append(NSAttributedString(string: "Active", attributes: [.font : UIFont.systemFont(ofSize: 13), .foregroundColor: UIColor.green]))
+
         topLabel.attributedText = attributed
         self.navigationItem.titleView = topLabel
         
         
     }
+ 
     
+/// call in selector to go to detail view controller
+    @objc func detailDidtaped() {
+        // switch to UsersAroundVC
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        detailVC.user = partnerUser
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        
+    }
+    
+    
+    
+    
+    
+    
+    ///send message info to firebase
     func sendToFirebase(dict: Dictionary<String, Any>) {
         let date: Double = Date().timeIntervalSince1970
         var value = dict
@@ -113,12 +134,12 @@ extension ChatViewController {
     
 }
 
-
+/// hide the send button if no text imput
 extension ChatViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         let spacing = CharacterSet.whitespacesAndNewlines
         if !textView.text.trimmingCharacters(in: spacing).isEmpty {
-            let text = textView.text.trimmingCharacters(in: spacing)
+            _ = textView.text.trimmingCharacters(in: spacing)
             sendBtn.isEnabled = true
             sendBtn.setTitleColor(.black, for: UIControl.State.normal)
             placeholderLbl.isHidden = true
@@ -133,25 +154,10 @@ extension ChatViewController: UITextViewDelegate {
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
-            handleVideoSelectedForUrl(videoUrl)
-        } else {
             handleImageSelectedForInfo(info)
         }
-    }
     
-    func handleVideoSelectedForUrl(_ url: URL) {
-        // save video data
-        let videoName = NSUUID().uuidString
-        StorageService.saveVideoMessage(url: url, id: videoName, onSuccess: { (anyValue) in
-            if let dict = anyValue as? [String: Any] {
-                self.sendToFirebase(dict: dict)
-            }
-        }) { (errorMessage) in
-            
-        }
-        self.picker.dismiss(animated: true, completion: nil)
-    }
+    
     
     func handleImageSelectedForInfo(_ info: [UIImagePickerController.InfoKey : Any]) {
         var selectedImageFromPicker: UIImage?
@@ -184,7 +190,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
-        cell.playButton.isHidden = messages[indexPath.row].videoUrl == ""
+//        cell.playButton.isHidden = messages[indexPath.row].videoUrl == ""
         cell.configureCell(uid: Api.User.currentUserId, message: messages[indexPath.row], image: imagePartner)
         return cell
     }

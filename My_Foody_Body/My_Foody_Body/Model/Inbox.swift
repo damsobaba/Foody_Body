@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Foundation
 
 class Inbox {
     var date: Double

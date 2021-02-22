@@ -5,7 +5,7 @@
 //  Created by Adam Mabrouki on 17/02/2021.
 //
 import UIKit
-
+import Firebase
 class UserTableViewCell: UITableViewCell {
 
     
@@ -14,6 +14,12 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var statusLbl: UILabel!
     
     var user: User!
+    var inboxChangedOnlineHandle: DatabaseHandle!
+    var inboxChangedProfileHandle: DatabaseHandle!
+    var controller: PeopleTableViewController!
+    
+    var inboxChangeOnlineHandle: DatabaseHandle!
+    var inboxChangeProfileHandle: DatabaseHandle!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,13 +33,32 @@ class UserTableViewCell: UITableViewCell {
         self.usernameLbl.text = user.username
         self.statusLbl.text = user.status
         self.avatar.loadImage(user.profileImageUrl)
+        
+        let refUser = Ref().databaseSpecificUser(uid: user.uid)
+        if inboxChangedProfileHandle != nil {
+            refUser.removeObserver(withHandle: inboxChangedProfileHandle)
+        }
+        
+        inboxChangedProfileHandle = refUser.observe(.childChanged, with: { (snapshot) in
+            if let snap = snapshot.value as? String {
+                self.user.updateData(key: snapshot.key, value: snap)
+                self.controller.tableView.reloadData()
+            }
+        })
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
 
+        
+        let refUser = Ref().databaseSpecificUser(uid: self.user.uid)
+        if inboxChangedProfileHandle != nil {
+            refUser.removeObserver(withHandle: inboxChangedProfileHandle)
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }

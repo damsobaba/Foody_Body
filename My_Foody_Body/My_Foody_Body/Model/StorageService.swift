@@ -10,35 +10,11 @@ import Foundation
 import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
-import ProgressHUD
+
 import AVFoundation
 
 class StorageService {
-    
-    static func saveVideoMessage(url: URL, id: String, onSuccess: @escaping(_ value: Any) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-        let ref = Ref().storageSpecificVideoMessage(id: id)
-        ref.putFile(from: url, metadata: nil) { (metadata, error) in
-            if error != nil {
-                onError(error!.localizedDescription)
-            }
-            ref.downloadURL(completion: { (videoUrl, error) in
-                if let thumbnailImage = self.thumbnailImageForFileUrl(url) {
-                    StorageService.savePhotoMessage(image: thumbnailImage, id: id, onSuccess: { (value) in
-                        if let dict = value as? Dictionary<String, Any> {
-                            var dictValue = dict
-                            if let videoUrlString = videoUrl?.absoluteString {
-                                dictValue["videoUrl"] = videoUrlString
-                            }
-                            onSuccess(dictValue)
-                        }
-                    }, onError: { (errorMessage) in
-                        onError(errorMessage)
-                    })
-                }
-            })
-        }
-    }
-    
+
     static func thumbnailImageForFileUrl(_ url: URL) -> UIImage? {
         let asset = AVAsset(url: url)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
@@ -102,9 +78,7 @@ class StorageService {
                     if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
                         changeRequest.photoURL = url
                         changeRequest.commitChanges(completion: { (error) in
-                            if let error = error {
-                                ProgressHUD.showError(error.localizedDescription)
-                            }
+                         
                         })
                     }
                     
@@ -138,9 +112,6 @@ class StorageService {
                         changeRequest.photoURL = url
                         changeRequest.displayName = username
                         changeRequest.commitChanges(completion: { (error) in
-                            if let error = error {
-                                ProgressHUD.showError(error.localizedDescription)
-                            }
                         })
                     }
                     

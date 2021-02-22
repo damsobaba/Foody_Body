@@ -8,18 +8,19 @@
 import UIKit
 import MobileCoreServices
 import AVFoundation
-import ProgressHUD
+
 
 class ChatViewController: UIViewController {
 
     
     @IBOutlet weak var mediaButton: UIButton!
-    @IBOutlet weak var audioButton: UIButton!
+
     @IBOutlet weak var inputTextView: UITextView!
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     var imagePartner: UIImage!
+    var detailImageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
     var avatarImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
     var topLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
     var partnerUsername: String!
@@ -27,12 +28,13 @@ class ChatViewController: UIViewController {
     var placeholderLbl = UILabel()
     var picker = UIImagePickerController()
     var messages = [Message]()
-
+    var partnerUser: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPicker()
         setupInputContainer()
+        
         setupNativationBar()
         setupTableView()
         observeMessages()
@@ -59,19 +61,10 @@ class ChatViewController: UIViewController {
     }
     
     @IBAction func mediaBtnDidTapped(_ sender: Any) {
-        let alert = UIAlertController(title: "JChat", message: "Select source", preferredStyle: UIAlertController.Style.actionSheet)
-        let camera = UIAlertAction(title: "Take a picture", style: UIAlertAction.Style.default) { (_) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
-                self.picker.sourceType = .camera
-                self.present(self.picker, animated: true, completion: nil)
-                
-            } else {
-                print("Unavailable")
-            }
-            
-        }
+        let alert = UIAlertController(title: "My_Foody_Body", message: "Select source", preferredStyle: UIAlertController.Style.actionSheet)
+
         
-        let library = UIAlertAction(title: "Choose an Image or a video", style: UIAlertAction.Style.default) { (_) in
+        let library = UIAlertAction(title: "Choose an Image ", style: UIAlertAction.Style.default) { (_) in
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
                 self.picker.sourceType = .photoLibrary
                 self.picker.mediaTypes = [String(kUTTypeImage), String(kUTTypeMovie)]
@@ -82,24 +75,10 @@ class ChatViewController: UIViewController {
             }
         }
         
-        let videoCamera = UIAlertAction(title: "Take a video", style: UIAlertAction.Style.default) { (_) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
-                self.picker.sourceType = .camera
-                self.picker.mediaTypes = [String(kUTTypeMovie)]
-                self.picker.videoExportPreset = AVAssetExportPresetPassthrough
-                self.picker.videoMaximumDuration = 30
-                self.present(self.picker, animated: true, completion: nil)
-                
-            } else {
-                print("Unavailable")
-            }
-        }
-        
-  
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
-        alert.addAction(camera)
+
         alert.addAction(cancel)
-        alert.addAction(videoCamera)
+
         alert.addAction(library)
         
         present(alert, animated: true, completion: nil)

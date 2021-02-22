@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import AVFoundation
+//import AVFoundation
 
 class MessageTableViewCell: UITableViewCell {
 
@@ -21,8 +21,8 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var bubbleRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
-    var playerLayer: AVPlayerLayer?
-    var player: AVPlayer?
+//    var playerLayer: AVPlayerLayer?
+//    var player: AVPlayer?
     var message: Message!
     
     override func awakeFromNib() {
@@ -42,7 +42,7 @@ class MessageTableViewCell: UITableViewCell {
         
         activityIndicatorView.isHidden = true
         activityIndicatorView.stopAnimating()
-        activityIndicatorView.style = .whiteLarge
+        activityIndicatorView.style = .large
     }
     
     override func prepareForReuse() {
@@ -51,20 +51,20 @@ class MessageTableViewCell: UITableViewCell {
         profileImage.isHidden = true
         textMessageLabel.isHidden = true
         
-        if observation != nil {
-            stopObservers()
-        }
-        playerLayer?.removeFromSuperlayer()
-        player?.pause()
-        playButton.isHidden = false
+//        if observation != nil {
+//            stopObservers()
+//        }
+//        playerLayer?.removeFromSuperlayer()
+//        player?.pause()
+//        playButton.isHidden = false
         activityIndicatorView.isHidden = true
         activityIndicatorView.stopAnimating()
     }
     
-    func stopObservers() {
-        player?.removeObserver(self, forKeyPath: "status")
-        observation = nil
-    }
+//    func stopObservers() {
+//        player?.removeObserver(self, forKeyPath: "status")
+//        observation = nil
+//    }
     
     func configureCell(uid: String, message: Message, image: UIImage) {
         self.message = message
@@ -92,7 +92,7 @@ class MessageTableViewCell: UITableViewCell {
         }
         
         if uid == message.from {
-            bubbleView.backgroundColor = UIColor.groupTableViewBackground
+            bubbleView.backgroundColor = UIColor.systemGroupedBackground
             bubbleView.layer.borderColor = UIColor.clear.cgColor
             bubbleRightConstraint.constant = 8
             bubbleLeftConstraint.constant = UIScreen.main.bounds.width - widthConstraint.constant - bubbleRightConstraint.constant
@@ -112,46 +112,46 @@ class MessageTableViewCell: UITableViewCell {
         
     }
 
-    @IBAction func playBtnDidTapped(_ sender: Any) {
-        handlePlay()
-
-    }
+//    @IBAction func playBtnDidTapped(_ sender: Any) {
+//        handlePlay()
+//
+//    }
     
-    var observation: Any? = nil
+//    var observation: Any? = nil
     
-    func handlePlay() {
-        let videoUrl = message.videoUrl
-        if videoUrl.isEmpty {
-            return
-        }
-        if let url = URL(string: videoUrl) {
-            activityIndicatorView.isHidden = false
-            activityIndicatorView.startAnimating()
-            player = AVPlayer(url: url)
-            playerLayer = AVPlayerLayer(player: player)
-            playerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-            playerLayer?.frame = photoMessage.frame
-            observation = player?.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions.new, context: nil)
-            bubbleView.layer.addSublayer(playerLayer!)
-            player?.play()
-            playButton.isHidden = true
-            
-        }
-    }
+//    func handlePlay() {
+//        let videoUrl = message.videoUrl
+//        if videoUrl.isEmpty {
+//            return
+//        }
+//        if let url = URL(string: videoUrl) {
+//            activityIndicatorView.isHidden = false
+//            activityIndicatorView.startAnimating()
+//            player = AVPlayer(url: url)
+//            playerLayer = AVPlayerLayer(player: player)
+//            playerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+//            playerLayer?.frame = photoMessage.frame
+//            observation = player?.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions.new, context: nil)
+//            bubbleView.layer.addSublayer(playerLayer!)
+//            player?.play()
+//            playButton.isHidden = true
+//
+//        }
+//    }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "status" {
-            let status: AVPlayer.Status = player!.status
-            switch (status) {
-            case AVPlayer.Status.readyToPlay:
-                activityIndicatorView.isHidden = true
-                activityIndicatorView.stopAnimating()
-                break
-            case AVPlayer.Status.unknown, AVPlayer.Status.failed:
-                break
-            }
-        }
-    }
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        if keyPath == "status" {
+//            let status: AVPlayer.Status = player!.status
+//            switch (status) {
+//            case AVPlayer.Status.readyToPlay:
+//                activityIndicatorView.isHidden = true
+//                activityIndicatorView.stopAnimating()
+//                break
+//            case AVPlayer.Status.unknown, AVPlayer.Status.failed:
+//                break
+//            }
+//        }
+//    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
