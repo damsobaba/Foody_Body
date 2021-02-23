@@ -61,10 +61,12 @@ class PeopleTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? UserTableViewCell {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let chatVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_CHAT) as! ChatViewController
+            let chatVC = storyboard.instantiateViewController(withIdentifier: IdentifierChat) as! ChatViewController
             chatVC.imagePartner = cell.avatar.image
             chatVC.partnerUsername = cell.usernameLbl.text
             chatVC.partnerId = cell.user.uid
+            chatVC.partnerUser = cell.user
+            
             self.navigationController?.pushViewController(chatVC, animated: true)
             
         

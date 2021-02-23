@@ -15,6 +15,9 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var statusTextField: UITextField!
     
+    @IBOutlet weak var cookingImageView: UIImageView!
+    
+    
     var image: UIImage?
     
     
@@ -39,6 +42,12 @@ class ProfileTableViewController: UITableViewController {
         avatar.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentPicker))
         avatar.addGestureRecognizer(tapGesture)
+        
+        cookingImageView.layer.cornerRadius = 20
+        cookingImageView.clipsToBounds = true
+        cookingImageView.isUserInteractionEnabled = true
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(presentPicker))
+        cookingImageView.addGestureRecognizer(tapGesture2)
     }
     
     @objc func presentPicker() {
@@ -99,6 +108,10 @@ class ProfileTableViewController: UITableViewController {
         
         self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
     }
+    
+    
+  
+    
     
 }
 

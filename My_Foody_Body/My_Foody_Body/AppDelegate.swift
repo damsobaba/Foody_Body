@@ -30,15 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard=UIStoryboard(name: "Main", bundle: nil)
         
         if Auth.auth().currentUser != nil {
-            let homeVC = storyboard.instantiateViewController(withIdentifier:  IDENTIFIER_TABBAR )
+            let homeVC = storyboard.instantiateViewController(withIdentifier:  identifierTabbar )
             initialVc = homeVC
         }
         else{
-            let loginVC = storyboard.instantiateViewController(withIdentifier:  IDENTIFIER_MAIN)
+            let loginVC = storyboard.instantiateViewController(withIdentifier:  identifierMain)
             initialVc = loginVC
         }
         
-//        if #available(iOS 14.1, *) {
+
             if let scene = UIApplication.shared.connectedScenes.first{
                 guard let windowScene = (scene as? UIWindowScene) else { return }
                 let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
@@ -47,13 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 window.makeKeyAndVisible()
                 appDelegate.window = window
             }
-//        }
-//        else
-//        {
-//            appDelegate.window?.rootViewController = initialVc
-//            appDelegate.window?.makeKeyAndVisible()
-//        }
-//        }
         }
     }
     func applicationWillResignActive(_ application: UIApplication) {

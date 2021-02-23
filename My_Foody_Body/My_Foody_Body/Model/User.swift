@@ -9,6 +9,7 @@
 
 import Foundation
 import UIKit
+
 class User {
     var uid: String
     var username: String
@@ -51,10 +52,12 @@ class User {
         }
     }
 }
-    extension User: Equatable {
-        static func == (lhs: User, rhs: User) -> Bool {
-            return lhs.uid == rhs.uid
-        }
-    }
-    
 
+
+extension User: Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.uid == rhs.uid
+    }
+}
+
+   

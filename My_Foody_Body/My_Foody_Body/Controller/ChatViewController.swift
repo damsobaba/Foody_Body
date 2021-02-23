@@ -28,7 +28,21 @@ class ChatViewController: UIViewController {
     var placeholderLbl = UILabel()
     var picker = UIImagePickerController()
     var messages = [Message]()
-    var partnerUser: User!
+    var partnerUser: User? {
+        didSet {
+            avatarImageView.loadImage(partnerUser?.profileImageUrl) {
+                (image) in
+                self.partnerUser?.profileImage = image
+
+
+            }
+        }
+    }
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

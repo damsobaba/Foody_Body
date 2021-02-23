@@ -11,39 +11,32 @@
 import Foundation
 import Firebase
 
-let REF_USER = "users"
-let REF_MESSAGE = "messages"
-let REF_INBOX = "inbox"
+let refUser = "users"
+let refMessage = "messages"
+let refInbox = "inbox"
 
-let URL_STORAGE_ROOT = "gs://foody-body-be872.appspot.com"
-let STORAGE_PROFILE = "profile"
-let PROFILE_IMAGE_URL = "profileImageUrl"
-let UID = "uid"
-let EMAIL = "email"
-let USERNAME = "username"
-let STATUS = "status"
-
-let ERROR_EMPTY_PHOTO = "Please choose your profile image"
-let ERROR_EMPTY_EMAIL = "Please enter an email address"
-let ERROR_EMPTY_USERNAME = "Please enter an username"
-let ERROR_EMPTY_PASSWORD = "Please enter a password"
-let ERROR_EMPTY_EMAIL_RESET = "Please enter an email address for password reset"
-
-let SUCCESS_EMAIL_RESET = "We have just sent you a password reset email. Please check your inbox and follow the instructions to reset your password"
-
-let IDENTIFIER_TABBAR = "TabBarVC"
-let IDENTIFIER_MAIN = "MainVC"
-let IDENTIFIER_CHAT = "ChatVC"
+let urlStorageRoot = "gs://foody-body-be872.appspot.com"
+let storageProfil = "profile"
+let profilImageUrl = "profileImageUrl"
+let uid = "uid"
+let emaiL = "email"
+let usernamE = "username"
+let status = "status"
 
 
-let IDENTIFIER_CELL_USERS = "UserTableViewCell"
+let identifierTabbar = "TabBarVC"
+let identifierMain = "MainVC"
+let IdentifierChat = "ChatVC"
+
+
+
 
 
 class Ref {
     let databaseRoot: DatabaseReference = Database.database().reference()
     
     var databaseUsers: DatabaseReference {
-        return databaseRoot.child(REF_USER)
+        return databaseRoot.child(refUser)
     }
     
     func databaseSpecificUser(uid: String) -> DatabaseReference {
@@ -51,7 +44,7 @@ class Ref {
     }
     
     var databaseMessage: DatabaseReference {
-        return databaseRoot.child(REF_MESSAGE)
+        return databaseRoot.child(refMessage)
     }
     
     func databaseMessageSendTo(from: String, to: String) -> DatabaseReference {
@@ -59,7 +52,7 @@ class Ref {
     }
     
     var databaseInbox: DatabaseReference {
-        return databaseRoot.child(REF_INBOX)
+        return databaseRoot.child(refInbox)
     }
     
     func databaseInboxInfor(from: String, to: String) -> DatabaseReference {
@@ -72,14 +65,14 @@ class Ref {
     
     // Storage Ref
     
-    let storageRoot = Storage.storage().reference(forURL: URL_STORAGE_ROOT)
+    let storageRoot = Storage.storage().reference(forURL: urlStorageRoot)
     
     var storageMessage: StorageReference {
-        return storageRoot.child(REF_MESSAGE)
+        return storageRoot.child(refMessage)
     }
     
     var storageProfile: StorageReference {
-        return storageRoot.child(STORAGE_PROFILE)
+        return storageRoot.child(storageProfil)
     }
     
     func storageSpecificProfile(uid: String) -> StorageReference {

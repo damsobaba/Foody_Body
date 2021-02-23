@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseAuth
 import Firebase
-//import ProgressHUD
+
 import FirebaseStorage
 
 class AuthManager {
@@ -31,17 +31,33 @@ class AuthManager {
         }
     }
     
+    
+//    func test(email: String, password: String) {
+//        Auth.auth().signIn(withEmail: email, password: password)  { [unowned self] result in
+//            switch result {
+//            case .success(let userData):
+//            result
+//            case .failure(let error):
+//                if error != nil {
+//                error!.localizedDescription
+//                }
+//            }
+//        }
+//    }
+    
+    
     func signUp (withUsername username: String, email: String, password: String, image: UIImage?, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
-            if error != nil { return }
+            if error != nil {
+               print(error!.localizedDescription)
+                return }
             if let authData = authDataResult {
-              
                 let dict: Dictionary<String, Any> =  [
-                    UID: authData.user.uid,
-                    EMAIL: authData.user.email!,
-                    USERNAME: username,
-                    PROFILE_IMAGE_URL: "",
-                    STATUS: "Hello, I'm a new foody-body 😊 "
+                    uid: authData.user.uid,
+                    emaiL: authData.user.email!,
+                    usernamE: username,
+                    profilImageUrl: "",
+                    status: "Hello, I'm a new foody-body 😊 "
                 ]
                 
                 guard let imageSelected = image else { return }

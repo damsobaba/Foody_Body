@@ -28,7 +28,6 @@
 		CE80EF3125DFD18B002520AC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80EF3025DFD18B002520AC /* CardView.swift */; };
 		CE88A1F125DD542C00BFB8F8 /* PeopleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A1F025DD542C00BFB8F8 /* PeopleTableViewController.swift */; };
 		CE88A1F625DD545D00BFB8F8 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A1F525DD545D00BFB8F8 /* UserTableViewCell.swift */; };
-		CE88A1FB25DD54C700BFB8F8 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A1FA25DD54C700BFB8F8 /* MessageTableViewController.swift */; };
 		CE88A20025DD556700BFB8F8 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A1FF25DD556700BFB8F8 /* StorageService.swift */; };
 		CE88A20825DD55D900BFB8F8 /* Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A20725DD55D900BFB8F8 /* Reference.swift */; };
 		CE88A20D25DD560500BFB8F8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A20C25DD560500BFB8F8 /* Extensions.swift */; };
@@ -40,11 +39,8 @@
 		CEE3B07E25DD9FC400834968 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B07D25DD9FC400834968 /* ChatViewController.swift */; };
 		CEE3B08325DDA05200834968 /* ChatViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B08225DDA05200834968 /* ChatViewControllerExtension.swift */; };
 		CEE3B08925DDA14500834968 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B08825DDA14500834968 /* MessageTableViewCell.swift */; };
-		CEE3B09125DDA1D300834968 /* InboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B09025DDA1D300834968 /* InboxTableViewCell.swift */; };
-		CEE3B09625DDA35300834968 /* Inbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B09525DDA35300834968 /* Inbox.swift */; };
 		CEE3B09B25DDA3D600834968 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B09A25DDA3D600834968 /* Message.swift */; };
 		CEE3B0A025DDA3FE00834968 /* MessageApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B09F25DDA3FE00834968 /* MessageApi.swift */; };
-		CEE3B0A525DDA42A00834968 /* InboxApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B0A425DDA42A00834968 /* InboxApi.swift */; };
 		CEFFD14D25DFE24700C872E1 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDEC96425DEFAFC00497262 /* CardView.xib */; };
 /* End PBXBuildFile section */
 
@@ -91,7 +87,6 @@
 		CE80EF3025DFD18B002520AC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		CE88A1F025DD542C00BFB8F8 /* PeopleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewController.swift; sourceTree = "<group>"; };
 		CE88A1F525DD545D00BFB8F8 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
-		CE88A1FA25DD54C700BFB8F8 /* MessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		CE88A1FF25DD556700BFB8F8 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		CE88A20725DD55D900BFB8F8 /* Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reference.swift; sourceTree = "<group>"; };
 		CE88A20C25DD560500BFB8F8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -104,11 +99,8 @@
 		CEE3B07D25DD9FC400834968 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		CEE3B08225DDA05200834968 /* ChatViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewControllerExtension.swift; sourceTree = "<group>"; };
 		CEE3B08825DDA14500834968 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
-		CEE3B09025DDA1D300834968 /* InboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxTableViewCell.swift; sourceTree = "<group>"; };
-		CEE3B09525DDA35300834968 /* Inbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inbox.swift; sourceTree = "<group>"; };
 		CEE3B09A25DDA3D600834968 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CEE3B09F25DDA3FE00834968 /* MessageApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageApi.swift; sourceTree = "<group>"; };
-		CEE3B0A425DDA42A00834968 /* InboxApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxApi.swift; sourceTree = "<group>"; };
 		CF83C5BEF9CF584AEDACCA84 /* Pods-My_Foody_Body.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My_Foody_Body.release.xcconfig"; path = "Target Support Files/Pods-My_Foody_Body/Pods-My_Foody_Body.release.xcconfig"; sourceTree = "<group>"; };
 		D6D7EA244DF92C2DCE711974 /* Pods_My_Foody_BodyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_Foody_BodyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D750B56A01332DC904EAFFAD /* Pods_My_Foody_Body_My_Foody_BodyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_Foody_Body_My_Foody_BodyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,10 +202,8 @@
 			children = (
 				CE75918625DBCD290056A779 /* Api.swift */,
 				CE88A21125DD574800BFB8F8 /* User.swift */,
-				CEE3B09525DDA35300834968 /* Inbox.swift */,
 				CEE3B09A25DDA3D600834968 /* Message.swift */,
 				CEE3B09F25DDA3FE00834968 /* MessageApi.swift */,
-				CEE3B0A425DDA42A00834968 /* InboxApi.swift */,
 				CE88A20725DD55D900BFB8F8 /* Reference.swift */,
 				CE88A1FF25DD556700BFB8F8 /* StorageService.swift */,
 				CE75918125DBCD0C0056A779 /* AuthManager.swift */,
@@ -234,7 +224,6 @@
 			isa = PBXGroup;
 			children = (
 				CE08AA0825D5BC6D00C6F688 /* ViewController.swift */,
-				CE88A1FA25DD54C700BFB8F8 /* MessageTableViewController.swift */,
 				CE88A1F025DD542C00BFB8F8 /* PeopleTableViewController.swift */,
 				CEE3B07825DD9F5F00834968 /* ProfileTableViewController.swift */,
 				CEE3B07D25DD9FC400834968 /* ChatViewController.swift */,
@@ -252,7 +241,6 @@
 				CEE3B08825DDA14500834968 /* MessageTableViewCell.swift */,
 				CEDEC96425DEFAFC00497262 /* CardView.xib */,
 				CE80EF3025DFD18B002520AC /* CardView.swift */,
-				CEE3B09025DDA1D300834968 /* InboxTableViewCell.swift */,
 				CE88A1F525DD545D00BFB8F8 /* UserTableViewCell.swift */,
 				CE08AA0A25D5BC6D00C6F688 /* Main.storyboard */,
 			);
@@ -523,12 +511,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEE3B0A525DDA42A00834968 /* InboxApi.swift in Sources */,
 				CE08AA0925D5BC6D00C6F688 /* ViewController.swift in Sources */,
-				CEE3B09125DDA1D300834968 /* InboxTableViewCell.swift in Sources */,
 				CE88A1F625DD545D00BFB8F8 /* UserTableViewCell.swift in Sources */,
 				CEE3B07E25DD9FC400834968 /* ChatViewController.swift in Sources */,
-				CE88A1FB25DD54C700BFB8F8 /* MessageTableViewController.swift in Sources */,
 				CEC8B87B25DEE9AD00A995E6 /* Alert.swift in Sources */,
 				CE88A20D25DD560500BFB8F8 /* Extensions.swift in Sources */,
 				CEE3B09B25DDA3D600834968 /* Message.swift in Sources */,
@@ -549,7 +534,6 @@
 				CE88A20825DD55D900BFB8F8 /* Reference.swift in Sources */,
 				CE88A20025DD556700BFB8F8 /* StorageService.swift in Sources */,
 				CEDEC97A25DEFE9B00497262 /* SwipeViewController.swift in Sources */,
-				CEE3B09625DDA35300834968 /* Inbox.swift in Sources */,
 				CE08AA0725D5BC6D00C6F688 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

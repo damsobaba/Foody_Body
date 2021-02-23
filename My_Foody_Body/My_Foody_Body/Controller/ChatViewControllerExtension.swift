@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 
 extension ChatViewController {
+    
+   
+
+    
     func observeMessages() {
         Api.Message.receiveMessage(from: Api.User.currentUserId, to: partnerId) { (message) in
             self.messages.append(message)
@@ -107,18 +111,17 @@ extension ChatViewController {
     
 /// call in selector to go to detail view controller
     @objc func detailDidtaped() {
-        // switch to UsersAroundVC
+   
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        
         detailVC.user = partnerUser
         self.navigationController?.pushViewController(detailVC, animated: true)
         
     }
     
     
-    
-    
-    
+
     
     ///send message info to firebase
     func sendToFirebase(dict: Dictionary<String, Any>) {
@@ -171,15 +174,17 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         // save photo data
         let imageName = NSUUID().uuidString
-        StorageService.savePhotoMessage(image: selectedImageFromPicker, id: imageName, onSuccess: { (anyValue) in
-            if let dict = anyValue as? [String: Any] {
-                self.sendToFirebase(dict: dict)
+        StorageService.savePhotoMessage(image: selectedImageFromPicker, id: imageName) { [ unowned self ] (result) in
+            switch result {
+            case .success(let data):
+                if let dict = data as? [String: Any] {
+                    self.sendToFirebase(dict: dict)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
-        }) { (errorMessage) in
-            
+            self.picker.dismiss(animated: true, completion: nil)
         }
-        
-        self.picker.dismiss(animated: true, completion: nil)
     }
 }
 

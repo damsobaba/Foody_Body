@@ -15,7 +15,6 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var bubbleView: UIView!
     @IBOutlet weak var photoMessage: UIImageView!
-    @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var bubbleLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var bubbleRightConstraint: NSLayoutConstraint!
@@ -50,22 +49,12 @@ class MessageTableViewCell: UITableViewCell {
         photoMessage.isHidden = true
         profileImage.isHidden = true
         textMessageLabel.isHidden = true
-        
-//        if observation != nil {
-//            stopObservers()
-//        }
-//        playerLayer?.removeFromSuperlayer()
-//        player?.pause()
-//        playButton.isHidden = false
+
         activityIndicatorView.isHidden = true
         activityIndicatorView.stopAnimating()
     }
     
-//    func stopObservers() {
-//        player?.removeObserver(self, forKeyPath: "status")
-//        observation = nil
-//    }
-    
+
     func configureCell(uid: String, message: Message, image: UIImage) {
         self.message = message
         let text = message.text
@@ -112,46 +101,6 @@ class MessageTableViewCell: UITableViewCell {
         
     }
 
-//    @IBAction func playBtnDidTapped(_ sender: Any) {
-//        handlePlay()
-//
-//    }
-    
-//    var observation: Any? = nil
-    
-//    func handlePlay() {
-//        let videoUrl = message.videoUrl
-//        if videoUrl.isEmpty {
-//            return
-//        }
-//        if let url = URL(string: videoUrl) {
-//            activityIndicatorView.isHidden = false
-//            activityIndicatorView.startAnimating()
-//            player = AVPlayer(url: url)
-//            playerLayer = AVPlayerLayer(player: player)
-//            playerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-//            playerLayer?.frame = photoMessage.frame
-//            observation = player?.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions.new, context: nil)
-//            bubbleView.layer.addSublayer(playerLayer!)
-//            player?.play()
-//            playButton.isHidden = true
-//
-//        }
-//    }
-    
-//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-//        if keyPath == "status" {
-//            let status: AVPlayer.Status = player!.status
-//            switch (status) {
-//            case AVPlayer.Status.readyToPlay:
-//                activityIndicatorView.isHidden = true
-//                activityIndicatorView.stopAnimating()
-//                break
-//            case AVPlayer.Status.unknown, AVPlayer.Status.failed:
-//                break
-//            }
-//        }
-//    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
