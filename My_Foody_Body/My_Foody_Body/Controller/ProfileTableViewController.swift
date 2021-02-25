@@ -16,10 +16,13 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var statusTextField: UITextField!
     
     @IBOutlet weak var cookingImageView: UIImageView!
+    @IBOutlet weak var genderSegment: UISegmentedControl!
+    @IBOutlet weak var ageTextField: UITextField!
     
+    var imageTag = 0
     
-    var image: UIImage?
-    
+    var ppImage: UIImage?
+    var favoriteFoodImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,7 @@ class ProfileTableViewController: UITableViewController {
     
     func setupView() {
         setupAvatar()
+        setUpFoodImage()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     
@@ -42,13 +46,19 @@ class ProfileTableViewController: UITableViewController {
         avatar.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentPicker))
         avatar.addGestureRecognizer(tapGesture)
+        imageTag = 1
         
+    }
+    
+    func setUpFoodImage() {
         cookingImageView.layer.cornerRadius = 20
         cookingImageView.clipsToBounds = true
         cookingImageView.isUserInteractionEnabled = true
         let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(presentPicker))
         cookingImageView.addGestureRecognizer(tapGesture2)
+        imageTag = 2
     }
+    //PASSER par DES BOUTOOOONNNNNNS
     
     @objc func presentPicker() {
         view.endEditing(true)
@@ -65,6 +75,22 @@ class ProfileTableViewController: UITableViewController {
             self.emailTextField.text = user.email
             self.statusTextField.text = user.status
             self.avatar.loadImage(user.profileImageUrl)
+            self.cookingImageView.loadImage(user.foodImage)
+            
+            if let age = user.age {
+                self.ageTextField.text = "\(age)"
+            } else {
+                self.ageTextField.placeholder = "Optional"
+            }
+            
+            
+            if let isMale = user.isMale {
+                self.genderSegment.selectedSegmentIndex = (isMale == true) ? 0 : 1
+            }
+            
+            //            if let foodImage = user.foodImage {
+            //                self.cookingImageView.loadImage(foodImage)
+            //            }
         }
         
     }
@@ -89,10 +115,31 @@ class ProfileTableViewController: UITableViewController {
         if let status = statusTextField.text, !status.isEmpty {
             dict["status"] = status
         }
+        if genderSegment.selectedSegmentIndex == 0 {
+            dict["isMale"] = true
+        }
+        if genderSegment.selectedSegmentIndex == 1 {
+            dict["isMale"] = false
+        }
+        if let age = ageTextField.text, !age.isEmpty {
+            dict["age"] = Int(age)
+        }
+        
+        
         
         Api.User.saveUserProfile(dict: dict, onSuccess: {
-            if let img = self.image {
-                StorageService.savePhotoProfile(image: img, uid: Api.User.currentUserId, onSuccess: {
+            if let favoriteFoodImage = self.favoriteFoodImage {
+                StorageService.saveFoodPhoto(image: favoriteFoodImage, uid: Api.User.currentUserId, onSuccess: {
+                    
+                }) { (errorMessage)  in
+                    
+                    print("comprend r ")
+                }
+            }
+            
+            
+            if let ppimg = self.ppImage {
+                StorageService.savePhotoProfile(image: ppimg, uid: Api.User.currentUserId, onSuccess: {
                     
                 }) { (errorMessage) in
                     
@@ -101,32 +148,89 @@ class ProfileTableViewController: UITableViewController {
             } else {
                 self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
             }
+          
             
         }) { (errorMessage) in
             self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
         }
         
         self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
+        
+        
+        
+        
+        
     }
     
     
-  
+    
     
     
 }
 
 extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let imageSelected = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            image = imageSelected
-            avatar.image = imageSelected
-        }
         
-        if let imageOriginal = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            image = imageOriginal
-            avatar.image = imageOriginal
-        }
+       
+            if let imageSelected = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+                
+                if imageTag == 1 {
+                ppImage = imageSelected
+                    avatar.image = imageSelected }
+                    else  if imageTag == 2 {
+                favoriteFoodImage = imageSelected
+                cookingImageView.image = imageSelected
+                    }
+                }
+            
+            if let imageOriginal = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                
+                if imageTag == 1 {
+                ppImage = imageOriginal
+                avatar.image = imageOriginal
+                }
+                else  if imageTag == 2 {
+                favoriteFoodImage = imageOriginal
+                cookingImageView.image = imageOriginal
+                
+                }
+            }
+    
+            
+//                if let imageSelectedFood = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+//                    favoriteFoodImage = imageSelectedFood
+//                    cookingImageView.image = imageSelectedFood
+//                }
+//
+//                if let imageOriginal2 = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+//                    favoriteFoodImage = imageOriginal2
+//                    cookingImageView.image = imageOriginal2
+//                }
+            
+        
+        
+        
+        
         
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    //    func foodImagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    //
+    //        if let imageSelectedFood = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+    //            favoriteFoodImage = imageSelectedFood
+    //            cookingImageView.image = imageSelectedFood
+    //        }
+    //
+    //        if let imageOriginal2 = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+    //            favoriteFoodImage = imageOriginal2
+    //            cookingImageView.image = imageOriginal2
+    //        }
+    //
+    //        picker.dismiss(animated: true, completion: nil)
+    //    }
+    
+    
+    
 }

@@ -46,7 +46,7 @@ class SwipeViewController:UIViewController   {
             return
         }
 //        saveToFirebase(like: false, card: firstCard)
-        swipeAnimation(translation: -750, angle: -15)
+        swipeAnimation(translation: 750, angle: -15)
         self.setupTransforms()
     }
     
@@ -55,7 +55,7 @@ class SwipeViewController:UIViewController   {
             return
         }
 //        saveToFirebase(like: true, card: firstCard)
-        swipeAnimation(translation: 750, angle: 15)
+        swipeAnimation(translation: -750, angle: 15)
         self.setupTransforms()
     }
     

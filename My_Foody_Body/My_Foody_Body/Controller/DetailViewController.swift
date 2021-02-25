@@ -26,6 +26,12 @@ class DetailViewController: UIViewController {
 
         usernameLbl.text = user.username
         avatar.image = user.profileImage
+        if user.age != nil {
+            ageLbl.text = " \(user.age!)"
+        } else {
+            ageLbl.text = ""
+        }
+        
       
     }
     

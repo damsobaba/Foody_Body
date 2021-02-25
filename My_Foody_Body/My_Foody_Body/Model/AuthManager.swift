@@ -58,6 +58,7 @@ class AuthManager {
                     usernamE: username,
                     profilImageUrl: "",
                     status: "Hello, I'm a new foody-body 😊 "
+                    
                 ]
                 
                 guard let imageSelected = image else { return }

@@ -18,6 +18,7 @@ let refInbox = "inbox"
 let urlStorageRoot = "gs://foody-body-be872.appspot.com"
 let storageProfil = "profile"
 let profilImageUrl = "profileImageUrl"
+let foodImage = "foodImage"
 let uid = "uid"
 let emaiL = "email"
 let usernamE = "username"
@@ -83,6 +84,8 @@ class Ref {
         return storageMessage.child("photo").child(id)
     }
     
-
+    func storageSpecificFoodImage(id: String) -> StorageReference {
+        return storageMessage.child("photo").child(id)
+    }
     
 }

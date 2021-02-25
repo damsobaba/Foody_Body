@@ -195,7 +195,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
-//        cell.playButton.isHidden = messages[indexPath.row].videoUrl == ""
+
         cell.configureCell(uid: Api.User.currentUserId, message: messages[indexPath.row], image: imagePartner)
         return cell
     }

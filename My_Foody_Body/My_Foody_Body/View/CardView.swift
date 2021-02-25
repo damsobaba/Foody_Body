@@ -25,13 +25,7 @@ class CardView: UIView {
             photo.loadImage(user.profileImageUrl) {
                 (image) in
                 self.user.profileImage = image
-                
-                
-                let attributedUsernameText = NSMutableAttributedString(string: "\(self.user.username)  ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 30),
-                                                                                                                       NSAttributedString.Key.foregroundColor : UIColor.white                                                                     ])
-                
-       
-                self.usernameLbl.attributedText = attributedUsernameText
+                self.usernameLbl.text = self.user.username
             }
         }
     }
@@ -52,12 +46,12 @@ class CardView: UIView {
         likeView.layer.borderWidth = 3
         likeView.layer.cornerRadius = 5
         likeView.clipsToBounds = true
-        likeView.layer.borderColor = UIColor(red: 0.101, green: 0.737, blue: 0.611, alpha: 1).cgColor
+        likeView.layer.borderColor = UIColor.brown.cgColor
         
         nopeView.layer.borderWidth = 3
         nopeView.layer.cornerRadius = 5
         nopeView.clipsToBounds = true
-        nopeView.layer.borderColor = UIColor(red: 0.9, green: 0.29, blue: 0.23, alpha: 1).cgColor
+        nopeView.layer.borderColor = UIColor.brown.cgColor
 
         likeView.transform = CGAffineTransform(rotationAngle: -.pi / 8)
         nopeView.transform = CGAffineTransform(rotationAngle: .pi / 8)
@@ -65,17 +59,20 @@ class CardView: UIView {
    
         nopeLbl.attributedText = NSAttributedString(string: "NOPE",attributes:[NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 30)])
 
-        nopeView.layer.borderColor = UIColor(red: 0.9, green: 0.29, blue: 0.23, alpha: 1).cgColor
-        nopeLbl.textColor = UIColor(red: 0.9, green: 0.29, blue: 0.23, alpha: 1)
+        nopeView.layer.borderColor = UIColor.brown.cgColor
+        nopeLbl.textColor = UIColor.brown
         
         
         likeLbl.attributedText = NSAttributedString(string: "LIKE",attributes:[NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 30)])
-        likeView.layer.borderColor = UIColor(red: 0.101, green: 0.737, blue: 0.611, alpha: 1).cgColor
-        likeLbl.textColor = UIColor(red: 0.101, green: 0.737, blue: 0.611, alpha: 1)
+        likeView.layer.borderColor = UIColor.brown.cgColor
+        likeLbl.textColor =  UIColor.brown
     }
     
     @IBAction func infoBtnDidTap(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         
-    }
+        detailVC.user = user
+        self.controller.navigationController?.pushViewController(detailVC, animated: true)    }
 }
 
