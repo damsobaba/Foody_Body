@@ -25,6 +25,7 @@
 		CE3D6B5F25E0257800E01B04 /* FoodCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D6B5E25E0257800E01B04 /* FoodCollectionViewController.swift */; };
 		CE75918225DBCD0C0056A779 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75918125DBCD0C0056A779 /* AuthManager.swift */; };
 		CE75918725DBCD290056A779 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75918625DBCD290056A779 /* Api.swift */; };
+		CE7E430E25E7FE9100323340 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7E430D25E7FE9100323340 /* FoodTableViewCell.swift */; };
 		CE80EF3125DFD18B002520AC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80EF3025DFD18B002520AC /* CardView.swift */; };
 		CE88A1F125DD542C00BFB8F8 /* PeopleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A1F025DD542C00BFB8F8 /* PeopleTableViewController.swift */; };
 		CE88A1F625DD545D00BFB8F8 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88A1F525DD545D00BFB8F8 /* UserTableViewCell.swift */; };
@@ -84,6 +85,7 @@
 		CE3D6B5E25E0257800E01B04 /* FoodCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewController.swift; sourceTree = "<group>"; };
 		CE75918125DBCD0C0056A779 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		CE75918625DBCD290056A779 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Api.swift; path = /Users/adammabrouki/Desktop/P12/My_Foody_Body/My_Foody_Body/Model/Api.swift; sourceTree = "<absolute>"; };
+		CE7E430D25E7FE9100323340 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		CE80EF3025DFD18B002520AC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		CE88A1F025DD542C00BFB8F8 /* PeopleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewController.swift; sourceTree = "<group>"; };
 		CE88A1F525DD545D00BFB8F8 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
@@ -197,16 +199,24 @@
 			path = My_Foody_BodyUITests;
 			sourceTree = "<group>";
 		};
-		CEE3B06825DD80ED00834968 /* Model */ = {
+		CE7E431225E84F8300323340 /* FireBase */ = {
 			isa = PBXGroup;
 			children = (
 				CE75918625DBCD290056A779 /* Api.swift */,
+				CE88A1FF25DD556700BFB8F8 /* StorageService.swift */,
+				CE75918125DBCD0C0056A779 /* AuthManager.swift */,
+			);
+			path = FireBase;
+			sourceTree = "<group>";
+		};
+		CEE3B06825DD80ED00834968 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE7E431225E84F8300323340 /* FireBase */,
 				CE88A21125DD574800BFB8F8 /* User.swift */,
 				CEE3B09A25DDA3D600834968 /* Message.swift */,
 				CEE3B09F25DDA3FE00834968 /* MessageApi.swift */,
 				CE88A20725DD55D900BFB8F8 /* Reference.swift */,
-				CE88A1FF25DD556700BFB8F8 /* StorageService.swift */,
-				CE75918125DBCD0C0056A779 /* AuthManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +252,7 @@
 				CEDEC96425DEFAFC00497262 /* CardView.xib */,
 				CE80EF3025DFD18B002520AC /* CardView.swift */,
 				CE88A1F525DD545D00BFB8F8 /* UserTableViewCell.swift */,
+				CE7E430D25E7FE9100323340 /* FoodTableViewCell.swift */,
 				CE08AA0A25D5BC6D00C6F688 /* Main.storyboard */,
 			);
 			path = View;
@@ -518,6 +529,7 @@
 				CE88A20D25DD560500BFB8F8 /* Extensions.swift in Sources */,
 				CEE3B09B25DDA3D600834968 /* Message.swift in Sources */,
 				CEA4193F25E020A600822294 /* DetailViewController.swift in Sources */,
+				CE7E430E25E7FE9100323340 /* FoodTableViewCell.swift in Sources */,
 				CE08AA0525D5BC6D00C6F688 /* AppDelegate.swift in Sources */,
 				CEE3B0A025DDA3FE00834968 /* MessageApi.swift in Sources */,
 				CE08AA5025D5BDEC00C6F688 /* SignUpViewController.swift in Sources */,

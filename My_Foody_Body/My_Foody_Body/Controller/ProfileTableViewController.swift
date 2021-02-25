@@ -19,6 +19,7 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var genderSegment: UISegmentedControl!
     @IBOutlet weak var ageTextField: UITextField!
     
+    @IBOutlet var foodDescriptionTextField: UITextField!
     var imageTag = 0
     
     var ppImage: UIImage?
@@ -87,10 +88,12 @@ class ProfileTableViewController: UITableViewController {
             if let isMale = user.isMale {
                 self.genderSegment.selectedSegmentIndex = (isMale == true) ? 0 : 1
             }
+            if let foodDescription = user.foodDescription {
+                self.foodDescriptionTextField.text = foodDescription
+            } else {
+                self.foodDescriptionTextField.placeholder = "No name for thise beauty"
+            }
             
-            //            if let foodImage = user.foodImage {
-            //                self.cookingImageView.loadImage(foodImage)
-            //            }
         }
         
     }
@@ -123,6 +126,9 @@ class ProfileTableViewController: UITableViewController {
         }
         if let age = ageTextField.text, !age.isEmpty {
             dict["age"] = Int(age)
+        }
+        if let foodDescription = foodDescriptionTextField.text {
+            dict["foodDescription"] = foodDescription
         }
         
         
@@ -190,14 +196,16 @@ extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigat
                 ppImage = imageOriginal
                 avatar.image = imageOriginal
                 }
-                else  if imageTag == 2 {
+                else  {
                 favoriteFoodImage = imageOriginal
                 cookingImageView.image = imageOriginal
                 
                 }
             }
     
-            
+            // la on a que la foodView qui change
+        
+        
 //                if let imageSelectedFood = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
 //                    favoriteFoodImage = imageSelectedFood
 //                    cookingImageView.image = imageSelectedFood
