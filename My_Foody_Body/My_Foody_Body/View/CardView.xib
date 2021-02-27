@@ -98,10 +98,10 @@
                 <constraint firstItem="vfy-q5-KsO" firstAttribute="bottom" secondItem="tCj-Xg-2Dv" secondAttribute="bottom" constant="20" id="uDv-1P-KVo"/>
             </constraints>
             <connections>
+                <outlet property="ageLabel" destination="O5u-LW-xbG" id="KWN-DQ-kAF"/>
                 <outlet property="infoButton" destination="tCj-Xg-2Dv" id="lOQ-cY-9MF"/>
                 <outlet property="likeLbl" destination="eg1-pK-LMB" id="3Fd-XW-abD"/>
                 <outlet property="likeView" destination="lLy-ZC-eJn" id="XLJ-91-fJn"/>
-                <outlet property="locationLbl" destination="O5u-LW-xbG" id="b1V-w3-MhW"/>
                 <outlet property="nopeLbl" destination="MP1-aR-zen" id="R8V-06-ac8"/>
                 <outlet property="nopeView" destination="sZn-i0-H6E" id="dE9-cS-faw"/>
                 <outlet property="photo" destination="cJX-Zt-GHC" id="Fyz-Ic-6Yc"/>

@@ -11,7 +11,8 @@ import CoreLocation
 class CardView: UIView {
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var usernameLbl: UILabel!
-    @IBOutlet weak var locationLbl: UILabel!
+ 
+    @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var likeView: UIView!
     @IBOutlet weak var likeLbl: UILabel!
@@ -26,6 +27,8 @@ class CardView: UIView {
                 (image) in
                 self.user.profileImage = image
                 self.usernameLbl.text = self.user.username
+                guard let age = self.user.age else { return }
+                self.ageLabel.text = String(age)
             }
         }
     }

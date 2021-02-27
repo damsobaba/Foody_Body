@@ -5,12 +5,12 @@
 //  Created by Adam Mabrouki on 19/02/2021.
 //
 import UIKit
-import CoreLocation
 
+import Firebase
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet var foodDescription1: UITextField!
+    @IBOutlet weak var foodDescriptionLabel: UILabel!
     @IBOutlet weak var foodImage1: UIImageView!
     @IBOutlet weak var foodImage2: UIImageView!
     @IBOutlet weak var foddImage3: UIImageView!
@@ -23,11 +23,20 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     
     @IBOutlet weak var sendBtn: UIButton!
+    
+    
+    
+    
+    var inboxChangedProfileHandle: DatabaseHandle!
     var user: User!
     var isMatch = false
     
     override func viewDidLoad() {
-
+        loadData(user)
+        setUpImageView()
+      
+    }
+    func loadData(_ user: User) {
         usernameLbl.text = user.username
         avatar.image = user.profileImage
         if user.age != nil {
@@ -36,13 +45,37 @@ class DetailViewController: UIViewController {
             ageLbl.text = ""
         }
         
+        if let isMale = user.isMale {
+            let genderImgName = (isMale == true) ? "icon-male" : "icon-female"
+            genderImage.image = UIImage(named: genderImgName)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+            
+        } else {
+            genderImage.image = UIImage(named: "icon-gender")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        }
+        
+        genderImage.tintColor = .white
+        
         statusLabel.text = user.status
         foodImage1.loadImage(user.foodImage)
-        foodDescription1.text =  user.foodDescription
+        foodDescriptionLabel.text =  user.foodDescription
         
-       
+        let refUser = Ref().databaseSpecificUser(uid: user.uid)
+        if inboxChangedProfileHandle != nil {
+            refUser.removeObserver(withHandle: inboxChangedProfileHandle)
+        }
+        inboxChangedProfileHandle = refUser.observe(.childChanged, with: { (snapshot) in
+            if let snap = snapshot.value as? String {
+                self.user.updateData(key: snapshot.key, value: snap)
+//               self.controller.tableView.reloadData()
+            }
+        })
       
+        
     }
+    
+    
+    
+    
     func setUpImageView() {
         
         avatar.clipsToBounds = true 

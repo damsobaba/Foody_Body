@@ -14,12 +14,12 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var statusLbl: UILabel!
     
     var user: User!
-    var inboxChangedOnlineHandle: DatabaseHandle!
+  
     var inboxChangedProfileHandle: DatabaseHandle!
     var controller: PeopleTableViewController!
     
-    var inboxChangeOnlineHandle: DatabaseHandle!
-    var inboxChangeProfileHandle: DatabaseHandle!
+   
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

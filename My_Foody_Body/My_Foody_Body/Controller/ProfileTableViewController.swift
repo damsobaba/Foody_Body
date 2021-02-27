@@ -195,8 +195,8 @@ extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigat
                 if imageTag == 1 {
                 ppImage = imageOriginal
                 avatar.image = imageOriginal
-                }
-                else  {
+//                }
+//                else  {
                 favoriteFoodImage = imageOriginal
                 cookingImageView.image = imageOriginal
                 
