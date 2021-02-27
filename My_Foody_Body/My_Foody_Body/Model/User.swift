@@ -21,6 +21,9 @@ class User {
     var age: Int?
     var foodImage: String?
     var foodDescription: String?
+    var foodDesciption2: String?
+    var foodDescription3: String?
+    
     
     init(uid: String, username: String, email: String, profileImageUrl: String, status: String) {
         self.uid = uid
@@ -53,8 +56,12 @@ class User {
         if let foodDescription = dict["foodDescription"] as? String{
             user.foodDescription = foodDescription
         }
-        
-        
+        if let foodDescription2 = dict["foodDescription2"] as? String{
+            user.foodDesciption2 = foodDescription2
+        }
+        if let foodDescription3 = dict["foodDescription3"] as? String{
+            user.foodDescription3 = foodDescription3
+        }
         return user
     }
     

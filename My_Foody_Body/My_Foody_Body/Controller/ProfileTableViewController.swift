@@ -14,12 +14,14 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var statusTextField: UITextField!
-    
     @IBOutlet weak var cookingImageView: UIImageView!
     @IBOutlet weak var genderSegment: UISegmentedControl!
     @IBOutlet weak var ageTextField: UITextField!
     
     @IBOutlet var foodDescriptionTextField: UITextField!
+    @IBOutlet weak var foodDescription2TextField: UITextField!
+    @IBOutlet weak var foodDescription3TextField: UITextField!
+    
     var imageTag = 0
     
     var ppImage: UIImage?
@@ -88,12 +90,24 @@ class ProfileTableViewController: UITableViewController {
             if let isMale = user.isMale {
                 self.genderSegment.selectedSegmentIndex = (isMale == true) ? 0 : 1
             }
+            
             if let foodDescription = user.foodDescription {
                 self.foodDescriptionTextField.text = foodDescription
             } else {
-                self.foodDescriptionTextField.placeholder = "No name for thise beauty"
+                self.foodDescriptionTextField.placeholder = "add ingredients"
             }
             
+            if let foodDescription2 = user.foodDesciption2 {
+                self.foodDescription2TextField.text = foodDescription2
+            } else {
+                self.foodDescription2TextField.placeholder = "add ingredients"
+            }
+            
+            if let foodDescription3 = user.foodDescription3 {
+                self.foodDescription3TextField.text = foodDescription3
+            } else {
+                self.foodDescription3TextField.placeholder = "add ingredients"
+            }
         }
         
     }
@@ -130,6 +144,12 @@ class ProfileTableViewController: UITableViewController {
         if let foodDescription = foodDescriptionTextField.text {
             dict["foodDescription"] = foodDescription
         }
+        if let foodDescription2 = foodDescription2TextField.text {
+            dict["foodDescription2"] = foodDescription2
+        }
+        if let foodDescription3 = foodDescription3TextField.text {
+            dict["foodDescription3"] = foodDescription3
+        }
         
         
         
@@ -139,7 +159,7 @@ class ProfileTableViewController: UITableViewController {
                     
                 }) { (errorMessage)  in
                     
-                    print("comprend r ")
+                    print("erreur  ")
                 }
             }
             

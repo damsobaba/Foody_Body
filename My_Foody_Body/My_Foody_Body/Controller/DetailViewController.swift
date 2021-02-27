@@ -10,6 +10,8 @@ import Firebase
 
 class DetailViewController: UIViewController {
 
+    @IBOutlet weak var foodDescription3Label: UILabel!
+    @IBOutlet weak var foodDesciption2Label: UILabel!
     @IBOutlet weak var foodDescriptionLabel: UILabel!
     @IBOutlet weak var foodImage1: UIImageView!
     @IBOutlet weak var foodImage2: UIImageView!
@@ -57,8 +59,9 @@ class DetailViewController: UIViewController {
         
         statusLabel.text = user.status
         foodImage1.loadImage(user.foodImage)
-        foodDescriptionLabel.text =  user.foodDescription
-        
+        foodDescriptionLabel.text = user.foodDescription
+        foodDesciption2Label.text = user.foodDesciption2
+        foodDescription3Label.text = user.foodDescription3
         let refUser = Ref().databaseSpecificUser(uid: user.uid)
         if inboxChangedProfileHandle != nil {
             refUser.removeObserver(withHandle: inboxChangedProfileHandle)
