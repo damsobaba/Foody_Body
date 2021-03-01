@@ -5,35 +5,25 @@
 //  Created by Adam Mabrouki on 17/02/2021.
 //
 
-
-
-
 import Foundation
 import Firebase
-
-let refUser = "users"
-let refMessage = "messages"
-let refInbox = "inbox"
-
-let urlStorageRoot = "gs://foody-body-be872.appspot.com"
-let storageProfil = "profile"
-let profilImageUrl = "profileImageUrl"
-let foodImage = "foodImage"
-let uid = "uid"
-let emaiL = "email"
-let usernamE = "username"
-let status = "status"
-
-
-let identifierTabbar = "TabBarVC"
-let identifierMain = "MainVC"
-let IdentifierChat = "ChatVC"
-
-
 
 
 
 class Ref {
+    let profileImageUrl = "profileImageUrl"
+    let refUser = "users"
+    let refMessage = "messages"
+    let refInbox = "inbox"
+    let storageProfil = "profile"
+    let foodImage = "foodImage"
+    let foodImage2 = "foodImage2"
+    let uid = "uid"
+    let emaiL = "email"
+    let usernamE = "username"
+    let status = "status"
+    let IdentifierChat = "ChatVC"
+    
     let databaseRoot: DatabaseReference = Database.database().reference()
     
     var databaseUsers: DatabaseReference {
@@ -64,9 +54,8 @@ class Ref {
         return databaseInbox.child(uid)
     }
     
-    // Storage Ref
     
-    let storageRoot = Storage.storage().reference(forURL: urlStorageRoot)
+    let storageRoot = Storage.storage().reference(forURL:"gs://foody-body-be872.appspot.com")
     
     var storageMessage: StorageReference {
         return storageRoot.child(refMessage)
@@ -85,7 +74,17 @@ class Ref {
     }
     
     func storageSpecificFoodImage(id: String) -> StorageReference {
-        return storageMessage.child("photo").child(id)
+        return storageMessage.child("photoFood").child(id)
     }
+    
+    
+    var databaseAction: DatabaseReference {
+        return databaseRoot.child("action")
+    }
+    
+    func databaseActionForUser(uid: String) -> DatabaseReference {
+        return databaseAction.child(uid)
+    }
+    
     
 }

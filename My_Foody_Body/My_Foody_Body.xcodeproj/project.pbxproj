@@ -22,7 +22,6 @@
 		CE08AB6125D5DEFC00C6F688 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */; };
 		CE08AB6225D5DEFC00C6F688 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */; };
 		CE231A9DC06B55DFF858E6DE /* Pods_My_Foody_Body.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D1D7069B7F9923940A8C83 /* Pods_My_Foody_Body.framework */; };
-		CE3D6B5F25E0257800E01B04 /* FoodCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D6B5E25E0257800E01B04 /* FoodCollectionViewController.swift */; };
 		CE75918225DBCD0C0056A779 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75918125DBCD0C0056A779 /* AuthManager.swift */; };
 		CE75918725DBCD290056A779 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75918625DBCD290056A779 /* Api.swift */; };
 		CE80EF3125DFD18B002520AC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80EF3025DFD18B002520AC /* CardView.swift */; };
@@ -81,7 +80,6 @@
 		CE08AA4F25D5BDEC00C6F688 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		CE08AA5425D5BE1600C6F688 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CE3D6B5E25E0257800E01B04 /* FoodCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewController.swift; sourceTree = "<group>"; };
 		CE75918125DBCD0C0056A779 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		CE75918625DBCD290056A779 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Api.swift; path = /Users/adammabrouki/Desktop/P12/My_Foody_Body/My_Foody_Body/Model/Api.swift; sourceTree = "<absolute>"; };
 		CE80EF3025DFD18B002520AC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 				CEE3B08225DDA05200834968 /* ChatViewControllerExtension.swift */,
 				CEDEC97925DEFE9B00497262 /* SwipeViewController.swift */,
 				CEA4193E25E020A600822294 /* DetailViewController.swift */,
-				CE3D6B5E25E0257800E01B04 /* FoodCollectionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -536,7 +533,6 @@
 				CEE3B08925DDA14500834968 /* MessageTableViewCell.swift in Sources */,
 				CEE3B08325DDA05200834968 /* ChatViewControllerExtension.swift in Sources */,
 				CE75918725DBCD290056A779 /* Api.swift in Sources */,
-				CE3D6B5F25E0257800E01B04 /* FoodCollectionViewController.swift in Sources */,
 				CE88A1F125DD542C00BFB8F8 /* PeopleTableViewController.swift in Sources */,
 				CE80EF3125DFD18B002520AC /* CardView.swift in Sources */,
 				CE88A20825DD55D900BFB8F8 /* Reference.swift in Sources */,

@@ -19,7 +19,12 @@ class User {
     var status: String
     var isMale: Bool?
     var age: Int?
+    
+    
+    
     var foodImage: String?
+    var foodImage2: String?
+    var foodImage3: String?
     var foodDescription: String?
     var foodDesciption2: String?
     var foodDescription3: String?
@@ -53,6 +58,14 @@ class User {
         if let foodImage = dict["foodImage"] as? String {
             user.foodImage = foodImage
         }
+        
+        if let foodImage2 = dict["foodImage2"] as? String {
+            user.foodImage2 = foodImage2
+        }
+        if let foodImage3 = dict["foodImage3"] as? String {
+            user.foodImage3 = foodImage3
+        }
+        
         if let foodDescription = dict["foodDescription"] as? String{
             user.foodDescription = foodDescription
         }

@@ -16,7 +16,7 @@ class SwipeViewController:UIViewController   {
     
     
     @IBOutlet weak var likeImg: UIImageView!
-    @IBOutlet weak var boostImg: UIImageView!
+    @IBOutlet weak var nopeImg: UIImageView!
    
     var queryHandle: DatabaseHandle?
     var users: [User] = []
@@ -28,24 +28,23 @@ class SwipeViewController:UIViewController   {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        title = "Swipe"
-      
-        boostImg.isUserInteractionEnabled = true
+        
+       
+        nopeImg.isUserInteractionEnabled = true
         let tapNopeImg = UITapGestureRecognizer(target: self, action: #selector(nopeImgDidTap))
-        boostImg.addGestureRecognizer(tapNopeImg)
+        nopeImg.addGestureRecognizer(tapNopeImg)
         
         likeImg.isUserInteractionEnabled = true
         let tapLikeImg = UITapGestureRecognizer(target: self, action: #selector(likeImgDidTap))
         likeImg.addGestureRecognizer(tapLikeImg)
         findUsers()
-//        let newMatchItem = UIBarButtonItem(image: UIImage(named: "icon-chat"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(newMatchItemDidTap))
-//        self.navigationItem.rightBarButtonItem = newMatchItem
+
     }
     @objc func nopeImgDidTap() {
         guard let firstCard = cards.first else {
             return
         }
-//        saveToFirebase(like: false, card: firstCard)
+      saveToFirebase(like: false, card: firstCard)
         swipeAnimation(translation: 750, angle: -15)
         self.setupTransforms()
     }
@@ -54,7 +53,7 @@ class SwipeViewController:UIViewController   {
         guard let firstCard = cards.first else {
             return
         }
-//        saveToFirebase(like: true, card: firstCard)
+       saveToFirebase(like: true, card: firstCard)
         swipeAnimation(translation: -750, angle: 15)
         self.setupTransforms()
     }
@@ -142,7 +141,7 @@ class SwipeViewController:UIViewController   {
             panInitialLocation = gesture.location(in: cardStack)
             print("began")
             print("panInitialLocation")
-            print(panInitialLocation)
+           
 
         case .changed:
             print("changed")
@@ -174,7 +173,7 @@ class SwipeViewController:UIViewController   {
                     // remove card
                     card.removeFromSuperview()
                 }
-//                saveToFirebase(like: true, card: card)
+               saveToFirebase(like: true, card: card)
                 self.updateCards(card: card)
 
                 return
@@ -186,7 +185,7 @@ class SwipeViewController:UIViewController   {
                     card.removeFromSuperview()
                 }
                 
-//                saveToFirebase(like: false, card: card)
+               saveToFirebase(like: false, card: card)
                 self.updateCards(card: card)
                 
                 return
@@ -241,6 +240,33 @@ class SwipeViewController:UIViewController   {
             card.transform = transform
         }
     }
+    
+    func saveToFirebase(like: Bool, card: CardView) {
+        Ref().databaseActionForUser(uid: Api.User.currentUserId)
+            .updateChildValues([card.user.uid: like]) { (error, ref) in
+                if error == nil, like == true {
+            
+                    self.checkIfMatchFor(card: card)
+                }
+        }
+    }
+    
+    func checkIfMatchFor(card: CardView) {
+        Ref().databaseActionForUser(uid: card.user.uid).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String: Bool] else { return }
+            if dict.keys.contains(Api.User.currentUserId), dict[Api.User.currentUserId] == true {
+                // send push notification
+            Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).updateChildValues([card.user.uid: true])
+            Ref().databaseRoot.child("newMatch").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
+                
+                Api.User.getUserInforSingleEvent(uid: Api.User.currentUserId, onSuccess: { (user) in
+                    self.presentAlert(title: "Notification", message: "you have a new match ! ")
+                  
+                })
+            }
+        }
+    }
+
     
 }
 

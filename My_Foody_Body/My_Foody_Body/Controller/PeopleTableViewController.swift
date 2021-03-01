@@ -10,7 +10,7 @@ import UIKit
 class PeopleTableViewController: UITableViewController {
 
     var users: [User] = []
-   
+    let ref = Ref()
     override func viewDidLoad() {
         super.viewDidLoad()
    
@@ -31,7 +31,7 @@ class PeopleTableViewController: UITableViewController {
     }
     
     func observeUsers() {
-        Api.User.observeUsers { (user) in
+        Api.User.observeNewMatch{ (user) in
             self.users.append(user)
             self.tableView.reloadData()
         }
@@ -61,7 +61,7 @@ class PeopleTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? UserTableViewCell {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let chatVC = storyboard.instantiateViewController(withIdentifier: IdentifierChat) as! ChatViewController
+            let chatVC = storyboard.instantiateViewController(withIdentifier: ref.IdentifierChat) as! ChatViewController
             chatVC.imagePartner = cell.avatar.image
             chatVC.partnerUsername = cell.usernameLbl.text
             chatVC.partnerId = cell.user.uid

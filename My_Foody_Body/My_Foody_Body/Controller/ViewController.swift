@@ -11,8 +11,7 @@ class ViewController: UIViewController {
 
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var signInFacebookButton: UIButton!
-    @IBOutlet weak var signInGoogleButton: UIButton!
+
     @IBOutlet weak var createAccountButton: UIButton!
   
     
@@ -23,8 +22,7 @@ class ViewController: UIViewController {
 
     private func changeButtonsAspect(){
         createAccountButton.layer.cornerRadius = 6
-        signInGoogleButton.layer.cornerRadius = 6
-        signInFacebookButton.layer.cornerRadius = 6
+    
     }
     
     

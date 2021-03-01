@@ -120,9 +120,7 @@ extension ChatViewController {
         
     }
     
-    
 
-    
     ///send message info to firebase
     func sendToFirebase(dict: Dictionary<String, Any>) {
         let date: Double = Date().timeIntervalSince1970

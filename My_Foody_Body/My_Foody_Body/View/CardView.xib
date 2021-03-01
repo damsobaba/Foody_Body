@@ -46,11 +46,10 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIKE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eg1-pK-LMB">
                             <rect key="frame" x="8" y="0.0" width="36" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.66976565119999998" green="0.56966716049999999" blue="0.48234224320000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="eg1-pK-LMB" secondAttribute="bottom" id="EF1-VR-z1R"/>
                         <constraint firstAttribute="trailing" secondItem="eg1-pK-LMB" secondAttribute="trailing" constant="8" id="Lec-RC-y0j"/>
@@ -65,11 +64,10 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MP1-aR-zen">
                             <rect key="frame" x="8" y="0.0" width="45" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.66976565119999998" green="0.56966716049999999" blue="0.48234224320000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="FZR-A0-SfV"/>
                         <constraint firstItem="MP1-aR-zen" firstAttribute="top" secondItem="sZn-i0-H6E" secondAttribute="top" id="MR0-76-v4Y"/>

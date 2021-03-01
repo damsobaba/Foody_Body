@@ -24,7 +24,7 @@ class DetailViewController: UIViewController {
    
     @IBOutlet weak var statusLabel: UILabel!
     
-    @IBOutlet weak var sendBtn: UIButton!
+
     
     
     
@@ -59,6 +59,8 @@ class DetailViewController: UIViewController {
         
         statusLabel.text = user.status
         foodImage1.loadImage(user.foodImage)
+        foodImage2.loadImage(user.foodImage2)
+        foddImage3.loadImage(user.foodImage3)
         foodDescriptionLabel.text = user.foodDescription
         foodDesciption2Label.text = user.foodDesciption2
         foodDescription3Label.text = user.foodDescription3
@@ -69,7 +71,7 @@ class DetailViewController: UIViewController {
         inboxChangedProfileHandle = refUser.observe(.childChanged, with: { (snapshot) in
             if let snap = snapshot.value as? String {
                 self.user.updateData(key: snapshot.key, value: snap)
-//               self.controller.tableView.reloadData()
+
             }
         })
       
@@ -83,8 +85,7 @@ class DetailViewController: UIViewController {
         
         avatar.clipsToBounds = true 
         foodImage1.layer.cornerRadius = 10
-        
-        foodImage1.clipsToBounds = true
+        [foodImage1,foodImage2,foddImage3].forEach { $0?.layer.cornerRadius = 10 }
     }
     
     

@@ -36,7 +36,7 @@ class CardView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .clear
+
         let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: bounds.height)
         photo.addBlackGradientLayer(frame: frameGradient, colors: [ UIColor.clear, UIColor.brown])
         
@@ -60,15 +60,7 @@ class CardView: UIView {
         nopeView.transform = CGAffineTransform(rotationAngle: .pi / 8)
         
    
-        nopeLbl.attributedText = NSAttributedString(string: "NOPE",attributes:[NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 30)])
 
-        nopeView.layer.borderColor = UIColor.brown.cgColor
-        nopeLbl.textColor = UIColor.brown
-        
-        
-        likeLbl.attributedText = NSAttributedString(string: "LIKE",attributes:[NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 30)])
-        likeView.layer.borderColor = UIColor.brown.cgColor
-        likeLbl.textColor =  UIColor.brown
     }
     
     @IBAction func infoBtnDidTap(_ sender: Any) {

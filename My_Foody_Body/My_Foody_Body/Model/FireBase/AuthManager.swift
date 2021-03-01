@@ -14,7 +14,7 @@ import FirebaseStorage
 
 class AuthManager {
     
-
+let ref = Ref()
     
     var currentUserId: String {
         return Auth.auth().currentUser != nil ? Auth.auth().currentUser!.uid : ""
@@ -41,11 +41,11 @@ class AuthManager {
                 return }
             if let authData = authDataResult {
                 let dict: Dictionary<String, Any> =  [
-                    uid: authData.user.uid,
-                    emaiL: authData.user.email!,
-                    usernamE: username,
-                    profilImageUrl: "",
-                    status: "Hello, I'm a new foody-body 😊 "
+                    self.ref.uid: authData.user.uid,
+                    self.ref.emaiL: authData.user.email!,
+                    self.ref.usernamE: username,
+                    self.ref.profileImageUrl: "",
+                    self.ref.status: "Hello, I'm a new foody-body 😊 "
                     
                 ]
                 
@@ -108,7 +108,7 @@ class AuthManager {
             }
         }
     }
-    
+
     func getUserInfor(uid: String, onSuccess: @escaping(UserCompletion)) {
         let ref = Ref().databaseSpecificUser(uid: uid)
         ref.observe(.value) { (snapshot) in
@@ -119,6 +119,22 @@ class AuthManager {
             }
         }
     }
+    
+    func observeNewMatch(onSuccess: @escaping(UserCompletion)) {    Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String: Bool] else { return }
+            dict.forEach({ (key, value) in
+                self.getUserInforSingleEvent(uid: key, onSuccess: { (user) in
+                    onSuccess(user)
+                })
+            })
+        }
+    }
+    
+    
+    
+    
+    
+    
 }
 
 typealias UserCompletion = (User) -> Void

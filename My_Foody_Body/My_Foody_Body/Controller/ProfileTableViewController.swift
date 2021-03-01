@@ -14,7 +14,13 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var statusTextField: UITextField!
+    
+    
     @IBOutlet weak var cookingImageView: UIImageView!
+    @IBOutlet weak var cookingImageView2: UIImageView!
+    @IBOutlet weak var cookingImageView3: UIImageView!
+    
+    
     @IBOutlet weak var genderSegment: UISegmentedControl!
     @IBOutlet weak var ageTextField: UITextField!
     
@@ -25,7 +31,14 @@ class ProfileTableViewController: UITableViewController {
     var imageTag = 0
     
     var ppImage: UIImage?
-    var favoriteFoodImage: UIImage?
+    
+    
+    
+    private var currentImageView: UIImageView? = nil
+    
+    var favoriteFoodImage:UIImage?
+    var favoriteFoodImage2: UIImage?
+    var favoriteFoodImage3: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,31 +60,17 @@ class ProfileTableViewController: UITableViewController {
         avatar.layer.cornerRadius = 40
         avatar.clipsToBounds = true
         avatar.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentPicker))
-        avatar.addGestureRecognizer(tapGesture)
-        imageTag = 1
-        
     }
     
     func setUpFoodImage() {
-        cookingImageView.layer.cornerRadius = 20
-        cookingImageView.clipsToBounds = true
-        cookingImageView.isUserInteractionEnabled = true
-        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(presentPicker))
-        cookingImageView.addGestureRecognizer(tapGesture2)
-        imageTag = 2
+        [cookingImageView,cookingImageView2,cookingImageView3].forEach { $0?.layer.cornerRadius = 20}
+        [cookingImageView,cookingImageView2,cookingImageView3].forEach { $0?.clipsToBounds = true }
+        [cookingImageView,cookingImageView2,cookingImageView3].forEach { $0?.isUserInteractionEnabled = true
+            
+        }
+        
     }
-    //PASSER par DES BOUTOOOONNNNNNS
-    
-    @objc func presentPicker() {
-        view.endEditing(true)
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
-        picker.delegate = self
-        self.present(picker, animated: true, completion: nil)
-    }
-    
+
     func observeData() {
         Api.User.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
             self.usernameTextField.text = user.username
@@ -79,6 +78,8 @@ class ProfileTableViewController: UITableViewController {
             self.statusTextField.text = user.status
             self.avatar.loadImage(user.profileImageUrl)
             self.cookingImageView.loadImage(user.foodImage)
+            self.cookingImageView2.loadImage(user.foodImage2)
+            self.cookingImageView3.loadImage(user.foodImage3)
             
             if let age = user.age {
                 self.ageTextField.text = "\(age)"
@@ -154,8 +155,16 @@ class ProfileTableViewController: UITableViewController {
         
         
         Api.User.saveUserProfile(dict: dict, onSuccess: {
-            if let favoriteFoodImage = self.favoriteFoodImage {
-                StorageService.saveFoodPhoto(image: favoriteFoodImage, uid: Api.User.currentUserId, onSuccess: {
+            if let saveFoodImage = self.favoriteFoodImage  {
+                StorageService.saveFoodPhoto(image: saveFoodImage, uid: Api.User.currentUserId, onSuccess: {
+                    
+                }) { (errorMessage)  in
+                    
+                    print("erreur  ")
+                }
+            }
+            if let saveFoodImage2 = self.favoriteFoodImage2  {
+                StorageService.saveFoodPhoto2(image: saveFoodImage2, uid: Api.User.currentUserId, onSuccess: {
                     
                 }) { (errorMessage)  in
                     
@@ -163,6 +172,14 @@ class ProfileTableViewController: UITableViewController {
                 }
             }
             
+            if let saveFoodImage3 = self.favoriteFoodImage3  {
+                StorageService.saveFoodPhoto3(image: saveFoodImage3, uid: Api.User.currentUserId, onSuccess: {
+                    
+                }) { (errorMessage)  in
+                    
+                    print("erreur  ")
+                }
+            }
             
             if let ppimg = self.ppImage {
                 StorageService.savePhotoProfile(image: ppimg, uid: Api.User.currentUserId, onSuccess: {
@@ -174,7 +191,7 @@ class ProfileTableViewController: UITableViewController {
             } else {
                 self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
             }
-          
+            
             
         }) { (errorMessage) in
             self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
@@ -188,6 +205,22 @@ class ProfileTableViewController: UITableViewController {
         
     }
     
+    @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        
+        currentImageView = sender.view as? UIImageView
+        imageTag = currentImageView!.tag
+        
+        view.endEditing(true)
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
+    }
+    
+    
+    
     
     
     
@@ -198,67 +231,46 @@ extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigat
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-       
-            if let imageSelected = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-                
-                if imageTag == 1 {
-                ppImage = imageSelected
-                    avatar.image = imageSelected }
-                    else  if imageTag == 2 {
-                favoriteFoodImage = imageSelected
-                cookingImageView.image = imageSelected
-                    }
-                }
+        let imageSelected = info[UIImagePickerController.InfoKey.editedImage]
+        currentImageView?.image = imageSelected as? UIImage
+        
+        
+        switch imageTag {
+        case 0:
             
-            if let imageOriginal = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                
-                if imageTag == 1 {
-                ppImage = imageOriginal
-                avatar.image = imageOriginal
-//                }
-//                else  {
-                favoriteFoodImage = imageOriginal
-                cookingImageView.image = imageOriginal
-                
-                }
-            }
-    
-            // la on a que la foodView qui change
-        
-        
-//                if let imageSelectedFood = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-//                    favoriteFoodImage = imageSelectedFood
-//                    cookingImageView.image = imageSelectedFood
-//                }
-//
-//                if let imageOriginal2 = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-//                    favoriteFoodImage = imageOriginal2
-//                    cookingImageView.image = imageOriginal2
-//                }
+            ppImage = imageSelected as? UIImage
             
+        case 1:
+            favoriteFoodImage = imageSelected as? UIImage
+        case 2:
+            favoriteFoodImage2 = imageSelected as? UIImage
+        case 3:
+            favoriteFoodImage3 = imageSelected as? UIImage
+            
+        default:
+            break
+        }
+        
+        let imageOriginal = info[UIImagePickerController.InfoKey.originalImage]
+        currentImageView?.image = imageOriginal as? UIImage
+        switch imageTag {
+        case 0:
+            
+            ppImage = imageOriginal as? UIImage
+            
+        case 1:
+            favoriteFoodImage = imageOriginal as? UIImage
+        case 2:
+            favoriteFoodImage2 = imageOriginal as? UIImage
+        case 3:
+            favoriteFoodImage3 = imageOriginal as? UIImage
+            
+        default:
+            break
+        }
         
         
         
-        
-        
-        picker.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
-    
-    //    func foodImagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    //
-    //        if let imageSelectedFood = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-    //            favoriteFoodImage = imageSelectedFood
-    //            cookingImageView.image = imageSelectedFood
-    //        }
-    //
-    //        if let imageOriginal2 = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-    //            favoriteFoodImage = imageOriginal2
-    //            cookingImageView.image = imageOriginal2
-    //        }
-    //
-    //        picker.dismiss(animated: true, completion: nil)
-    //    }
-    
-    
-    
 }

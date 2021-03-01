@@ -30,11 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard=UIStoryboard(name: "Main", bundle: nil)
         
         if Auth.auth().currentUser != nil {
-            let homeVC = storyboard.instantiateViewController(withIdentifier:  identifierTabbar )
+            let homeVC = storyboard.instantiateViewController(withIdentifier:  "TabBarVC" )
             initialVc = homeVC
         }
         else{
-            let loginVC = storyboard.instantiateViewController(withIdentifier:  identifierMain)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "MainVC")
             initialVc = loginVC
         }
         
