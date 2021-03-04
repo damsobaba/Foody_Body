@@ -22,9 +22,9 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordContainterView: UIView!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var signInButton: UIButton!
+  
     
-    
+    private let authService: AuthService = AuthService()
     var image:UIImage? = nil
     
     override func viewDidLoad() {
@@ -35,7 +35,7 @@ class SignUpViewController: UIViewController {
     
     
     func changeButtonsAspect() {
-        signInButton.layer.cornerRadius = 6
+       
         signUpButton.layer.cornerRadius = 6
         
     }
@@ -85,30 +85,44 @@ class SignUpViewController: UIViewController {
         
     }
     
-    func signUp(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-  
-      
-
-        Api.User.signUp(withUsername: self.fullnameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!, image: self.image, onSuccess: {
-            self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Loading")
-            onSuccess()
-        }) { (errorMessage) in
-            onError(errorMessage)
-
-        }
-       
-    }
+//    func signUp(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+//
+//
+//
+//        Api.User.signUp(withUsername: self.fullnameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!, image: self.image, onSuccess: {
+//            self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Loading")
+//            onSuccess()
+//        }) { (errorMessage) in
+//            onError(errorMessage)
+//
+//        }
+//
+//    }
+    
+    
     @IBAction func signUpButtonDidTapped(_ sender: Any) {
         self.view.endEditing(true)
         self.validateFields()
-        self.signUp(onSuccess: {
-            (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
-        }) { (errorMessage) in
-            self.presentAlert(title: "Error", message: "They have been a error please try again")
+//        self.signUp(onSuccess: {
+//            (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
+//        }) { (errorMessage) in
+//            self.presentAlert(title: "Error", message: "They have been a error please try again")
+//        }
+//
+//    }
+        guard let userName = fullnameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        guard let image = image else { return }
+        authService.signUp(userName: userName, email: email, password: password, image: image) { isSuccess in
+            if isSuccess {
+                self.performSegue(withIdentifier: "UnwindToSignInViewController", sender: nil)
+            }
+            else {
+                self.presentAlert(title: "Try Again", message: "the paswword or email adress is incorect")
+            }
         }
-        
     }
-    
 }
 
 

@@ -16,8 +16,6 @@ class Ref {
     let refMessage = "messages"
     let refInbox = "inbox"
     let storageProfil = "profile"
-    let foodImage = "foodImage"
-    let foodImage2 = "foodImage2"
     let uid = "uid"
     let emaiL = "email"
     let usernamE = "username"

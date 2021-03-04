@@ -27,8 +27,7 @@ class SwipeViewController:UIViewController   {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        
+    
        
         nopeImg.isUserInteractionEnabled = true
         let tapNopeImg = UITapGestureRecognizer(target: self, action: #selector(nopeImgDidTap))
@@ -40,6 +39,8 @@ class SwipeViewController:UIViewController   {
         findUsers()
 
     }
+    
+  
     @objc func nopeImgDidTap() {
         guard let firstCard = cards.first else {
             return
@@ -255,13 +256,12 @@ class SwipeViewController:UIViewController   {
         Ref().databaseActionForUser(uid: card.user.uid).observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? [String: Bool] else { return }
             if dict.keys.contains(Api.User.currentUserId), dict[Api.User.currentUserId] == true {
-                // send push notification
             Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).updateChildValues([card.user.uid: true])
             Ref().databaseRoot.child("newMatch").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
                 
                 Api.User.getUserInforSingleEvent(uid: Api.User.currentUserId, onSuccess: { (user) in
                     self.presentAlert(title: "Notification", message: "you have a new match ! ")
-                  
+                    
                 })
             }
         }

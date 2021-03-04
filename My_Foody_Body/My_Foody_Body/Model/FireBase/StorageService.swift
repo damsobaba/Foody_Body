@@ -43,34 +43,10 @@ let ref = Ref()
    
     
     
-//    static func savePhotoMessage(image: UIImage?, id: String, onSuccess: @escaping(_ value: Any) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-//        if let imagePhoto = image {
-//            let ref = Ref().storageSpecificImageMessage(id: id)
-//            if let data = imagePhoto.jpegData(compressionQuality: 0.5) {
-//
-//                ref.putData(data, metadata: nil) { (metadata, error) in
-//                    if error != nil {
-//                        onError(error!.localizedDescription)
-//                    }
-//                    ref.downloadURL(completion: { (url, error) in
-//                        if let metaImageUrl = url?.absoluteString {
-//                            let dict: Dictionary<String, Any> = [
-//                                "imageUrl": metaImageUrl as Any,
-//                                "height": imagePhoto.size.height as Any,
-//                                "width": imagePhoto.size.width as Any,
-//                                "text": "" as Any
-//                            ]
-//                            onSuccess(dict)
-//                        }
-//                    })
-//                }
-//            }
-//        }
-//    }
-//
-//
+
+
     
-       static func savePhotoProfile(image: UIImage, uid: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void)  {
+       static func savePhotoProfile(image: UIImage, uid: String, onError: @escaping(_ errorMessage: String) -> Void)  {
            guard let imageData = image.jpegData(compressionQuality: 0.4) else {
                return
            }
@@ -97,12 +73,10 @@ let ref = Ref()
                        }
                        
                     Ref().databaseSpecificUser(uid: uid).updateChildValues(["profileImageUrl": metaImageUrl], withCompletionBlock: { (error, ref) in
-                           if error == nil {
-                               
-                               onSuccess()
-                           } else {
-                               onError(error!.localizedDescription)
-                           }
+                           if error != nil {
+                            onError(error!.localizedDescription)
+                              
+                           } 
                        })
                    }
                })
@@ -112,18 +86,60 @@ let ref = Ref()
            
        }
        
-    
-    
-    static func saveFoodPhoto(image: UIImage, uid: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void)  {
+    static func savePhotoProfile(image: UIImage, uid: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void)  {
+               guard let imageData = image.jpegData(compressionQuality: 0.4) else {
+                   return
+               }
+               
+               let storageProfileRef = Ref().storageSpecificProfile(uid: uid)
+               
+               let metadata = StorageMetadata()
+               metadata.contentType = "image/jpg"
+               
+               storageProfileRef.putData(imageData, metadata: metadata, completion: { (storageMetaData, error) in
+                   if error != nil {
+                       onError(error!.localizedDescription)
+                       return
+                   }
+                   
+                   storageProfileRef.downloadURL(completion: { (url, error) in
+                       if let metaImageUrl = url?.absoluteString {
+                           
+                           if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
+                               changeRequest.photoURL = url
+                               changeRequest.commitChanges(completion: { (error) in
+                                
+                               })
+                           }
+                           
+                        Ref().databaseSpecificUser(uid: uid).updateChildValues(["profileImageUrl": metaImageUrl], withCompletionBlock: { (error, ref) in
+                               if error == nil {
+                                   
+                                   onSuccess()
+                               } else {
+                                   onError(error!.localizedDescription)
+                               }
+                           })
+                       }
+                   })
+                   
+               })
+               
+               
+           }
+           
+        
+
+    static func saveFoodPhoto(image: UIImage, uid: String,dictValue:String, onError: @escaping(_ errorMessage: String) -> Void)  {
         guard let imageData = image.jpegData(compressionQuality: 0.4) else {
             return
         }
-    
+
         let storageProfileRef = Ref().storageSpecificProfile(uid: uid)
-        
+
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
-        
+
         storageProfileRef.putData(imageData, metadata: metadata, completion: { (storageMetaData, error) in
             if error != nil {
                 onError(error!.localizedDescription)
@@ -131,125 +147,30 @@ let ref = Ref()
             }
             storageProfileRef.downloadURL(completion: { (url, error) in
                 if let metaImageUrl = url?.absoluteString {
-                    
+
                     if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
                         changeRequest.photoURL = url
                         changeRequest.commitChanges(completion: { (error) in
-                         
+
                         })
                     }
-                    
-                    Ref().databaseSpecificUser(uid: uid).updateChildValues(["foodImage": metaImageUrl,], withCompletionBlock: { (error, ref) in
-                        if error == nil {
-                            
-                            onSuccess()
-                        } else {
+
+                    Ref().databaseSpecificUser(uid: uid).updateChildValues([dictValue: metaImageUrl,], withCompletionBlock: { (error, ref) in
+                        if error != nil {
                             onError(error!.localizedDescription)
                         }
                     })
 
                 }
             })
-            
-        })
-        
-        
-    }
-    
-    static func saveFoodPhoto2(image: UIImage, uid: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void)  {
-        guard let imageData = image.jpegData(compressionQuality: 0.4) else {
-            return
-        }
-    
-        let storageProfileRef = Ref().storageSpecificProfile(uid: uid)
-        
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpg"
-        
-        storageProfileRef.putData(imageData, metadata: metadata, completion: { (storageMetaData, error) in
-            if error != nil {
-                onError(error!.localizedDescription)
-                return
-            }
-            storageProfileRef.downloadURL(completion: { (url, error) in
-                if let metaImageUrl = url?.absoluteString {
-                    
-                    if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
-                        changeRequest.photoURL = url
-                        changeRequest.commitChanges(completion: { (error) in
-                         
-                        })
-                    }
-                    
-                    Ref().databaseSpecificUser(uid: uid).updateChildValues(["foodImage2": metaImageUrl,], withCompletionBlock: { (error, ref) in
-                        if error == nil {
-                            
-                            onSuccess()
-                        } else {
-                            onError(error!.localizedDescription)
-                        }
-                    })
 
-                }
-            })
-            
         })
-        
-        
-    }
-    
-    
-    static func saveFoodPhoto3(image: UIImage, uid: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void)  {
-        guard let imageData = image.jpegData(compressionQuality: 0.4) else {
-            return
-        }
-    
-        let storageProfileRef = Ref().storageSpecificProfile(uid: uid)
-        
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpg"
-        
-        storageProfileRef.putData(imageData, metadata: metadata, completion: { (storageMetaData, error) in
-            if error != nil {
-                onError(error!.localizedDescription)
-                return
-            }
-            storageProfileRef.downloadURL(completion: { (url, error) in
-                if let metaImageUrl = url?.absoluteString {
-                    
-                    if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
-                        changeRequest.photoURL = url
-                        changeRequest.commitChanges(completion: { (error) in
-                         
-                        })
-                    }
-                    
-                    Ref().databaseSpecificUser(uid: uid).updateChildValues(["foodImage3": metaImageUrl,], withCompletionBlock: { (error, ref) in
-                        if error == nil {
-                            
-                            onSuccess()
-                        } else {
-                            onError(error!.localizedDescription)
-                        }
-                    })
 
-                }
-            })
-            
-        })
-        
-        
+
     }
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    static func savePhoto(username: String, uid: String, data: Data, metadata: StorageMetadata, storageProfileRef: StorageReference, dict: Dictionary<String, Any>, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    static func savePhoto(username: String, uid: String, data: Data, metadata: StorageMetadata, storageProfileRef: StorageReference, dict: Dictionary<String, Any>, onError: @escaping(_ errorMessage: String) -> Void) {
         storageProfileRef.putData(data, metadata: metadata, completion: { (storageMetaData, error) in
             if error != nil {
                 onError(error!.localizedDescription)
@@ -271,12 +192,10 @@ let ref = Ref()
                 
                     
                     Ref().databaseSpecificUser(uid: uid).updateChildValues(dictTemp, withCompletionBlock: { (error, ref) in
-                        if error == nil {
-                            
-                            onSuccess()
-                        } else {
+                        if error != nil {
                             onError(error!.localizedDescription)
-                        }
+                           
+                        } 
                     })
                 }
             })

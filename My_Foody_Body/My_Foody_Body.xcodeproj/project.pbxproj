@@ -16,11 +16,14 @@
 		CE08AA0E25D5BC7000C6F688 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE08AA0D25D5BC7000C6F688 /* Assets.xcassets */; };
 		CE08AA1125D5BC7000C6F688 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE08AA0F25D5BC7000C6F688 /* LaunchScreen.storyboard */; };
 		CE08AA1C25D5BC7000C6F688 /* My_Foody_BodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08AA1B25D5BC7000C6F688 /* My_Foody_BodyTests.swift */; };
-		CE08AA2725D5BC7000C6F688 /* My_Foody_BodyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08AA2625D5BC7000C6F688 /* My_Foody_BodyUITests.swift */; };
 		CE08AA5025D5BDEC00C6F688 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08AA4F25D5BDEC00C6F688 /* SignUpViewController.swift */; };
 		CE08AA5525D5BE1600C6F688 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08AA5425D5BE1600C6F688 /* SignInViewController.swift */; };
 		CE08AB6125D5DEFC00C6F688 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */; };
 		CE08AB6225D5DEFC00C6F688 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */; };
+		CE0D6D1125F005580093DFF5 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D6D1025F005580093DFF5 /* AuthService.swift */; };
+		CE0D6D1B25F015CC0093DFF5 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D6D1A25F015CC0093DFF5 /* MainTabBarViewController.swift */; };
+		CE0D6D2325F133E00093DFF5 /* DatabaseManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D6D2225F133E00093DFF5 /* DatabaseManagerTest.swift */; };
+		CE0D6D2B25F134A90093DFF5 /* AuthServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D6D2A25F134A90093DFF5 /* AuthServiceTest.swift */; };
 		CE231A9DC06B55DFF858E6DE /* Pods_My_Foody_Body.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D1D7069B7F9923940A8C83 /* Pods_My_Foody_Body.framework */; };
 		CE75918225DBCD0C0056A779 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75918125DBCD0C0056A779 /* AuthManager.swift */; };
 		CE75918725DBCD290056A779 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75918625DBCD290056A779 /* Api.swift */; };
@@ -75,11 +78,13 @@
 		CE08AA1B25D5BC7000C6F688 /* My_Foody_BodyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = My_Foody_BodyTests.swift; sourceTree = "<group>"; };
 		CE08AA1D25D5BC7000C6F688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE08AA2225D5BC7000C6F688 /* My_Foody_BodyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = My_Foody_BodyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE08AA2625D5BC7000C6F688 /* My_Foody_BodyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = My_Foody_BodyUITests.swift; sourceTree = "<group>"; };
-		CE08AA2825D5BC7000C6F688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE08AA4F25D5BDEC00C6F688 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		CE08AA5425D5BE1600C6F688 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE0D6D1025F005580093DFF5 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		CE0D6D1A25F015CC0093DFF5 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		CE0D6D2225F133E00093DFF5 /* DatabaseManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManagerTest.swift; sourceTree = "<group>"; };
+		CE0D6D2A25F134A90093DFF5 /* AuthServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceTest.swift; sourceTree = "<group>"; };
 		CE75918125DBCD0C0056A779 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		CE75918625DBCD290056A779 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Api.swift; path = /Users/adammabrouki/Desktop/P12/My_Foody_Body/My_Foody_Body/Model/Api.swift; sourceTree = "<absolute>"; };
 		CE80EF3025DFD18B002520AC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -141,7 +146,6 @@
 			children = (
 				CE08AA0325D5BC6D00C6F688 /* My_Foody_Body */,
 				CE08AA1A25D5BC7000C6F688 /* My_Foody_BodyTests */,
-				CE08AA2525D5BC7000C6F688 /* My_Foody_BodyUITests */,
 				CE08AA0225D5BC6D00C6F688 /* Products */,
 				EA3BBEE26BA477D7CE512636 /* Pods */,
 				E26BF593879DBCE8EE56F3C0 /* Frameworks */,
@@ -181,18 +185,11 @@
 			isa = PBXGroup;
 			children = (
 				CE08AA1B25D5BC7000C6F688 /* My_Foody_BodyTests.swift */,
+				CE0D6D2A25F134A90093DFF5 /* AuthServiceTest.swift */,
+				CE0D6D2225F133E00093DFF5 /* DatabaseManagerTest.swift */,
 				CE08AA1D25D5BC7000C6F688 /* Info.plist */,
 			);
 			path = My_Foody_BodyTests;
-			sourceTree = "<group>";
-		};
-		CE08AA2525D5BC7000C6F688 /* My_Foody_BodyUITests */ = {
-			isa = PBXGroup;
-			children = (
-				CE08AA2625D5BC7000C6F688 /* My_Foody_BodyUITests.swift */,
-				CE08AA2825D5BC7000C6F688 /* Info.plist */,
-			);
-			path = My_Foody_BodyUITests;
 			sourceTree = "<group>";
 		};
 		CE7E431225E84F8300323340 /* FireBase */ = {
@@ -200,6 +197,7 @@
 			children = (
 				CE75918625DBCD290056A779 /* Api.swift */,
 				CE88A1FF25DD556700BFB8F8 /* StorageService.swift */,
+				CE0D6D1025F005580093DFF5 /* AuthService.swift */,
 				CE75918125DBCD0C0056A779 /* AuthManager.swift */,
 			);
 			path = FireBase;
@@ -230,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				CE08AA0825D5BC6D00C6F688 /* ViewController.swift */,
+				CE0D6D1A25F015CC0093DFF5 /* MainTabBarViewController.swift */,
 				CE88A1F025DD542C00BFB8F8 /* PeopleTableViewController.swift */,
 				CEE3B07825DD9F5F00834968 /* ProfileTableViewController.swift */,
 				CEE3B07D25DD9FC400834968 /* ChatViewController.swift */,
@@ -521,6 +520,7 @@
 				CEE3B07E25DD9FC400834968 /* ChatViewController.swift in Sources */,
 				CEC8B87B25DEE9AD00A995E6 /* Alert.swift in Sources */,
 				CE88A20D25DD560500BFB8F8 /* Extensions.swift in Sources */,
+				CE0D6D1B25F015CC0093DFF5 /* MainTabBarViewController.swift in Sources */,
 				CEE3B09B25DDA3D600834968 /* Message.swift in Sources */,
 				CEA4193F25E020A600822294 /* DetailViewController.swift in Sources */,
 				CE08AA0525D5BC6D00C6F688 /* AppDelegate.swift in Sources */,
@@ -531,6 +531,7 @@
 				CE75918225DBCD0C0056A779 /* AuthManager.swift in Sources */,
 				CE08AA5525D5BE1600C6F688 /* SignInViewController.swift in Sources */,
 				CEE3B08925DDA14500834968 /* MessageTableViewCell.swift in Sources */,
+				CE0D6D1125F005580093DFF5 /* AuthService.swift in Sources */,
 				CEE3B08325DDA05200834968 /* ChatViewControllerExtension.swift in Sources */,
 				CE75918725DBCD290056A779 /* Api.swift in Sources */,
 				CE88A1F125DD542C00BFB8F8 /* PeopleTableViewController.swift in Sources */,
@@ -546,7 +547,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0D6D2325F133E00093DFF5 /* DatabaseManagerTest.swift in Sources */,
 				CE08AA1C25D5BC7000C6F688 /* My_Foody_BodyTests.swift in Sources */,
+				CE0D6D2B25F134A90093DFF5 /* AuthServiceTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,7 +557,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE08AA2725D5BC7000C6F688 /* My_Foody_BodyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

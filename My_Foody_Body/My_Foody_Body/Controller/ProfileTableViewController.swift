@@ -28,6 +28,10 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var foodDescription2TextField: UITextField!
     @IBOutlet weak var foodDescription3TextField: UITextField!
     
+    
+    private let authService: AuthService = AuthService()
+    
+    
     var imageTag = 0
     
     var ppImage: UIImage?
@@ -116,7 +120,12 @@ class ProfileTableViewController: UITableViewController {
     
     
     @IBAction func logoutBtnDidTapped(_ sender: Any) {
-        Api.User.logOut()
+        authService.logOut { isSuccess in
+            if !isSuccess {
+                // Present an alert
+            }
+        }
+        
     }
     
     @IBAction func saveBtnDidTapped(_ sender: Any) {
@@ -156,38 +165,32 @@ class ProfileTableViewController: UITableViewController {
         
         Api.User.saveUserProfile(dict: dict, onSuccess: {
             if let saveFoodImage = self.favoriteFoodImage  {
-                StorageService.saveFoodPhoto(image: saveFoodImage, uid: Api.User.currentUserId, onSuccess: {
+                StorageService.saveFoodPhoto(image: saveFoodImage, uid: Api.User.currentUserId, dictValue:"foodImage") { (errorMessage)  in
                     
-                }) { (errorMessage)  in
-                    
-                    print("erreur  ")
+                    self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             }
             if let saveFoodImage2 = self.favoriteFoodImage2  {
-                StorageService.saveFoodPhoto2(image: saveFoodImage2, uid: Api.User.currentUserId, onSuccess: {
+                StorageService.saveFoodPhoto(image: saveFoodImage2, uid: Api.User.currentUserId, dictValue:"foodImage2") { (errorMessage)  in
                     
-                }) { (errorMessage)  in
-                    
-                    print("erreur  ")
+                    self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             }
             
             if let saveFoodImage3 = self.favoriteFoodImage3  {
-                StorageService.saveFoodPhoto3(image: saveFoodImage3, uid: Api.User.currentUserId, onSuccess: {
-                    
-                }) { (errorMessage)  in
-                    
-                    print("erreur  ")
+                StorageService.saveFoodPhoto(image: saveFoodImage3, uid: Api.User.currentUserId, dictValue:"foodImage3") { (errorMessage)  in
+                    self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             }
             
             if let ppimg = self.ppImage {
-                StorageService.savePhotoProfile(image: ppimg, uid: Api.User.currentUserId, onSuccess: {
-                    
-                }) { (errorMessage) in
+                StorageService.savePhotoProfile(image: ppimg, uid: Api.User.currentUserId) {
+                    (errorMessage) in
                     
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
+                
+                
             } else {
                 self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
             }
@@ -198,11 +201,6 @@ class ProfileTableViewController: UITableViewController {
         }
         
         self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
-        
-        
-        
-        
-        
     }
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {

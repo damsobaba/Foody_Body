@@ -25,19 +25,21 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     
 
+var inboxChangedProfileHandle: DatabaseHandle!
+    
+    var controller: DetailViewController!
     
     
-    
-    
-    var inboxChangedProfileHandle: DatabaseHandle!
     var user: User!
     var isMatch = false
     
     override func viewDidLoad() {
-        loadData(user)
+        
         setUpImageView()
       
     }
+    
+   
     func loadData(_ user: User) {
         usernameLbl.text = user.username
         avatar.image = user.profileImage
@@ -64,17 +66,11 @@ class DetailViewController: UIViewController {
         foodDescriptionLabel.text = user.foodDescription
         foodDesciption2Label.text = user.foodDesciption2
         foodDescription3Label.text = user.foodDescription3
-        let refUser = Ref().databaseSpecificUser(uid: user.uid)
-        if inboxChangedProfileHandle != nil {
-            refUser.removeObserver(withHandle: inboxChangedProfileHandle)
-        }
-        inboxChangedProfileHandle = refUser.observe(.childChanged, with: { (snapshot) in
-            if let snap = snapshot.value as? String {
-                self.user.updateData(key: snapshot.key, value: snap)
-
-            }
-        })
-      
+        
+        
+        
+        
+        
         
     }
     
@@ -86,6 +82,7 @@ class DetailViewController: UIViewController {
         avatar.clipsToBounds = true 
         foodImage1.layer.cornerRadius = 10
         [foodImage1,foodImage2,foddImage3].forEach { $0?.layer.cornerRadius = 10 }
+        [foodImage1,foodImage2,foddImage3].forEach { $0?.clipsToBounds = true }
     }
     
     
@@ -94,6 +91,20 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        
+        loadData(user)
+        
+        let refUser = Ref().databaseSpecificUser(uid: user.uid)
+        if inboxChangedProfileHandle != nil {
+            refUser.removeObserver(withHandle: inboxChangedProfileHandle)
+        }
+        inboxChangedProfileHandle = refUser.observe(.childChanged, with: { (snapshot) in
+            if let snap = snapshot.value as? String {
+                self.user.updateData(key: snapshot.key, value: snap)
+                
+            }
+        })
+      
     }
 
     override func viewWillDisappear(_ animated: Bool) {
