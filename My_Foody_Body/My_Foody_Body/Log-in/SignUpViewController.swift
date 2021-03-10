@@ -113,7 +113,7 @@ class SignUpViewController: UIViewController {
         guard let userName = fullnameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        guard let image = image else { return }
+        guard let image = image?.jpeg else { return }
         authService.signUp(userName: userName, email: email, password: password, image: image) { isSuccess in
             if isSuccess {
                 self.performSegue(withIdentifier: "UnwindToSignInViewController", sender: nil)

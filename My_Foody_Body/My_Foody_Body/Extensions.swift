@@ -22,7 +22,10 @@ extension UIImageView {
     }
 }
 
-
+extension UIImage {
+    var jpeg: Data? { jpegData(compressionQuality: 0.4) }  // QUALITY min = 0 / max = 1
+    var png: Data? { pngData() }
+}
 
 
 extension String {
@@ -30,6 +33,11 @@ extension String {
         let size = CGSize(width: 250, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)], context: nil)
+    }
+    var data: Data? {
+        guard let url = URL(string: self) else { return nil }
+        guard let data = try? Data(contentsOf: url) else {return nil }
+        return data
     }
 }
 

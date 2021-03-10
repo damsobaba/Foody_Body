@@ -21,13 +21,14 @@ class User {
     var age: Int?
     
     
-    
     var foodImage: String?
     var foodImage2: String?
     var foodImage3: String?
     var foodDescription: String?
     var foodDesciption2: String?
     var foodDescription3: String?
+    var swipeUser: [String]?
+    
     
     
     init(uid: String, username: String, email: String, profileImageUrl: String, status: String) {
@@ -75,6 +76,12 @@ class User {
         if let foodDescription3 = dict["foodDescription3"] as? String{
             user.foodDescription3 = foodDescription3
         }
+        
+        if let swipeUser = dict["swiped"] as? [String]{
+            user.swipeUser = swipeUser
+        }
+        
+        
         return user
     }
     

@@ -11,6 +11,7 @@ class PeopleTableViewController: UITableViewController {
 
     var users: [User] = []
     let ref = Ref()
+    private let databaseManager: DatabaseManager = DatabaseManager()
     override func viewDidLoad() {
         super.viewDidLoad()
    
@@ -31,8 +32,9 @@ class PeopleTableViewController: UITableViewController {
     }
     
     func observeUsers() {
-        Api.User.observeNewMatch{ (user) in
+        databaseManager.observeNewMatch{ (user) in
             self.users.append(user)
+            print(self.users)
             self.tableView.reloadData()
         }
     }

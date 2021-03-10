@@ -16,47 +16,18 @@ class StorageService {
 
 let ref = Ref()
      
-    static func savePhotoMessage(image: UIImage?, id: String, callback: @escaping (Result<Any, Error>)  -> Void) {
-        if let imagePhoto = image {
-            let ref = Ref().storageSpecificImageMessage(id: id)
-            if let data = imagePhoto.jpegData(compressionQuality: 0.5) {
-                
-                ref.putData(data, metadata: nil) { (metadata, error) in
-                    if error != nil {
-                        callback(.failure(error!))
-                    }
-                    ref.downloadURL(completion: { (url, error) in
-                        if let metaImageUrl = url?.absoluteString {
-                            let dict: Dictionary<String, Any> = [
-                                "imageUrl": metaImageUrl as Any,
-                                "height": imagePhoto.size.height as Any,
-                                "width": imagePhoto.size.width as Any,
-                                "text": "" as Any
-                            ]
-                            callback(.success(dict))
-                        }
-                    })
-                }
-            }
-        }
-    }
-   
     
-    
-
-
-    
-       static func savePhotoProfile(image: UIImage, uid: String, onError: @escaping(_ errorMessage: String) -> Void)  {
-           guard let imageData = image.jpegData(compressionQuality: 0.4) else {
-               return
-           }
+       static func savePhotoProfile(image: Data, uid: String, onError: @escaping(_ errorMessage: String) -> Void)  {
+//           guard let imageData = image.jpegData(compressionQuality: 0.4) else {
+//               return
+//           }
            
            let storageProfileRef = Ref().storageSpecificProfile(uid: uid)
            
            let metadata = StorageMetadata()
            metadata.contentType = "image/jpg"
            
-           storageProfileRef.putData(imageData, metadata: metadata, completion: { (storageMetaData, error) in
+           storageProfileRef.putData(image, metadata: metadata, completion: { (storageMetaData, error) in
                if error != nil {
                    onError(error!.localizedDescription)
                    return
@@ -84,63 +55,19 @@ let ref = Ref()
            })
            
            
-       }
-       
-    static func savePhotoProfile(image: UIImage, uid: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void)  {
-               guard let imageData = image.jpegData(compressionQuality: 0.4) else {
-                   return
-               }
-               
-               let storageProfileRef = Ref().storageSpecificProfile(uid: uid)
-               
-               let metadata = StorageMetadata()
-               metadata.contentType = "image/jpg"
-               
-               storageProfileRef.putData(imageData, metadata: metadata, completion: { (storageMetaData, error) in
-                   if error != nil {
-                       onError(error!.localizedDescription)
-                       return
-                   }
-                   
-                   storageProfileRef.downloadURL(completion: { (url, error) in
-                       if let metaImageUrl = url?.absoluteString {
-                           
-                           if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
-                               changeRequest.photoURL = url
-                               changeRequest.commitChanges(completion: { (error) in
-                                
-                               })
-                           }
-                           
-                        Ref().databaseSpecificUser(uid: uid).updateChildValues(["profileImageUrl": metaImageUrl], withCompletionBlock: { (error, ref) in
-                               if error == nil {
-                                   
-                                   onSuccess()
-                               } else {
-                                   onError(error!.localizedDescription)
-                               }
-                           })
-                       }
-                   })
-                   
-               })
-               
-               
-           }
-           
-        
+      }
 
-    static func saveFoodPhoto(image: UIImage, uid: String,dictValue:String, onError: @escaping(_ errorMessage: String) -> Void)  {
-        guard let imageData = image.jpegData(compressionQuality: 0.4) else {
-            return
-        }
+    static func saveFoodPhoto(image: Data, uid: String,dictValue:String, onError: @escaping(_ errorMessage: String) -> Void)  {
+//        guard let imageData = image.jpegData(compressionQuality: 0.4) else {
+//            return
+//        }
 
         let storageProfileRef = Ref().storageSpecificProfile(uid: uid)
 
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
 
-        storageProfileRef.putData(imageData, metadata: metadata, completion: { (storageMetaData, error) in
+        storageProfileRef.putData(image, metadata: metadata, completion: { (storageMetaData, error) in
             if error != nil {
                 onError(error!.localizedDescription)
                 return
@@ -203,4 +130,33 @@ let ref = Ref()
         })
         
     }
+    
+    
+    
+    static func savePhotoMessage(image: UIImage?, id: String, callback: @escaping (Result<Any, Error>)  -> Void) {
+        if let imagePhoto = image {
+            let ref = Ref().storageSpecificImageMessage(id: id)
+            if let data = imagePhoto.jpegData(compressionQuality: 0.5) {
+                
+                ref.putData(data, metadata: nil) { (metadata, error) in
+                    if error != nil {
+                        callback(.failure(error!))
+                    }
+                    ref.downloadURL(completion: { (url, error) in
+                        if let metaImageUrl = url?.absoluteString {
+                            let dict: Dictionary<String, Any> = [
+                                "imageUrl": metaImageUrl as Any,
+                                "height": imagePhoto.size.height as Any,
+                                "width": imagePhoto.size.width as Any,
+                                "text": "" as Any
+                            ]
+                            callback(.success(dict))
+                        }
+                    })
+                }
+            }
+        }
+    }
+   
+    
 }

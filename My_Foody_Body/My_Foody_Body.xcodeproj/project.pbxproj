@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5D5E63E443C26C32BCF0E45E /* Pods_My_Foody_Body_My_Foody_BodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D750B56A01332DC904EAFFAD /* Pods_My_Foody_Body_My_Foody_BodyUITests.framework */; };
 		AD53284F6B7BFF108D0C0D56 /* Pods_My_Foody_BodyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7EA244DF92C2DCE711974 /* Pods_My_Foody_BodyTests.framework */; };
 		CE08AA0525D5BC6D00C6F688 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08AA0425D5BC6D00C6F688 /* AppDelegate.swift */; };
 		CE08AA0725D5BC6D00C6F688 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08AA0625D5BC6D00C6F688 /* SceneDelegate.swift */; };
@@ -21,9 +20,10 @@
 		CE08AB6125D5DEFC00C6F688 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */; };
 		CE08AB6225D5DEFC00C6F688 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */; };
 		CE0D6D1125F005580093DFF5 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D6D1025F005580093DFF5 /* AuthService.swift */; };
-		CE0D6D1B25F015CC0093DFF5 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D6D1A25F015CC0093DFF5 /* MainTabBarViewController.swift */; };
 		CE0D6D2325F133E00093DFF5 /* DatabaseManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D6D2225F133E00093DFF5 /* DatabaseManagerTest.swift */; };
 		CE0D6D2B25F134A90093DFF5 /* AuthServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D6D2A25F134A90093DFF5 /* AuthServiceTest.swift */; };
+		CE0D6D3725F13B3E0093DFF5 /* FireBaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D6D3625F13B3E0093DFF5 /* FireBaseDatabase.swift */; };
+		CE0D6D3B25F14C0D0093DFF5 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D6D3A25F14C0D0093DFF5 /* DatabaseManager.swift */; };
 		CE231A9DC06B55DFF858E6DE /* Pods_My_Foody_Body.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D1D7069B7F9923940A8C83 /* Pods_My_Foody_Body.framework */; };
 		CE75918225DBCD0C0056A779 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75918125DBCD0C0056A779 /* AuthManager.swift */; };
 		CE75918725DBCD290056A779 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75918625DBCD290056A779 /* Api.swift */; };
@@ -54,13 +54,6 @@
 			remoteGlobalIDString = CE08AA0025D5BC6D00C6F688;
 			remoteInfo = My_Foody_Body;
 		};
-		CE08AA2325D5BC7000C6F688 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE08A9F925D5BC6D00C6F688 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CE08AA0025D5BC6D00C6F688;
-			remoteInfo = My_Foody_Body;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -77,15 +70,15 @@
 		CE08AA1725D5BC7000C6F688 /* My_Foody_BodyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = My_Foody_BodyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE08AA1B25D5BC7000C6F688 /* My_Foody_BodyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = My_Foody_BodyTests.swift; sourceTree = "<group>"; };
 		CE08AA1D25D5BC7000C6F688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE08AA2225D5BC7000C6F688 /* My_Foody_BodyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = My_Foody_BodyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE08AA4F25D5BDEC00C6F688 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		CE08AA5425D5BE1600C6F688 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		CE08AB6025D5DEFC00C6F688 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE0D6D1025F005580093DFF5 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		CE0D6D1A25F015CC0093DFF5 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		CE0D6D2225F133E00093DFF5 /* DatabaseManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManagerTest.swift; sourceTree = "<group>"; };
 		CE0D6D2A25F134A90093DFF5 /* AuthServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceTest.swift; sourceTree = "<group>"; };
-		CE75918125DBCD0C0056A779 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		CE0D6D3625F13B3E0093DFF5 /* FireBaseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDatabase.swift; sourceTree = "<group>"; };
+		CE0D6D3A25F14C0D0093DFF5 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		CE75918125DBCD0C0056A779 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthManager.swift; path = /Users/adammabrouki/Desktop/P12/My_Foody_Body/My_Foody_Body/Model/FireBase/Auth/AuthManager.swift; sourceTree = "<absolute>"; };
 		CE75918625DBCD290056A779 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Api.swift; path = /Users/adammabrouki/Desktop/P12/My_Foody_Body/My_Foody_Body/Model/Api.swift; sourceTree = "<absolute>"; };
 		CE80EF3025DFD18B002520AC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		CE88A1F025DD542C00BFB8F8 /* PeopleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewController.swift; sourceTree = "<group>"; };
@@ -130,14 +123,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE08AA1F25D5BC7000C6F688 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5D5E63E443C26C32BCF0E45E /* Pods_My_Foody_Body_My_Foody_BodyUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -157,7 +142,6 @@
 			children = (
 				CE08AA0125D5BC6D00C6F688 /* My_Foody_Body.app */,
 				CE08AA1725D5BC7000C6F688 /* My_Foody_BodyTests.xctest */,
-				CE08AA2225D5BC7000C6F688 /* My_Foody_BodyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,13 +176,31 @@
 			path = My_Foody_BodyTests;
 			sourceTree = "<group>";
 		};
+		CE0D6D3E25F1598B0093DFF5 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				CE0D6D1025F005580093DFF5 /* AuthService.swift */,
+				CE75918125DBCD0C0056A779 /* AuthManager.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		CE0D6D3F25F1599A0093DFF5 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				CE0D6D3625F13B3E0093DFF5 /* FireBaseDatabase.swift */,
+				CE0D6D3A25F14C0D0093DFF5 /* DatabaseManager.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
 		CE7E431225E84F8300323340 /* FireBase */ = {
 			isa = PBXGroup;
 			children = (
-				CE75918625DBCD290056A779 /* Api.swift */,
 				CE88A1FF25DD556700BFB8F8 /* StorageService.swift */,
-				CE0D6D1025F005580093DFF5 /* AuthService.swift */,
-				CE75918125DBCD0C0056A779 /* AuthManager.swift */,
+				CE0D6D3E25F1598B0093DFF5 /* Auth */,
+				CE0D6D3F25F1599A0093DFF5 /* DataBase */,
+				CE75918625DBCD290056A779 /* Api.swift */,
 			);
 			path = FireBase;
 			sourceTree = "<group>";
@@ -228,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				CE08AA0825D5BC6D00C6F688 /* ViewController.swift */,
-				CE0D6D1A25F015CC0093DFF5 /* MainTabBarViewController.swift */,
 				CE88A1F025DD542C00BFB8F8 /* PeopleTableViewController.swift */,
 				CEE3B07825DD9F5F00834968 /* ProfileTableViewController.swift */,
 				CEE3B07D25DD9FC400834968 /* ChatViewController.swift */,
@@ -315,26 +316,6 @@
 			productReference = CE08AA1725D5BC7000C6F688 /* My_Foody_BodyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CE08AA2125D5BC7000C6F688 /* My_Foody_BodyUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CE08AA3125D5BC7000C6F688 /* Build configuration list for PBXNativeTarget "My_Foody_BodyUITests" */;
-			buildPhases = (
-				859406B6468127E8DC20E317 /* [CP] Check Pods Manifest.lock */,
-				CE08AA1E25D5BC7000C6F688 /* Sources */,
-				CE08AA1F25D5BC7000C6F688 /* Frameworks */,
-				CE08AA2025D5BC7000C6F688 /* Resources */,
-				786912416DFEF0F5E1BF1A5F /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CE08AA2425D5BC7000C6F688 /* PBXTargetDependency */,
-			);
-			name = My_Foody_BodyUITests;
-			productName = My_Foody_BodyUITests;
-			productReference = CE08AA2225D5BC7000C6F688 /* My_Foody_BodyUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -348,10 +329,6 @@
 						CreatedOnToolsVersion = 12.3;
 					};
 					CE08AA1625D5BC7000C6F688 = {
-						CreatedOnToolsVersion = 12.3;
-						TestTargetID = CE08AA0025D5BC6D00C6F688;
-					};
-					CE08AA2125D5BC7000C6F688 = {
 						CreatedOnToolsVersion = 12.3;
 						TestTargetID = CE08AA0025D5BC6D00C6F688;
 					};
@@ -372,7 +349,6 @@
 			targets = (
 				CE08AA0025D5BC6D00C6F688 /* My_Foody_Body */,
 				CE08AA1625D5BC7000C6F688 /* My_Foody_BodyTests */,
-				CE08AA2125D5BC7000C6F688 /* My_Foody_BodyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -398,13 +374,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE08AA2025D5BC7000C6F688 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -423,45 +392,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-My_Foody_Body/Pods-My_Foody_Body-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		786912416DFEF0F5E1BF1A5F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-My_Foody_Body-My_Foody_BodyUITests/Pods-My_Foody_Body-My_Foody_BodyUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-My_Foody_Body-My_Foody_BodyUITests/Pods-My_Foody_Body-My_Foody_BodyUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-My_Foody_Body-My_Foody_BodyUITests/Pods-My_Foody_Body-My_Foody_BodyUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		859406B6468127E8DC20E317 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-My_Foody_Body-My_Foody_BodyUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		95D6D753D68BC991858F9C85 /* [CP] Check Pods Manifest.lock */ = {
@@ -517,10 +447,10 @@
 			files = (
 				CE08AA0925D5BC6D00C6F688 /* ViewController.swift in Sources */,
 				CE88A1F625DD545D00BFB8F8 /* UserTableViewCell.swift in Sources */,
+				CE0D6D3B25F14C0D0093DFF5 /* DatabaseManager.swift in Sources */,
 				CEE3B07E25DD9FC400834968 /* ChatViewController.swift in Sources */,
 				CEC8B87B25DEE9AD00A995E6 /* Alert.swift in Sources */,
 				CE88A20D25DD560500BFB8F8 /* Extensions.swift in Sources */,
-				CE0D6D1B25F015CC0093DFF5 /* MainTabBarViewController.swift in Sources */,
 				CEE3B09B25DDA3D600834968 /* Message.swift in Sources */,
 				CEA4193F25E020A600822294 /* DetailViewController.swift in Sources */,
 				CE08AA0525D5BC6D00C6F688 /* AppDelegate.swift in Sources */,
@@ -538,6 +468,7 @@
 				CE80EF3125DFD18B002520AC /* CardView.swift in Sources */,
 				CE88A20825DD55D900BFB8F8 /* Reference.swift in Sources */,
 				CE88A20025DD556700BFB8F8 /* StorageService.swift in Sources */,
+				CE0D6D3725F13B3E0093DFF5 /* FireBaseDatabase.swift in Sources */,
 				CEDEC97A25DEFE9B00497262 /* SwipeViewController.swift in Sources */,
 				CE08AA0725D5BC6D00C6F688 /* SceneDelegate.swift in Sources */,
 			);
@@ -553,13 +484,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE08AA1E25D5BC7000C6F688 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -567,11 +491,6 @@
 			isa = PBXTargetDependency;
 			target = CE08AA0025D5BC6D00C6F688 /* My_Foody_Body */;
 			targetProxy = CE08AA1825D5BC7000C6F688 /* PBXContainerItemProxy */;
-		};
-		CE08AA2425D5BC7000C6F688 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CE08AA0025D5BC6D00C6F688 /* My_Foody_Body */;
-			targetProxy = CE08AA2325D5BC7000C6F688 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -799,48 +718,6 @@
 			};
 			name = Release;
 		};
-		CE08AA3225D5BC7000C6F688 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E13836C29D3530F2448F861E /* Pods-My_Foody_Body-My_Foody_BodyUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NYLP3F6GN;
-				INFOPLIST_FILE = My_Foody_BodyUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.adammab.My-Foody-BodyUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = My_Foody_Body;
-			};
-			name = Debug;
-		};
-		CE08AA3325D5BC7000C6F688 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0A38FAB73A3C62233C96B42 /* Pods-My_Foody_Body-My_Foody_BodyUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NYLP3F6GN;
-				INFOPLIST_FILE = My_Foody_BodyUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.adammab.My-Foody-BodyUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = My_Foody_Body;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -867,15 +744,6 @@
 			buildConfigurations = (
 				CE08AA2F25D5BC7000C6F688 /* Debug */,
 				CE08AA3025D5BC7000C6F688 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CE08AA3125D5BC7000C6F688 /* Build configuration list for PBXNativeTarget "My_Foody_BodyUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CE08AA3225D5BC7000C6F688 /* Debug */,
-				CE08AA3325D5BC7000C6F688 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

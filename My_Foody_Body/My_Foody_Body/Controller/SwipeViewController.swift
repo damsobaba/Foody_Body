@@ -17,18 +17,21 @@ class SwipeViewController:UIViewController   {
     
     @IBOutlet weak var likeImg: UIImageView!
     @IBOutlet weak var nopeImg: UIImageView!
-   
+    private let databaseManager: DatabaseManager = DatabaseManager()
     var queryHandle: DatabaseHandle?
     var users: [User] = []
+    var swipeUsers: [String] = []
     var cards: [CardView] = []
     var cardInitialLocationCenter: CGPoint!
     var panInitialLocation: CGPoint!
     var distance: Double = 500
-    
+    var userMatch: [User] = []
+    var  filteredUser : [User] = []
+    var id: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-       
+      
+   
         nopeImg.isUserInteractionEnabled = true
         let tapNopeImg = UITapGestureRecognizer(target: self, action: #selector(nopeImgDidTap))
         nopeImg.addGestureRecognizer(tapNopeImg)
@@ -36,8 +39,14 @@ class SwipeViewController:UIViewController   {
         likeImg.isUserInteractionEnabled = true
         let tapLikeImg = UITapGestureRecognizer(target: self, action: #selector(likeImgDidTap))
         likeImg.addGestureRecognizer(tapLikeImg)
-        findUsers()
+        
+        findUsers() {
+            for user in self.filteredUser {
+                self.setupCard(user: user)
+            }
+        }
 
+        print(self.swipeUsers.count)
     }
     
   
@@ -62,9 +71,10 @@ class SwipeViewController:UIViewController   {
     
     func setupCard(user: User) {
         let card: CardView = UIView.fromNib()
-        
         card.frame = CGRect(x: 0, y: 0, width: cardStack.bounds.width, height: cardStack.bounds.height)
+   
         card.user = user
+        
         card.controller = self
         cards.append(card)
         
@@ -79,12 +89,29 @@ class SwipeViewController:UIViewController   {
     }
     
     
-    func findUsers() {
-        Api.User.observeUsers { (user) in
-            self.users.append(user)
-            
-            self.setupCard(user: user)
+    func findUsers(callback: @escaping () -> Void) {
+       observeData()
+        let curent = Api.User.currentUserId // a mettre a la creation de profil, rentrer dans swiped l id du user qui cree son compte
+        
+        
+        
+ databaseManager.observeUsers { (user) in
+        if user.uid == curent {
+            return
         }
+        self.users.append(user)
+   
+    let displayUser = self.users.filter {
+        !self.swipeUsers.contains($0.uid)
+    }
+    
+    print("*\(displayUser.count)")
+    
+   self.filteredUser = displayUser
+   callback()
+ }
+        
+     
     }
     
     func swipeAnimation(translation: CGFloat, angle: CGFloat) {
@@ -106,7 +133,9 @@ class SwipeViewController:UIViewController   {
             if c.user.uid == firstCard.user.uid {
                 self.cards.remove(at: index)
                 self.users.remove(at: index)
+         
             }
+         
         }
         
         self.setupGestures()
@@ -140,15 +169,11 @@ class SwipeViewController:UIViewController   {
         switch gesture.state {
         case .began:
             panInitialLocation = gesture.location(in: cardStack)
-            print("began")
-            print("panInitialLocation")
+           
            
 
         case .changed:
-            print("changed")
-            print("x: \(translation.x)")
-            print("y: \(translation.y)")
-
+            
             card.center.x = cardInitialLocationCenter.x + translation.x
             card.center.y = cardInitialLocationCenter.y + translation.y
             
@@ -174,9 +199,27 @@ class SwipeViewController:UIViewController   {
                     // remove card
                     card.removeFromSuperview()
                 }
-               saveToFirebase(like: true, card: card)
-                self.updateCards(card: card)
+                Ref().databaseRoot.child("newSwipe").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
+                
+                if swipeUsers.contains(card.user.uid) {
+                    return
+                } else {
+                    swipeUsers.append(card.user.uid)
+                }
+                
+      
+              
+                saveSwipe()
 
+                
+                
+             
+                print(swipeUsers.count)
+               
+               saveToFirebase(like: true, card: card)
+
+                self.updateCards(card: card)
+               
                 return
             } else if translation.x < -75 {
                 UIView.animate(withDuration: 0.3, animations: {
@@ -185,8 +228,13 @@ class SwipeViewController:UIViewController   {
                     // remove card
                     card.removeFromSuperview()
                 }
-                
+            
                saveToFirebase(like: false, card: card)
+               Ref().databaseRoot.child("newSwipe").childByAutoId().setValue(card.user.uid)
+                
+               
+//                Ref().databaseRoot.child("newSwipe").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
+                
                 self.updateCards(card: card)
                 
                 return
@@ -216,7 +264,7 @@ class SwipeViewController:UIViewController   {
         for (index, c) in self.cards.enumerated() {
             if c.user.uid == card.user.uid {
                 self.cards.remove(at: index)
-                self.users.remove(at: index)
+               self.filteredUser.remove(at: index)
             }
         }
         
@@ -243,30 +291,72 @@ class SwipeViewController:UIViewController   {
     }
     
     func saveToFirebase(like: Bool, card: CardView) {
+
         Ref().databaseActionForUser(uid: Api.User.currentUserId)
             .updateChildValues([card.user.uid: like]) { (error, ref) in
                 if error == nil, like == true {
-            
+          
                     self.checkIfMatchFor(card: card)
+                    
+            }
                 }
-        }
+               
     }
     
+
     func checkIfMatchFor(card: CardView) {
         Ref().databaseActionForUser(uid: card.user.uid).observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? [String: Bool] else { return }
             if dict.keys.contains(Api.User.currentUserId), dict[Api.User.currentUserId] == true {
             Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).updateChildValues([card.user.uid: true])
             Ref().databaseRoot.child("newMatch").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
-                
-                Api.User.getUserInforSingleEvent(uid: Api.User.currentUserId, onSuccess: { (user) in
+
+                self.databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId, onSuccess: { (user) in
                     self.presentAlert(title: "Notification", message: "you have a new match ! ")
-                    
+                   
                 })
             }
         }
     }
-
     
+    
+    func saveSwipe() {
+        var dict = Dictionary<String, Any>()
+        let swipe = swipeUsers
+            dict["swiped"] = swipe
+        
+        Api.User.saveUserProfile(dict: dict) {
+            print(dict.count)
+        } onError: { (errorMesage) in
+            print(errorMesage)
+        }
+
+    }
+    
+    func observeData() {
+        databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
+            
+            if let userSwipe = user.swipeUser {
+                
+                self.swipeUsers = userSwipe
+            }
+    
+        }
+        
+    }
+    
+    
+    
+   func observeNewSwipes(onSuccess: @escaping(UserCompletion)) {    Ref().databaseRoot.child("newSwipe").observe(.childAdded, with:  { (snapshot) in
+     })
+    }
+
+}
+extension Array where Element: Hashable {
+    func difference(from other: [Element]) -> [Element] {
+        let thisSet = Set(self)
+        let otherSet = Set(other)
+        return Array(thisSet.symmetricDifference(otherSet))
+    }
 }
 

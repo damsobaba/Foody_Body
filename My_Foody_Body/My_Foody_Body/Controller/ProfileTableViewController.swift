@@ -30,7 +30,7 @@ class ProfileTableViewController: UITableViewController {
     
     
     private let authService: AuthService = AuthService()
-    
+    private let databaseManager: DatabaseManager = DatabaseManager()
     
     var imageTag = 0
     
@@ -76,7 +76,7 @@ class ProfileTableViewController: UITableViewController {
     }
 
     func observeData() {
-        Api.User.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
+        databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
             self.usernameTextField.text = user.username
             self.emailTextField.text = user.email
             self.statusTextField.text = user.status
@@ -164,26 +164,26 @@ class ProfileTableViewController: UITableViewController {
         
         
         Api.User.saveUserProfile(dict: dict, onSuccess: {
-            if let saveFoodImage = self.favoriteFoodImage  {
+            if let saveFoodImage = self.favoriteFoodImage?.jpeg  {
                 StorageService.saveFoodPhoto(image: saveFoodImage, uid: Api.User.currentUserId, dictValue:"foodImage") { (errorMessage)  in
                     
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             }
-            if let saveFoodImage2 = self.favoriteFoodImage2  {
+            if let saveFoodImage2 = self.favoriteFoodImage2?.jpeg {
                 StorageService.saveFoodPhoto(image: saveFoodImage2, uid: Api.User.currentUserId, dictValue:"foodImage2") { (errorMessage)  in
                     
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             }
             
-            if let saveFoodImage3 = self.favoriteFoodImage3  {
+            if let saveFoodImage3 = self.favoriteFoodImage3?.jpeg  {
                 StorageService.saveFoodPhoto(image: saveFoodImage3, uid: Api.User.currentUserId, dictValue:"foodImage3") { (errorMessage)  in
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             }
-            
-            if let ppimg = self.ppImage {
+         
+            if let ppimg = self.ppImage?.jpeg {
                 StorageService.savePhotoProfile(image: ppimg, uid: Api.User.currentUserId) {
                     (errorMessage) in
                     

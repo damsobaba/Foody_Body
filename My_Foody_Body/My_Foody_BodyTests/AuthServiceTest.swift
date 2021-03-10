@@ -11,11 +11,6 @@ class AuthServiceTest: XCTestCase {
 
     private class AuthStub: AuthType {
         
-        
-
-        
-     
-
         private let isSuccess: Bool
 
         var currentUserId: String { return isSuccess ? "uUs63keFW1NiuHtW85bbFMHn12v2" : "" }
