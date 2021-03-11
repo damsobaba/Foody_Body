@@ -35,9 +35,6 @@ class ProfileTableViewController: UITableViewController {
     var imageTag = 0
     
     var ppImage: UIImage?
-    
-    
-    
     private var currentImageView: UIImageView? = nil
     
     var favoriteFoodImage:UIImage?
@@ -74,7 +71,7 @@ class ProfileTableViewController: UITableViewController {
         }
         
     }
-
+// load the profila data from the firebase
     func observeData() {
         databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
             self.usernameTextField.text = user.username
@@ -90,8 +87,6 @@ class ProfileTableViewController: UITableViewController {
             } else {
                 self.ageTextField.placeholder = "Optional"
             }
-            
-            
             if let isMale = user.isMale {
                 self.genderSegment.selectedSegmentIndex = (isMale == true) ? 0 : 1
             }
@@ -122,16 +117,15 @@ class ProfileTableViewController: UITableViewController {
     @IBAction func logoutBtnDidTapped(_ sender: Any) {
         authService.logOut { isSuccess in
             if !isSuccess {
-                // Present an alert
+                self.presentAlert(title: "error", message: "We having trouble tryng to log you out")
             }
         }
         
     }
     
+    
+    // saves all the informations into firebase database
     @IBAction func saveBtnDidTapped(_ sender: Any) {
-        
-        
-        
         var dict = Dictionary<String, Any>()
         if let username = usernameTextField.text, !username.isEmpty {
             dict["username"] = username
@@ -160,42 +154,35 @@ class ProfileTableViewController: UITableViewController {
         if let foodDescription3 = foodDescription3TextField.text {
             dict["foodDescription3"] = foodDescription3
         }
-        
-        
-        
-        Api.User.saveUserProfile(dict: dict, onSuccess: {
+        authService.saveUserProfile(dict: dict, onSuccess: { _ in 
             if let saveFoodImage = self.favoriteFoodImage?.jpeg  {
-                StorageService.saveFoodPhoto(image: saveFoodImage, uid: Api.User.currentUserId, dictValue:"foodImage") { (errorMessage)  in
+                self.authService.saveFoodPhoto(image: saveFoodImage, uid: Api.User.currentUserId, dictValue:"foodImage") { (errorMessage)  in
                     
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             }
             if let saveFoodImage2 = self.favoriteFoodImage2?.jpeg {
-                StorageService.saveFoodPhoto(image: saveFoodImage2, uid: Api.User.currentUserId, dictValue:"foodImage2") { (errorMessage)  in
+                self.authService.saveFoodPhoto(image: saveFoodImage2, uid: Api.User.currentUserId, dictValue:"foodImage2") { (errorMessage)  in
                     
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             }
             
             if let saveFoodImage3 = self.favoriteFoodImage3?.jpeg  {
-                StorageService.saveFoodPhoto(image: saveFoodImage3, uid: Api.User.currentUserId, dictValue:"foodImage3") { (errorMessage)  in
+
+                self.authService.saveFoodPhoto(image: saveFoodImage3, uid: Api.User.currentUserId, dictValue:"foodImage3") { (errorMessage)  in
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             }
-         
             if let ppimg = self.ppImage?.jpeg {
-                StorageService.savePhotoProfile(image: ppimg, uid: Api.User.currentUserId) {
+                self.authService.savePhotoProfile(image: ppimg, uid: Api.User.currentUserId) {
                     (errorMessage) in
                     
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
-                }
-                
-                
+                } 
             } else {
                 self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
             }
-            
-            
         }) { (errorMessage) in
             self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
         }
@@ -203,8 +190,8 @@ class ProfileTableViewController: UITableViewController {
         self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
     }
     
+    // handle all the tap gesture in order to pick the right photo for the rigth image
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
-        
         currentImageView = sender.view as? UIImageView
         imageTag = currentImageView!.tag
         
@@ -216,14 +203,10 @@ class ProfileTableViewController: UITableViewController {
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
     }
-    
-    
-    
-    
-    
-    
-    
 }
+
+
+
 
 extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -232,10 +215,8 @@ extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigat
         let imageSelected = info[UIImagePickerController.InfoKey.editedImage]
         currentImageView?.image = imageSelected as? UIImage
         
-        
         switch imageTag {
         case 0:
-            
             ppImage = imageSelected as? UIImage
             
         case 1:

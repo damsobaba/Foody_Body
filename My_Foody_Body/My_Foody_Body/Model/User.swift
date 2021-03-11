@@ -39,6 +39,7 @@ class User {
         self.status = status
     }
     
+    
     static func transformUser(dict: [String: Any]) -> User? {
         guard let email = dict["email"] as? String,
             let username = dict["username"] as? String,

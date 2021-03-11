@@ -11,7 +11,6 @@ class ViewController: UIViewController {
 
     
     @IBOutlet weak var titleLabel: UILabel!
-
     @IBOutlet weak var createAccountButton: UIButton!
   
     

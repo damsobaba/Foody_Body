@@ -62,9 +62,9 @@ class SignUpViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.view.endEditing(true)
+//    }
     
     func validateFields() {
         guard let username = self.fullnameTextField.text, !username.isEmpty else {
@@ -85,31 +85,10 @@ class SignUpViewController: UIViewController {
         
     }
     
-//    func signUp(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-//
-//
-//
-//        Api.User.signUp(withUsername: self.fullnameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!, image: self.image, onSuccess: {
-//            self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Loading")
-//            onSuccess()
-//        }) { (errorMessage) in
-//            onError(errorMessage)
-//
-//        }
-//
-//    }
-    
     
     @IBAction func signUpButtonDidTapped(_ sender: Any) {
         self.view.endEditing(true)
         self.validateFields()
-//        self.signUp(onSuccess: {
-//            (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
-//        }) { (errorMessage) in
-//            self.presentAlert(title: "Error", message: "They have been a error please try again")
-//        }
-//
-//    }
         guard let userName = fullnameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }

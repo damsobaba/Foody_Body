@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import SDWebImage
 
+
+// change data into image
 extension UIImageView {
     func loadImage(_ urlString: String?, onSuccess: ((UIImage) -> Void)? = nil) {
         self.image = UIImage()
@@ -20,12 +22,22 @@ extension UIImageView {
             }
         }
     }
+    func addBlackGradientLayer(frame: CGRect, colors:[UIColor]){
+        let gradient = CAGradientLayer()
+        gradient.frame = frame
+        gradient.locations = [0.5, 1.0]
+        
+        gradient.colors = colors.map{$0.cgColor}
+        self.layer.addSublayer(gradient)
+    }
 }
-
+// change image into data
 extension UIImage {
-    var jpeg: Data? { jpegData(compressionQuality: 0.4) }  // QUALITY min = 0 / max = 1
+    var jpeg: Data? { jpegData(compressionQuality: 0.4) }
     var png: Data? { pngData() }
 }
+
+
 
 
 extension String {
@@ -41,7 +53,7 @@ extension String {
     }
 }
 
-
+// handle date of send messages
 func timeAgoSinceDate(_ date:Date, currentDate:Date, numericDates:Bool) -> String {
     let calendar = Calendar.current
     let now = currentDate
@@ -83,18 +95,6 @@ func timeAgoSinceDate(_ date:Date, currentDate:Date, numericDates:Bool) -> Strin
         return "\(components.second!) seconds ago"
     } else { return "Just now" }
 }
-
-extension UIImageView {
-    func addBlackGradientLayer(frame: CGRect, colors:[UIColor]){
-        let gradient = CAGradientLayer()
-        gradient.frame = frame
-        gradient.locations = [0.5, 1.0]
-        
-        gradient.colors = colors.map{$0.cgColor}
-        self.layer.addSublayer(gradient)
-    }
-}
-
 
 extension UIView {
     class func fromNib<T: UIView>() -> T {

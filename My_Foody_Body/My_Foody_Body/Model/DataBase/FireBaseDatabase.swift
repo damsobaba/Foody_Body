@@ -24,11 +24,8 @@ final class FirebaseDatabase: DatabaseType {
     
     
     // MARK: - Read Queries
-    
-    
-    
     func observeUsers(onSuccess: @escaping(UserCompletion)) {
-        Ref().databaseUsers.observe(.childAdded) { (snapshot) in
+        Reference().databaseUsers.observe(.childAdded) { (snapshot) in
             if let dict = snapshot.value as? Dictionary<String, Any> {
                 if let user = User.transformUser(dict: dict) {
                     onSuccess(user)
@@ -38,7 +35,7 @@ final class FirebaseDatabase: DatabaseType {
     }
     
     func getUserInforSingleEvent(uid: String, onSuccess: @escaping(UserCompletion)) {
-        let ref = Ref().databaseSpecificUser(uid: uid)
+        let ref = Reference().databaseSpecificUser(uid: uid)
         ref.observeSingleEvent(of: .value) { (snapshot) in
             if let dict = snapshot.value as? Dictionary<String, Any> {
                 if let user = User.transformUser(dict: dict) {
@@ -49,7 +46,7 @@ final class FirebaseDatabase: DatabaseType {
     }
     
     func getUserInfor(uid: String, onSuccess: @escaping(UserCompletion)) {
-        let ref = Ref().databaseSpecificUser(uid: uid)
+        let ref = Reference().databaseSpecificUser(uid: uid)
         ref.observe(.value) { (snapshot) in
             if let dict = snapshot.value as? Dictionary<String, Any> {
                 if let user = User.transformUser(dict: dict) {
@@ -59,7 +56,7 @@ final class FirebaseDatabase: DatabaseType {
         }
     }
     
-    func observeNewMatch(onSuccess: @escaping(UserCompletion)) {    Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
+    func observeNewMatch(onSuccess: @escaping(UserCompletion)) {    Reference().databaseRoot.child("newMatch").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
         guard let dict = snapshot.value as? [String: Bool] else { return }
         dict.forEach({ (key, value) in
             self.getUserInforSingleEvent(uid: key, onSuccess: { (user) in
@@ -69,7 +66,7 @@ final class FirebaseDatabase: DatabaseType {
       }
     }
     
-    func observeNewSwipe(onSuccess: @escaping(UserCompletion)) {    Ref().databaseRoot.child("newSwipe").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
+    func observeNewSwipe(onSuccess: @escaping(UserCompletion)) {    Reference().databaseRoot.child("newSwipe").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
         guard let dict = snapshot.value as? [String: Bool] else { return }
         print("dd \(dict)")
         dict.forEach({ (key, value) in
@@ -82,6 +79,8 @@ final class FirebaseDatabase: DatabaseType {
 
       }
     }
+    
+    
     
     
 }

@@ -12,7 +12,8 @@ class SignInViewController: UIViewController {
     
     private let authService: AuthService = AuthService()
     
-
+    @IBOutlet weak var logoImageView: UIImageView!
+    
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
@@ -21,11 +22,12 @@ class SignInViewController: UIViewController {
     
     
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        // Do any additional setup after loading the view.
-//    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        logoImageView.layer.cornerRadius = 20
+        logoImageView.clipsToBounds = true
+    }
     
     
     @IBAction func dismissAction(_ sender: Any) {
@@ -48,21 +50,7 @@ class SignInViewController: UIViewController {
         
     }
     
-    //    func signIn(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-    //        authManager.signIn(email: self.emailTextField.text!, password: passwordTextField.text!)  { isSuccess in
-    //            if isSuccess {
-    //                (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
-    //                self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Loading")
-    //            }
-    //        }
-    //    }
-    //        Api.User.signIn(email: self.emailTextField.text!, password: passwordTextField.text!, onSuccess: {
-    //            self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Loading")
-    //            onSuccess()
-    //        }) { (errorMessage) in
-    //            onError(errorMessage)
-    //        }
-    //    }
+ 
     
     @IBAction func signInButtonDidTapped(_ sender: Any) {
         self.view.endEditing(true)

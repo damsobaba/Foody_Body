@@ -12,11 +12,13 @@ import FirebaseDatabase
 
 
 class SwipeViewController:UIViewController   {
+    
+    
     @IBOutlet weak var cardStack: UIView!
-    
-    
     @IBOutlet weak var likeImg: UIImageView!
     @IBOutlet weak var nopeImg: UIImageView!
+    
+    
     private let databaseManager: DatabaseManager = DatabaseManager()
     var queryHandle: DatabaseHandle?
     var users: [User] = []
@@ -25,9 +27,7 @@ class SwipeViewController:UIViewController   {
     var cardInitialLocationCenter: CGPoint!
     var panInitialLocation: CGPoint!
     var distance: Double = 500
-    var userMatch: [User] = []
     var  filteredUser : [User] = []
-    var id: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
       
@@ -68,7 +68,7 @@ class SwipeViewController:UIViewController   {
         self.setupTransforms()
     }
     
-    
+    // set up the display card
     func setupCard(user: User) {
         let card: CardView = UIView.fromNib()
         card.frame = CGRect(x: 0, y: 0, width: cardStack.bounds.width, height: cardStack.bounds.height)
@@ -88,14 +88,11 @@ class SwipeViewController:UIViewController   {
         }
     }
     
-    
+    // syncronise the users of the data base
     func findUsers(callback: @escaping () -> Void) {
        observeData()
         let curent = Api.User.currentUserId // a mettre a la creation de profil, rentrer dans swiped l id du user qui cree son compte
-        
-        
-        
- databaseManager.observeUsers { (user) in
+        databaseManager.observeUsers { (user) in
         if user.uid == curent {
             return
         }
@@ -104,16 +101,14 @@ class SwipeViewController:UIViewController   {
     let displayUser = self.users.filter {
         !self.swipeUsers.contains($0.uid)
     }
-    
-    print("*\(displayUser.count)")
-    
    self.filteredUser = displayUser
-   callback()
+  callback()
+  
  }
         
      
     }
-    
+    // handle the swipe animation
     func swipeAnimation(translation: CGFloat, angle: CGFloat) {
         let duration = 0.5
         let translationAnimation = CABasicAnimation(keyPath: "position.x")
@@ -132,7 +127,7 @@ class SwipeViewController:UIViewController   {
         for (index, c) in self.cards.enumerated() {
             if c.user.uid == firstCard.user.uid {
                 self.cards.remove(at: index)
-                self.users.remove(at: index)
+                self.filteredUser.remove(at: index)
          
             }
          
@@ -149,6 +144,8 @@ class SwipeViewController:UIViewController   {
     }
     
     
+    
+    //handle the gesture on the card view
     func setupGestures() {
         for card in cards {
             let gestures = card.gestureRecognizers ?? []
@@ -161,6 +158,7 @@ class SwipeViewController:UIViewController   {
             firstCard.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan(gesture:))))
         }
     }
+    
 
     @objc func pan(gesture: UIPanGestureRecognizer) {
         let card = gesture.view! as! CardView
@@ -199,23 +197,13 @@ class SwipeViewController:UIViewController   {
                     // remove card
                     card.removeFromSuperview()
                 }
-                Ref().databaseRoot.child("newSwipe").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
+                Reference().databaseRoot.child("newSwipe").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
                 
                 if swipeUsers.contains(card.user.uid) {
                     return
                 } else {
                     swipeUsers.append(card.user.uid)
                 }
-                
-      
-              
-                saveSwipe()
-
-                
-                
-             
-                print(swipeUsers.count)
-               
                saveToFirebase(like: true, card: card)
 
                 self.updateCards(card: card)
@@ -230,13 +218,7 @@ class SwipeViewController:UIViewController   {
                 }
             
                saveToFirebase(like: false, card: card)
-               Ref().databaseRoot.child("newSwipe").childByAutoId().setValue(card.user.uid)
-                
-               
-//                Ref().databaseRoot.child("newSwipe").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
-                
                 self.updateCards(card: card)
-                
                 return
             }
             
@@ -259,7 +241,7 @@ class SwipeViewController:UIViewController   {
         return moveBy.rotated(by: rotation)
     }
     
-    
+    // update the card view
     func updateCards(card: CardView) {
         for (index, c) in self.cards.enumerated() {
             if c.user.uid == card.user.uid {
@@ -271,7 +253,7 @@ class SwipeViewController:UIViewController   {
         setupGestures()
         setupTransforms()
     }
-    
+    // handle a little transformation of direction when card move
     func setupTransforms() {
         for (i, card) in cards.enumerated() {
             if i == 0 { continue; }
@@ -290,26 +272,26 @@ class SwipeViewController:UIViewController   {
         }
     }
     
+    
+    //update info in dataBase
     func saveToFirebase(like: Bool, card: CardView) {
-
-        Ref().databaseActionForUser(uid: Api.User.currentUserId)
+         saveSwipe()
+        Reference().databaseActionForUser(uid: Api.User.currentUserId)
             .updateChildValues([card.user.uid: like]) { (error, ref) in
                 if error == nil, like == true {
           
                     self.checkIfMatchFor(card: card)
-                    
             }
-                }
-               
+        }
     }
     
-
+    //check if they is a match between two user, than send a notification
     func checkIfMatchFor(card: CardView) {
-        Ref().databaseActionForUser(uid: card.user.uid).observeSingleEvent(of: .value) { (snapshot) in
+        Reference().databaseActionForUser(uid: card.user.uid).observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? [String: Bool] else { return }
             if dict.keys.contains(Api.User.currentUserId), dict[Api.User.currentUserId] == true {
-            Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).updateChildValues([card.user.uid: true])
-            Ref().databaseRoot.child("newMatch").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
+            Reference().databaseRoot.child("newMatch").child(Api.User.currentUserId).updateChildValues([card.user.uid: true])
+            Reference().databaseRoot.child("newMatch").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
 
                 self.databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId, onSuccess: { (user) in
                     self.presentAlert(title: "Notification", message: "you have a new match ! ")
@@ -319,13 +301,13 @@ class SwipeViewController:UIViewController   {
         }
     }
     
-    
+    // save swipe users into the data base
     func saveSwipe() {
         var dict = Dictionary<String, Any>()
         let swipe = swipeUsers
             dict["swiped"] = swipe
         
-        Api.User.saveUserProfile(dict: dict) {
+        Api.User.saveUserProfile(dict: dict) {_ in
             print(dict.count)
         } onError: { (errorMesage) in
             print(errorMesage)
@@ -333,6 +315,8 @@ class SwipeViewController:UIViewController   {
 
     }
     
+    
+    // get info from the swiped node in data base
     func observeData() {
         databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
             
@@ -340,23 +324,9 @@ class SwipeViewController:UIViewController   {
                 
                 self.swipeUsers = userSwipe
             }
-    
         }
         
     }
-    
-    
-    
-   func observeNewSwipes(onSuccess: @escaping(UserCompletion)) {    Ref().databaseRoot.child("newSwipe").observe(.childAdded, with:  { (snapshot) in
-     })
-    }
+}
 
-}
-extension Array where Element: Hashable {
-    func difference(from other: [Element]) -> [Element] {
-        let thisSet = Set(self)
-        let otherSet = Set(other)
-        return Array(thisSet.symmetricDifference(otherSet))
-    }
-}
 

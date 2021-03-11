@@ -7,25 +7,38 @@
 
 import XCTest
 @testable import My_Foody_Body
+
+import FirebaseStorage
 class AuthServiceTest: XCTestCase {
 
     private class AuthStub: AuthType {
-        
+
+    
         private let isSuccess: Bool
 
+     
+//  
+        
         var currentUserId: String { return isSuccess ? "uUs63keFW1NiuHtW85bbFMHn12v2" : "" }
 
         init(_ isSuccess: Bool) {
             self.isSuccess = isSuccess
+
         }
+
+
+
 
         func signIn(email: String, password: String, callback: @escaping (Bool) -> Void) {
             callback(isSuccess)
         }
 
-        func signUp(userName: String, email: String, password: String,image: UIImage?, callback: @escaping (Bool) -> Void) {
+
+        func signUp(userName: String, email: String, password: String, image: Data?, callback: @escaping (Bool) -> Void) {
             callback(isSuccess)
         }
+
+
 
         func logOut(callback: @escaping (Bool) -> Void) {
             callback(isSuccess)
@@ -34,7 +47,33 @@ class AuthServiceTest: XCTestCase {
         func isUserConnected(callback: @escaping (Bool) -> Void) {
             callback(isSuccess)
         }
+
+
+
+        func saveUserProfile(dict: Dictionary<String, Any>, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void) {
+            onSuccess(isSuccess)
+
+        }
+
+        func savePhotoProfile(image: Data, uid: String, onError: @escaping (String) -> Void) {
+            onError("")
+        }
+
+        func saveFoodPhoto(image: Data, uid: String, dictValue: String, onError: @escaping (String) -> Void) {
+            onError("")
+        }
+
+        func savePhoto(username: String, uid: String, data: Data, metadata: StorageMetadata, storageProfileRef: StorageReference, dict: Dictionary<String, Any>, onError: @escaping (String) -> Void) {
+            onError("")
+        }
+
+        func savePhotoMessage(image: UIImage?, id: String, callback: @escaping (Result<Any, Error>) -> Void) {
+            callback(.success(isSuccess))
+        }
+
+
     }
+
 
     // MARK: - Tests
 
@@ -73,7 +112,7 @@ class AuthServiceTest: XCTestCase {
     func testSignUpMethod_WhenTheUserEnterCorrectData_ThenShouldCreateTheUser() {
         let sut: AuthService = AuthService(auth: AuthStub(true))
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        sut.signUp(userName: "Username", email: "Email", password: "Password", image: UIImage()) { isSuccess in
+        sut.signUp(userName: "Username", email: "Email", password: "Password", image: Data()) { isSuccess in
             XCTAssertTrue(isSuccess == true)
             expectation.fulfill()
         }
@@ -83,7 +122,7 @@ class AuthServiceTest: XCTestCase {
     func testSignUpMethod_WhenTheUserEnterIncorrectData_ThenShouldNotCreateTheUser() {
         let sut: AuthService = AuthService(auth: AuthStub(false))
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        sut.signUp(userName: "Username", email: "Email", password: "", image: UIImage()) { isSuccess in
+        sut.signUp(userName: "Username", email: "Email", password: "", image: Data()) { isSuccess in
             XCTAssertTrue(isSuccess == false)
             expectation.fulfill()
         }
@@ -129,4 +168,66 @@ class AuthServiceTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 0.01)
     }
+    
+    func testSaveUserProfileMethode_WhenUserPressSaveProfile_thenTheUserInfoShouldBeSaved() {
+        let sut: AuthService = AuthService(auth: AuthStub(true))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        sut.saveUserProfile(dict: Dictionary<String, Any>()) { (Bool) in
+            XCTAssertTrue(Bool == true)
+            expectation.fulfill()
+        } onError: { (String) in
+            
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+
+    func testSavePhotoProfilMethode_WhenUserPressSave_thenProfilePictureShouldbeSaved() {
+        let sut: AuthService = AuthService(auth: AuthStub(true))
+
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        sut.savePhotoProfile(image: Data(), uid: "uUs63keFW1NiuHtW85bbFMHn12v2") { isSuccess in
+            XCTAssertTrue(isSuccess ==  "")
+                   expectation.fulfill()
+               }
+               wait(for: [expectation], timeout: 0.01)
+    }
+    
+    
+    func testSavePhotoMessageMethode_WhenPhotoMessageSend_thePhotoShouldBeSaved() {
+        let sut: AuthService = AuthService(auth: AuthStub(true))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        sut.savePhotoMessage(image: UIImage(), id: "") { (message) in
+            guard case .success = message else {
+                XCTFail("Get User Data Method Success Tests Fails")
+                return
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+
+    func testSaveFoodPhotoMethode_WhenUserPressSave_thanFoodImageShouldBeSaved() {
+        let sut: AuthService = AuthService(auth: AuthStub(true))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        sut.saveFoodPhoto(image: Data(), uid: "uUs63keFW1NiuHtW85bbFMHn12v2", dictValue: "foodImage") { (result) in
+            XCTAssertTrue( result ==  "")
+                   expectation.fulfill()
+        }
+      
+        wait(for: [expectation], timeout: 0.01)
+    }
+
+    func testSavePhotoMethode_WhenSignUp_thanProfilePictureShouldBesaved() {
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpg"
+        let storageProfile = Reference().storageSpecificProfile(uid:"uUs63keFW1NiuHtW85bbFMHn12v2" )
+        let sut: AuthService = AuthService(auth: AuthStub(true))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        sut.savePhoto(username: "Pierre", uid: "uUs63keFW1NiuHtW85bbFMHn12v2", data: Data(), metadata: metadata, storageProfileRef:storageProfile, dict: Dictionary<String, Any>()) { (result) in
+            XCTAssertTrue( result ==  "")
+                   expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+
 }

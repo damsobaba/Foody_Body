@@ -11,10 +11,11 @@ import AVFoundation
 
 
 class ChatViewController: UIViewController {
+    
+    let authService: AuthService = AuthService()
 
     
     @IBOutlet weak var mediaButton: UIButton!
-
     @IBOutlet weak var inputTextView: UITextView!
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!

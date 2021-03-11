@@ -34,7 +34,7 @@ class UserTableViewCell: UITableViewCell {
         self.statusLbl.text = user.status
         self.avatar.loadImage(user.profileImageUrl)
         
-        let refUser = Ref().databaseSpecificUser(uid: user.uid)
+        let refUser = Reference().databaseSpecificUser(uid: user.uid)
         if inboxChangedProfileHandle != nil {
             refUser.removeObserver(withHandle: inboxChangedProfileHandle)
         }
@@ -51,7 +51,7 @@ class UserTableViewCell: UITableViewCell {
         super.prepareForReuse()
 
         
-        let refUser = Ref().databaseSpecificUser(uid: self.user.uid)
+        let refUser = Reference().databaseSpecificUser(uid: self.user.uid)
         if inboxChangedProfileHandle != nil {
             refUser.removeObserver(withHandle: inboxChangedProfileHandle)
         }

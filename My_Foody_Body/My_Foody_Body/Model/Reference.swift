@@ -10,7 +10,7 @@ import Firebase
 
 
 
-class Ref {
+class Reference {
     let profileImageUrl = "profileImageUrl"
     let refUser = "users"
     let refMessage = "messages"

@@ -10,7 +10,7 @@ import UIKit
 class PeopleTableViewController: UITableViewController {
 
     var users: [User] = []
-    let ref = Ref()
+    let ref = Reference()
     private let databaseManager: DatabaseManager = DatabaseManager()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class PeopleTableViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
     }
-    
+    // get all the info of the new match users
     func observeUsers() {
         databaseManager.observeNewMatch{ (user) in
             self.users.append(user)

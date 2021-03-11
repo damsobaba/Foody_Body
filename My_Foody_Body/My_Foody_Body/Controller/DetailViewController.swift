@@ -39,7 +39,7 @@ var inboxChangedProfileHandle: DatabaseHandle!
       
     }
     
-   
+   // load all the users info
     func loadData(_ user: User) {
         usernameLbl.text = user.username
         avatar.image = user.profileImage
@@ -66,19 +66,12 @@ var inboxChangedProfileHandle: DatabaseHandle!
         foodDescriptionLabel.text = user.foodDescription
         foodDesciption2Label.text = user.foodDesciption2
         foodDescription3Label.text = user.foodDescription3
-        
-        
-        
-        
-        
-        
     }
     
     
     
     
     func setUpImageView() {
-        
         avatar.clipsToBounds = true 
         foodImage1.layer.cornerRadius = 10
         [foodImage1,foodImage2,foddImage3].forEach { $0?.layer.cornerRadius = 10 }
@@ -94,7 +87,7 @@ var inboxChangedProfileHandle: DatabaseHandle!
         
         loadData(user)
         
-        let refUser = Ref().databaseSpecificUser(uid: user.uid)
+        let refUser = Reference().databaseSpecificUser(uid: user.uid)
         if inboxChangedProfileHandle != nil {
             refUser.removeObserver(withHandle: inboxChangedProfileHandle)
         }

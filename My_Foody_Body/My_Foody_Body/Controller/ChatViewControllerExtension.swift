@@ -12,7 +12,7 @@ extension ChatViewController {
     
    
 
-    
+    // download messages from the data base
     func observeMessages() {
         Api.Message.receiveMessage(from: Api.User.currentUserId, to: partnerId) { (message) in
             self.messages.append(message)
@@ -24,6 +24,7 @@ extension ChatViewController {
         }
     }
     
+    // get the most recent message 
     func sortMessages() {
         messages = messages.sorted(by: { $0.date < $1.date })
         DispatchQueue.main.async {
@@ -172,7 +173,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         // save photo data
         let imageName = NSUUID().uuidString
-        StorageService.savePhotoMessage(image: selectedImageFromPicker, id: imageName) { [ unowned self ] (result) in
+        self.authService.savePhotoMessage(image: selectedImageFromPicker, id: imageName) { [ unowned self ] (result) in
             switch result {
             case .success(let data):
                 if let dict = data as? [String: Any] {
