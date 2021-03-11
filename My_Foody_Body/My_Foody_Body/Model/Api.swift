@@ -12,3 +12,4 @@ struct Api {
     static var Message = MessageApi()
    
 }
+
