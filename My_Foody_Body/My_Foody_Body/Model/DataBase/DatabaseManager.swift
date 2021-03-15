@@ -33,10 +33,6 @@ final class DatabaseManager {
         database.getUserInforSingleEvent(uid: uid, onSuccess: onSuccess)
     }
 
-    func getUserInfor(uid: String, onSuccess: @escaping(UserCompletion)) {
-        database.getUserInfor(uid: uid, onSuccess: onSuccess)
-    }
-
     func observeNewMatch(onSuccess: @escaping(UserCompletion)) {
         database.observeNewMatch(onSuccess: onSuccess)
 }

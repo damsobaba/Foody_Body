@@ -40,12 +40,9 @@ class SwipeViewController:UIViewController   {
         let tapLikeImg = UITapGestureRecognizer(target: self, action: #selector(likeImgDidTap))
         likeImg.addGestureRecognizer(tapLikeImg)
         
-        findUsers() {
-            for user in self.filteredUser {
-                self.setupCard(user: user)
-            }
-        }
 
+        
+        findUsers()
         print(self.swipeUsers.count)
     }
     
@@ -89,25 +86,31 @@ class SwipeViewController:UIViewController   {
     }
     
     // syncronise the users of the data base
-    func findUsers(callback: @escaping () -> Void) {
-       observeData()
-        let curent = Api.User.currentUserId // a mettre a la creation de profil, rentrer dans swiped l id du user qui cree son compte
+    func findUsers() {
+        observeData()
+        let curent = Api.User.currentUserId
         databaseManager.observeUsers { (user) in
+            print(user.email)
         if user.uid == curent {
             return
         }
+          
         self.users.append(user)
-   
+          
     let displayUser = self.users.filter {
         !self.swipeUsers.contains($0.uid)
     }
    self.filteredUser = displayUser
-  callback()
-  
+//  callback()
+
+//            for user in self.filteredUser {
+//                self.setupCard(user: user)
+//            }
+            self.setupCard(user: user)
+        }
  }
         
-     
-    }
+        
     // handle the swipe animation
     func swipeAnimation(translation: CGFloat, angle: CGFloat) {
         let duration = 0.5
@@ -127,8 +130,7 @@ class SwipeViewController:UIViewController   {
         for (index, c) in self.cards.enumerated() {
             if c.user.uid == firstCard.user.uid {
                 self.cards.remove(at: index)
-                self.filteredUser.remove(at: index)
-         
+                self.users.remove(at: index)
             }
          
         }
@@ -194,16 +196,15 @@ class SwipeViewController:UIViewController   {
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: self.cardInitialLocationCenter.x + 1000, y: self.cardInitialLocationCenter.y + 1000)
                 }) { (bool) in
-                    // remove card
+                   
                     card.removeFromSuperview()
                 }
-                Reference().databaseRoot.child("newSwipe").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
-                
-                if swipeUsers.contains(card.user.uid) {
-                    return
-                } else {
+             
+//                if swipeUsers.contains(card.user.uid) {
+//                    return
+//                } else {
                     swipeUsers.append(card.user.uid)
-                }
+//                }
                saveToFirebase(like: true, card: card)
 
                 self.updateCards(card: card)
@@ -213,7 +214,6 @@ class SwipeViewController:UIViewController   {
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: self.cardInitialLocationCenter.x - 1000, y: self.cardInitialLocationCenter.y + 1000)
                 }) { (bool) in
-                    // remove card
                     card.removeFromSuperview()
                 }
             
@@ -246,13 +246,14 @@ class SwipeViewController:UIViewController   {
         for (index, c) in self.cards.enumerated() {
             if c.user.uid == card.user.uid {
                 self.cards.remove(at: index)
-               self.filteredUser.remove(at: index)
+               self.users.remove(at: index)
             }
         }
         
         setupGestures()
         setupTransforms()
     }
+    
     // handle a little transformation of direction when card move
     func setupTransforms() {
         for (i, card) in cards.enumerated() {
@@ -279,7 +280,6 @@ class SwipeViewController:UIViewController   {
         Reference().databaseActionForUser(uid: Api.User.currentUserId)
             .updateChildValues([card.user.uid: like]) { (error, ref) in
                 if error == nil, like == true {
-          
                     self.checkIfMatchFor(card: card)
             }
         }
@@ -312,20 +312,17 @@ class SwipeViewController:UIViewController   {
         } onError: { (errorMesage) in
             print(errorMesage)
         }
-
     }
     
     
     // get info from the swiped node in data base
     func observeData() {
         databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
-            
             if let userSwipe = user.swipeUser {
                 
                 self.swipeUsers = userSwipe
             }
         }
-        
     }
 }
 

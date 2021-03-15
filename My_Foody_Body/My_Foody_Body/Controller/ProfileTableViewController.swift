@@ -116,6 +116,7 @@ class ProfileTableViewController: UITableViewController {
     
     @IBAction func logoutBtnDidTapped(_ sender: Any) {
         authService.logOut { isSuccess in
+            (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
             if !isSuccess {
                 self.presentAlert(title: "error", message: "We having trouble tryng to log you out")
             }

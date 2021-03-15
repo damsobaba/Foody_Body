@@ -35,7 +35,7 @@ final class AuthService {
 
     func logOut(callback: @escaping (Bool) -> Void) {
          auth.logOut(callback: callback)
-               (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
+//               (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
     }
 //
     func isUserConnected(callback: @escaping (Bool) -> Void) {
