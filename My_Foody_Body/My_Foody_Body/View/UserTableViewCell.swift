@@ -6,6 +6,10 @@
 //
 import UIKit
 import Firebase
+
+protocol UpdateTableProtocol {
+    func reloadData()
+}
 class UserTableViewCell: UITableViewCell {
 
     
@@ -17,7 +21,7 @@ class UserTableViewCell: UITableViewCell {
   
     var inboxChangedProfileHandle: DatabaseHandle!
     var controller: PeopleTableViewController!
-    
+    var delegate: UpdateTableProtocol!
    
     
     
@@ -28,6 +32,7 @@ class UserTableViewCell: UITableViewCell {
         
     }
     
+    // load data from database 
     func loadData(_ user: User) {
         self.user = user
         self.usernameLbl.text = user.username
@@ -42,7 +47,7 @@ class UserTableViewCell: UITableViewCell {
         inboxChangedProfileHandle = refUser.observe(.childChanged, with: { (snapshot) in
             if let snap = snapshot.value as? String {
                 self.user.updateData(key: snapshot.key, value: snap)
-                self.controller.tableView.reloadData()
+                self.delegate.reloadData()
             }
         })
     }

@@ -19,6 +19,7 @@ class PeopleTableViewController: UITableViewController {
         observeUsers()
         setupTableView()
     }
+   
     
     func setupTableView() {
         tableView.tableFooterView = UIView()
@@ -34,12 +35,15 @@ class PeopleTableViewController: UITableViewController {
     func observeUsers() {
         databaseManager.observeNewMatch{ (user) in
             self.users.append(user)
-            print(self.users)
             self.tableView.reloadData()
         }
     }
-    
-    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super .viewWillAppear(true)
+//
+//        tableView.reloadData()
+//    }
+//
 
     // MARK: - Table view data source
 
@@ -51,7 +55,7 @@ class PeopleTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserTableViewCell", for: indexPath) as! UserTableViewCell
         let user = users[indexPath.row]
-        cell.controller = self
+        cell.delegate = self
         cell.loadData(user)
         
         return cell
@@ -76,5 +80,9 @@ class PeopleTableViewController: UITableViewController {
         }
 
 }
-    
+}
+extension PeopleTableViewController: UpdateTableProtocol {
+    func reloadData() {
+        self.tableView.reloadData()
+    }
 }

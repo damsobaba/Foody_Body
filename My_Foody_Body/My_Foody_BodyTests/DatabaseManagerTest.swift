@@ -22,7 +22,7 @@ final class DadabaseManagerTests: XCTestCase {
         
         // observe data from all users
         func observeUsers(onSuccess: @escaping (UserCompletion)) {
-            guard let getUser = User.transformUser(dict: ["username":"pierre"]) else { return }
+            guard let getUser = User.transformUser(dict: ["username":"pierre", "email":"pierre@gmail.com", "profileImageUrl": "blabla", "uid": "uUs63keFW1NiuHtW85bbFMHn12v2", "status":"salut, je suis nouveau" ]) else { return }
 
             onSuccess(getUser)
 
@@ -31,28 +31,22 @@ final class DadabaseManagerTests: XCTestCase {
 
           // observe all the data from the data of specify user
         func getUserInforSingleEvent(uid: String, onSuccess: @escaping (UserCompletion)) {
-            guard let getUser = User.transformUser(dict:  ["uid":"uUs63keFW1NiuHtW85bbFMHn12v2"]) else { return }
+            guard let getUser = User.transformUser(dict:  ["username":"pierre", "email":"pierre@gmail.com", "profileImageUrl": "blabla", "uid": "uUs63keFW1NiuHtW85bbFMHn12v2", "status":"salut, je suis nouveau" ]) else { return }
             onSuccess(getUser)
         }
 
         
        // check if they is a match between two user by checking if the nod contain the swipe user
         func observeNewMatch(onSuccess: @escaping (UserCompletion)) {
-          getUserInforSingleEvent(uid: "Pierre", onSuccess: onSuccess)
+          getUserInforSingleEvent(uid: "uUs63keFW1NiuHtW85bbFMHn12v2", onSuccess: onSuccess)
         }
 
             // not working yet
         func observeNewSwipe(onSuccess: @escaping (UserCompletion)) {
 
         }
-
-
-
     }
 
-    enum TestError: Error {
-        case invalidUID
-    }
 
     // MARK: - Tests
 
@@ -74,7 +68,7 @@ final class DadabaseManagerTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.getUserInforSingleEvent(uid: "uUs63keFW1NiuHtW85bbFMHn12v2", onSuccess: { (success) in
             
-            XCTAssertTrue(success.username == "Pierre")
+            XCTAssertTrue(success.username == "pierre")
             expectation.fulfill()
         })
         wait(for: [expectation], timeout: 0.1)
@@ -83,8 +77,8 @@ final class DadabaseManagerTests: XCTestCase {
     func testNewMatchMethode() {
         let sut: DatabaseManager = DatabaseManager(database: DatabaseStub())
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        sut.observeNewMatch { (User) in
-            XCTAssertTrue(User.username == "Pierre")
+        sut.observeNewMatch { (success) in
+            XCTAssertTrue(success.username == "pierre")
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.1)

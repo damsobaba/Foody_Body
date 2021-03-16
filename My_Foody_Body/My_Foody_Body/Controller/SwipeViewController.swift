@@ -101,11 +101,12 @@ class SwipeViewController:UIViewController   {
         !self.swipeUsers.contains($0.uid)
     }
    self.filteredUser = displayUser
-//  callback()
+
 
 //            for user in self.filteredUser {
 //                self.setupCard(user: user)
 //            }
+            
             self.setupCard(user: user)
         }
  }
@@ -287,17 +288,10 @@ class SwipeViewController:UIViewController   {
     
     //check if they is a match between two user, than send a notification
     func checkIfMatchFor(card: CardView) {
-        Reference().databaseActionForUser(uid: card.user.uid).observeSingleEvent(of: .value) { (snapshot) in
-            guard let dict = snapshot.value as? [String: Bool] else { return }
-            if dict.keys.contains(Api.User.currentUserId), dict[Api.User.currentUserId] == true {
-            Reference().databaseRoot.child("newMatch").child(Api.User.currentUserId).updateChildValues([card.user.uid: true])
-            Reference().databaseRoot.child("newMatch").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
-
-                self.databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId, onSuccess: { (user) in
-                    self.presentAlert(title: "Notification", message: "you have a new match ! ")
-                   
-                })
-            }
+        databaseManager.findMatchfor(user: card.user.uid) { (user) in
+                    self.databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId, onSuccess: { (user) in
+                        self.presentAlert(title: "Notification", message: "you have a new match ! ")
+            })
         }
     }
     

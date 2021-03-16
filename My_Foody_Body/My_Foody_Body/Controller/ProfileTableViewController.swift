@@ -45,6 +45,7 @@ class ProfileTableViewController: UITableViewController {
         super.viewDidLoad()
         setupView()
         observeData()
+        tableView.reloadData()
     }
     
     func setupView() {
@@ -180,9 +181,8 @@ class ProfileTableViewController: UITableViewController {
                     (errorMessage) in
                     
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
-                } 
-            } else {
-                self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
+                }
+                
             }
         }) { (errorMessage) in
             self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
@@ -195,7 +195,6 @@ class ProfileTableViewController: UITableViewController {
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
         currentImageView = sender.view as? UIImageView
         imageTag = currentImageView!.tag
-        
         view.endEditing(true)
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -219,7 +218,6 @@ extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigat
         switch imageTag {
         case 0:
             ppImage = imageSelected as? UIImage
-            
         case 1:
             favoriteFoodImage = imageSelected as? UIImage
         case 2:
@@ -248,9 +246,6 @@ extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigat
         default:
             break
         }
-        
-        
-        
         self.dismiss(animated: true, completion: nil)
     }
 }

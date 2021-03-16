@@ -56,15 +56,15 @@ class AuthServiceTest: XCTestCase {
         }
 
         func savePhotoProfile(image: Data, uid: String, onError: @escaping (String) -> Void) {
-            onError("")
+            onError("they have been a error trying to save you profile picture")
         }
 
         func saveFoodPhoto(image: Data, uid: String, dictValue: String, onError: @escaping (String) -> Void) {
-            onError("")
+            onError("they have been a error trying to save you food picture")
         }
 
         func savePhoto(username: String, uid: String, data: Data, metadata: StorageMetadata, storageProfileRef: StorageReference, dict: Dictionary<String, Any>, onError: @escaping (String) -> Void) {
-            onError("")
+            onError("a error as occure trying to save you picture")
         }
 
         func savePhotoMessage(image: UIImage?, id: String, callback: @escaping (Result<Any, Error>) -> Void) {
@@ -83,11 +83,7 @@ class AuthServiceTest: XCTestCase {
         XCTAssertTrue(sut.currentUID! == expectedUID)
     }
 
-//    func testCurrentUID_WhenTheUserIsDisconnected_ThenShouldReturnANilValue() {
-//        let sut: AuthService = AuthService(auth: AuthStub(false))
-//        let expectedUID: String? = nil
-//        XCTAssertTrue(sut.currentUID == expectedUID)
-//    }
+
 
     func testSignInMethod_WhenTheUserEnterCorrectData_ThenShouldConnectTheUser() {
         let sut: AuthService = AuthService(auth: AuthStub(true))
@@ -185,8 +181,8 @@ class AuthServiceTest: XCTestCase {
         let sut: AuthService = AuthService(auth: AuthStub(true))
 
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        sut.savePhotoProfile(image: Data(), uid: "uUs63keFW1NiuHtW85bbFMHn12v2") { isSuccess in
-            XCTAssertTrue(isSuccess ==  "")
+        sut.savePhotoProfile(image: Data(), uid: "uUs63keFW1NiuHtW85bbFMHn12v2") { isError in
+            XCTAssertTrue(isError ==  "they have been a error trying to save you profile picture")
                    expectation.fulfill()
                }
                wait(for: [expectation], timeout: 0.01)
@@ -209,8 +205,8 @@ class AuthServiceTest: XCTestCase {
     func testSaveFoodPhotoMethode_WhenUserPressSave_thanFoodImageShouldBeSaved() {
         let sut: AuthService = AuthService(auth: AuthStub(true))
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        sut.saveFoodPhoto(image: Data(), uid: "uUs63keFW1NiuHtW85bbFMHn12v2", dictValue: "foodImage") { (result) in
-            XCTAssertTrue( result ==  "")
+        sut.saveFoodPhoto(image: Data(), uid: "uUs63keFW1NiuHtW85bbFMHn12v2", dictValue: "foodImage") { (error) in
+            XCTAssertTrue( error == "they have been a error trying to save you food picture")
                    expectation.fulfill()
         }
       
@@ -223,8 +219,8 @@ class AuthServiceTest: XCTestCase {
         let storageProfile = Reference().storageSpecificProfile(uid:"uUs63keFW1NiuHtW85bbFMHn12v2" )
         let sut: AuthService = AuthService(auth: AuthStub(true))
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        sut.savePhoto(username: "Pierre", uid: "uUs63keFW1NiuHtW85bbFMHn12v2", data: Data(), metadata: metadata, storageProfileRef:storageProfile, dict: Dictionary<String, Any>()) { (result) in
-            XCTAssertTrue( result ==  "")
+        sut.savePhoto(username: "Pierre", uid: "uUs63keFW1NiuHtW85bbFMHn12v2", data: Data(), metadata: metadata, storageProfileRef:storageProfile, dict: Dictionary<String, Any>()) { (error) in
+            XCTAssertTrue( error ==  "a error as occure trying to save you picture")
                    expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.01)

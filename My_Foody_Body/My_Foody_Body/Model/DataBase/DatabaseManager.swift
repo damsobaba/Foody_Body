@@ -39,7 +39,11 @@ final class DatabaseManager {
     func observeSwipe(onSuccess: @escaping(UserCompletion)) {
         database.observeNewSwipe(onSuccess:onSuccess)
     }
-
+    
+    func findMatchfor(user: String,onSuccess: @escaping(Bool)->Void) {
+        database.findMatchfor(user: user, onSuccess: onSuccess)
+    }
+      
 }
 
 

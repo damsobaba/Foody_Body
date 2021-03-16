@@ -21,7 +21,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var backBtn: UIButton!
-   
     @IBOutlet weak var statusLabel: UILabel!
     
 
@@ -58,7 +57,6 @@ var inboxChangedProfileHandle: DatabaseHandle!
         }
         
         genderImage.tintColor = .white
-        
         statusLabel.text = user.status
         foodImage1.loadImage(user.foodImage)
         foodImage2.loadImage(user.foodImage2)
@@ -94,7 +92,6 @@ var inboxChangedProfileHandle: DatabaseHandle!
         inboxChangedProfileHandle = refUser.observe(.childChanged, with: { (snapshot) in
             if let snap = snapshot.value as? String {
                 self.user.updateData(key: snapshot.key, value: snap)
-                
             }
         })
       
