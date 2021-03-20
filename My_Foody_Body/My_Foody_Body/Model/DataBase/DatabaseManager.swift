@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import Foundation
 
 final class DatabaseManager {
@@ -36,10 +35,7 @@ final class DatabaseManager {
     func observeNewMatch(onSuccess: @escaping(UserCompletion)) {
         database.observeNewMatch(onSuccess: onSuccess)
 }
-    func observeSwipe(onSuccess: @escaping(UserCompletion)) {
-        database.observeNewSwipe(onSuccess:onSuccess)
-    }
-    
+
     func findMatchfor(user: String,onSuccess: @escaping(Bool)->Void) {
         database.findMatchfor(user: user, onSuccess: onSuccess)
     }

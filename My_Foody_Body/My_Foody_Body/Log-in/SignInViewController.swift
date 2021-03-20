@@ -38,7 +38,6 @@ class SignInViewController: UIViewController {
     func validateFields() {
         
         guard let email = self.emailTextField.text, !email.isEmpty else {
-            
             presentAlert(title: "Error", message: "please enter a valid email adress ")
             
             return

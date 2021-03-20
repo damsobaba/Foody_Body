@@ -15,7 +15,6 @@ protocol DatabaseType {
     func getUserInforSingleEvent(uid: String, onSuccess: @escaping(UserCompletion))
     func observeNewMatch(onSuccess: @escaping(UserCompletion))
     func findMatchfor(user: String,onSuccess: @escaping(Bool)->Void)
-    func observeNewSwipe(onSuccess: @escaping(UserCompletion))
 }
 
 final class FirebaseDatabase: DatabaseType {
@@ -47,7 +46,7 @@ final class FirebaseDatabase: DatabaseType {
         }
     }
     
-    // check if they is a match between two user by checking if the nod contain the swipe user
+    // get all the users in the new match nod that have match with the current user
     func observeNewMatch(onSuccess: @escaping(UserCompletion)) {
         Reference().databaseRoot.child("newMatch").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? [String: Bool] else { return }
@@ -59,7 +58,7 @@ final class FirebaseDatabase: DatabaseType {
         }
     }
     
-    
+    // create a newMatch nod and implement all the liked users
     func findMatchfor(user: String,onSuccess: @escaping(Bool)->Void) {
         Reference().databaseActionForUser(uid:user).observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? [String: Bool] else { return }
@@ -70,20 +69,6 @@ final class FirebaseDatabase: DatabaseType {
             }
         }
     }
-        
-        
-        
-        func observeNewSwipe(onSuccess: @escaping(UserCompletion)) {    Reference().databaseRoot.child("newSwipe").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
-            guard let dict = snapshot.value as? [String: Bool] else { return }
-            print("dd \(dict)")
-            dict.forEach({ (key, value) in
-                self.getUserInforSingleEvent(uid: key, onSuccess: { (user) in
-                    onSuccess(user)
-                    
-                })
-            })
-        }
-    }
-    }
+}
 
 

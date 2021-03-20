@@ -6,14 +6,12 @@
 //
 
 import UIKit
-import CoreLocation
 import FirebaseDatabase
 
 
 
 class SwipeViewController:UIViewController   {
-    
-    
+
     @IBOutlet weak var cardStack: UIView!
     @IBOutlet weak var likeImg: UIImageView!
     @IBOutlet weak var nopeImg: UIImageView!
@@ -30,8 +28,15 @@ class SwipeViewController:UIViewController   {
     var  filteredUser : [User] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-   
+        
+       enableUserInteractionOnButton()
+       findUsers()
+        
+    }
+    
+    
+    
+    func enableUserInteractionOnButton() {
         nopeImg.isUserInteractionEnabled = true
         let tapNopeImg = UITapGestureRecognizer(target: self, action: #selector(nopeImgDidTap))
         nopeImg.addGestureRecognizer(tapNopeImg)
@@ -39,19 +44,14 @@ class SwipeViewController:UIViewController   {
         likeImg.isUserInteractionEnabled = true
         let tapLikeImg = UITapGestureRecognizer(target: self, action: #selector(likeImgDidTap))
         likeImg.addGestureRecognizer(tapLikeImg)
-        
 
-        
-        findUsers()
-        print(self.swipeUsers.count)
     }
     
-  
     @objc func nopeImgDidTap() {
         guard let firstCard = cards.first else {
             return
         }
-      saveToFirebase(like: false, card: firstCard)
+        saveToFirebase(like: false, card: firstCard)
         swipeAnimation(translation: 750, angle: -15)
         self.setupTransforms()
     }
@@ -60,58 +60,52 @@ class SwipeViewController:UIViewController   {
         guard let firstCard = cards.first else {
             return
         }
-       saveToFirebase(like: true, card: firstCard)
+        saveToFirebase(like: true, card: firstCard)
         swipeAnimation(translation: -750, angle: 15)
         self.setupTransforms()
     }
+    
+    
     
     // set up the display card
     func setupCard(user: User) {
         let card: CardView = UIView.fromNib()
         card.frame = CGRect(x: 0, y: 0, width: cardStack.bounds.width, height: cardStack.bounds.height)
-   
         card.user = user
-        
         card.controller = self
         cards.append(card)
-        
         cardStack.addSubview(card)
         cardStack.sendSubviewToBack(card)
         setupTransforms()
-        
         if cards.count == 1 {
             cardInitialLocationCenter = card.center
             card.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan(gesture:))))
         }
     }
     
-    // syncronise the users of the data base
+    // syncronyse the users of the data base
     func findUsers() {
         observeData()
         let curent = Api.User.currentUserId
         databaseManager.observeUsers { (user) in
             print(user.email)
-        if user.uid == curent {
-            return
-        }
-          
-        self.users.append(user)
-          
-    let displayUser = self.users.filter {
-        !self.swipeUsers.contains($0.uid)
-    }
-   self.filteredUser = displayUser
-
-
-//            for user in self.filteredUser {
-//                self.setupCard(user: user)
-//            }
+            if user.uid == curent {
+                return
+            }
             
+            self.users.append(user)
+        
+            let displayUser = self.users.filter {
+                !self.swipeUsers.contains($0.uid)
+                
+            }
+           self.filteredUser = displayUser
             self.setupCard(user: user)
         }
- }
-        
-        
+
+    }
+    
+    
     // handle the swipe animation
     func swipeAnimation(translation: CGFloat, angle: CGFloat) {
         let duration = 0.5
@@ -132,8 +126,9 @@ class SwipeViewController:UIViewController   {
             if c.user.uid == firstCard.user.uid {
                 self.cards.remove(at: index)
                 self.users.remove(at: index)
+                self.filteredUser.remove(at: index)
             }
-         
+            
         }
         
         self.setupGestures()
@@ -162,7 +157,7 @@ class SwipeViewController:UIViewController   {
         }
     }
     
-
+    
     @objc func pan(gesture: UIPanGestureRecognizer) {
         let card = gesture.view! as! CardView
         let translation = gesture.translation(in: cardStack)
@@ -170,9 +165,9 @@ class SwipeViewController:UIViewController   {
         switch gesture.state {
         case .began:
             panInitialLocation = gesture.location(in: cardStack)
-           
-           
-
+            
+            
+            
         case .changed:
             
             card.center.x = cardInitialLocationCenter.x + translation.x
@@ -190,26 +185,28 @@ class SwipeViewController:UIViewController   {
             }
             
             card.transform = self.transform(view: card, for: translation)
-
+            
         case .ended:
             
             if translation.x > 75 {
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: self.cardInitialLocationCenter.x + 1000, y: self.cardInitialLocationCenter.y + 1000)
                 }) { (bool) in
-                   
+                    
                     card.removeFromSuperview()
                 }
-             
-//                if swipeUsers.contains(card.user.uid) {
-//                    return
-//                } else {
-                    swipeUsers.append(card.user.uid)
-//                }
-               saveToFirebase(like: true, card: card)
-
+                
+                //                if swipeUsers.contains(card.user.uid) {
+                //                    return
+                //                } else {
+                
+                swipeUsers.append(card.user.uid)
+                print(card.user.uid)
+                //               }
+                saveToFirebase(like: true, card: card)
+                
                 self.updateCards(card: card)
-               
+                
                 return
             } else if translation.x < -75 {
                 UIView.animate(withDuration: 0.3, animations: {
@@ -217,8 +214,8 @@ class SwipeViewController:UIViewController   {
                 }) { (bool) in
                     card.removeFromSuperview()
                 }
-            
-               saveToFirebase(like: false, card: card)
+                
+                saveToFirebase(like: false, card: card)
                 self.updateCards(card: card)
                 return
             }
@@ -247,7 +244,7 @@ class SwipeViewController:UIViewController   {
         for (index, c) in self.cards.enumerated() {
             if c.user.uid == card.user.uid {
                 self.cards.remove(at: index)
-               self.users.remove(at: index)
+                self.users.remove(at: index)
             }
         }
         
@@ -277,20 +274,20 @@ class SwipeViewController:UIViewController   {
     
     //update info in dataBase
     func saveToFirebase(like: Bool, card: CardView) {
-         saveSwipe()
+        saveSwipe()
         Reference().databaseActionForUser(uid: Api.User.currentUserId)
             .updateChildValues([card.user.uid: like]) { (error, ref) in
                 if error == nil, like == true {
                     self.checkIfMatchFor(card: card)
+                }
             }
-        }
     }
     
     //check if they is a match between two user, than send a notification
     func checkIfMatchFor(card: CardView) {
         databaseManager.findMatchfor(user: card.user.uid) { (user) in
-                    self.databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId, onSuccess: { (user) in
-                        self.presentAlert(title: "Notification", message: "you have a new match ! ")
+            self.databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId, onSuccess: { (user) in
+                self.presentAlert(title: "Notification", message: "you have a new match ! ")
             })
         }
     }
@@ -299,7 +296,7 @@ class SwipeViewController:UIViewController   {
     func saveSwipe() {
         var dict = Dictionary<String, Any>()
         let swipe = swipeUsers
-            dict["swiped"] = swipe
+        dict["swiped"] = swipe
         
         Api.User.saveUserProfile(dict: dict) {_ in
             print(dict.count)
@@ -313,7 +310,6 @@ class SwipeViewController:UIViewController   {
     func observeData() {
         databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
             if let userSwipe = user.swipeUser {
-                
                 self.swipeUsers = userSwipe
             }
         }

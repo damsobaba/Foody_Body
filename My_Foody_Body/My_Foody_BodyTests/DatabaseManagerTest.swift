@@ -14,12 +14,7 @@ final class DadabaseManagerTests: XCTestCase {
     // MARK: - Helpers
 
     private class DatabaseStub: DatabaseType {
-
-
-
-
-        
-        
+     
         // observe data from all users
         func observeUsers(onSuccess: @escaping (UserCompletion)) {
             guard let getUser = User.transformUser(dict: ["username":"pierre", "email":"pierre@gmail.com", "profileImageUrl": "blabla", "uid": "uUs63keFW1NiuHtW85bbFMHn12v2", "status":"salut, je suis nouveau" ]) else { return }
@@ -41,10 +36,11 @@ final class DadabaseManagerTests: XCTestCase {
           getUserInforSingleEvent(uid: "uUs63keFW1NiuHtW85bbFMHn12v2", onSuccess: onSuccess)
         }
 
-            // not working yet
-        func observeNewSwipe(onSuccess: @escaping (UserCompletion)) {
-
+        
+        func findMatchfor(user: String, onSuccess: @escaping (Bool) -> Void) {
+            onSuccess(true)
         }
+        
     }
 
 
@@ -52,7 +48,7 @@ final class DadabaseManagerTests: XCTestCase {
 
  
 
-    func testGetUserDataMethod_WhenTheUIDIscorrect_ThenShouldReturnAnError() {
+    func testGetUserDataMethod_WhenTheDictInfoArecorrect_ThenShouldReturnAUser() {
         let sut: DatabaseManager = DatabaseManager(database: DatabaseStub())
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.observeUsers { (success) in
@@ -63,7 +59,7 @@ final class DadabaseManagerTests: XCTestCase {
         wait(for: [expectation], timeout: 0.1)
         }
     
-    func testGetSpecifyUser() {
+    func testGetSpecifyUser_() {
         let sut: DatabaseManager = DatabaseManager(database: DatabaseStub())
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.getUserInforSingleEvent(uid: "uUs63keFW1NiuHtW85bbFMHn12v2", onSuccess: { (success) in
@@ -74,7 +70,7 @@ final class DadabaseManagerTests: XCTestCase {
         wait(for: [expectation], timeout: 0.1)
         }
     
-    func testNewMatchMethode() {
+    func testNewMatchMethode_whenTheNewMatchIdIsPassed_ThanShouldReturnTheAssociateNewMatchUserName() {
         let sut: DatabaseManager = DatabaseManager(database: DatabaseStub())
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.observeNewMatch { (success) in
@@ -83,6 +79,17 @@ final class DadabaseManagerTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 0.1)
         
-        
     }
+    
+    func testFindMatchMethode_WhenUserSwipe_dataBaseaddNewMatchId() {
+        let sut: DatabaseManager = DatabaseManager(database: DatabaseStub())
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        sut.findMatchfor(user:"uUs63keFW1NiuHtW85bbFMHn12v2") { (success) in
+            XCTAssertTrue(success == true)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.1)
+    
+    }
+    
 }

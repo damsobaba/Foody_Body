@@ -23,11 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func configureInitialViewController(){
            DispatchQueue.main.async {
-   //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
            let appDelegate = UIApplication.shared.delegate as! AppDelegate
            var initialVc:UIViewController?
            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let storyboard2 = UIStoryboard(name: "Authentification", bundle: nil)
            if Auth.auth().currentUser != nil {
                let homeVC = storyboard.instantiateViewController(withIdentifier:  "TabBarVC" )
                initialVc = homeVC

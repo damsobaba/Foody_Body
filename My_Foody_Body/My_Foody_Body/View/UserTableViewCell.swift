@@ -38,28 +38,10 @@ class UserTableViewCell: UITableViewCell {
         self.usernameLbl.text = user.username
         self.statusLbl.text = user.status
         self.avatar.loadImage(user.profileImageUrl)
-        
-        let refUser = Reference().databaseSpecificUser(uid: user.uid)
-        if inboxChangedProfileHandle != nil {
-            refUser.removeObserver(withHandle: inboxChangedProfileHandle)
-        }
-        
-        inboxChangedProfileHandle = refUser.observe(.childChanged, with: { (snapshot) in
-            if let snap = snapshot.value as? String {
-                self.user.updateData(key: snapshot.key, value: snap)
-                self.delegate.reloadData()
-            }
-        })
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-
-        
-        let refUser = Reference().databaseSpecificUser(uid: self.user.uid)
-        if inboxChangedProfileHandle != nil {
-            refUser.removeObserver(withHandle: inboxChangedProfileHandle)
-        }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

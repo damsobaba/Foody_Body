@@ -12,11 +12,16 @@ class PeopleTableViewController: UITableViewController {
     var users: [User] = []
     let ref = Reference()
     private let databaseManager: DatabaseManager = DatabaseManager()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(true)
+        observeUsers()
+        tableView.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
    
         setupNavigationBar()
-        observeUsers()
         setupTableView()
     }
    
@@ -34,16 +39,14 @@ class PeopleTableViewController: UITableViewController {
     // get all the info of the new match users
     func observeUsers() {
         databaseManager.observeNewMatch{ (user) in
+            if self.users.contains(user) {
+                return
+            }
             self.users.append(user)
             self.tableView.reloadData()
         }
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        super .viewWillAppear(true)
-//
-//        tableView.reloadData()
-//    }
-//
+
 
     // MARK: - Table view data source
 
@@ -57,7 +60,6 @@ class PeopleTableViewController: UITableViewController {
         let user = users[indexPath.row]
         cell.delegate = self
         cell.loadData(user)
-        
         return cell
     }
     
@@ -72,14 +74,9 @@ class PeopleTableViewController: UITableViewController {
             chatVC.partnerUsername = cell.usernameLbl.text
             chatVC.partnerId = cell.user.uid
             chatVC.partnerUser = cell.user
-            
             self.navigationController?.pushViewController(chatVC, animated: true)
-            
-        
-            
         }
-
-}
+   }
 }
 extension PeopleTableViewController: UpdateTableProtocol {
     func reloadData() {
