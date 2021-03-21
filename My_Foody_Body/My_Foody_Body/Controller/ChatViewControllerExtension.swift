@@ -47,6 +47,9 @@ extension ChatViewController {
     
     func setupInputContainer() {
         setupInputTextView()
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     
@@ -108,6 +111,25 @@ extension ChatViewController {
         
         
     }
+    @objc func adjustForKeyboard(notification: Notification) {
+        let userInfo = notification.userInfo!
+        let keyboardScreenEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            bottomConstraint.constant = 0
+        } else {
+            if #available(iOS 11.0, *) {
+                bottomConstraint.constant = -keyboardViewEndFrame.height + view.safeAreaInsets.bottom
+
+            } else {
+                bottomConstraint.constant = -keyboardViewEndFrame.height
+            }
+        }
+        
+        view.layoutIfNeeded()
+    }
+    
  
     
 /// call in selector to go to detail view controller

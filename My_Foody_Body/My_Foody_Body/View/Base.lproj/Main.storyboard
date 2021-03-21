@@ -80,6 +80,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
+                        <gestureRecognizers/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="OtC-Ez-glL">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -155,6 +156,9 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="5bF-C5-Doq" id="AL0-r6-hKD"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M7r-L4-TgX">
                                             <rect key="frame" x="134" y="0.0" width="87" height="50"/>
@@ -163,6 +167,9 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="5bF-C5-Doq" id="jkm-Ki-qJs"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jFc-Ge-8bH">
                                             <rect key="frame" x="268" y="0.0" width="87" height="50"/>
@@ -171,6 +178,9 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="5bF-C5-Doq" id="uEp-ov-IsP"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -204,6 +214,9 @@
                                                     <rect key="frame" x="20" y="0.0" width="340" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="5bF-C5-Doq" id="LiM-dg-Bdp"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -225,6 +238,9 @@
                                                     <rect key="frame" x="20" y="0.0" width="340" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="5bF-C5-Doq" id="qNO-Js-lEc"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -246,6 +262,9 @@
                                                     <rect key="frame" x="20" y="0.0" width="340" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="5bF-C5-Doq" id="WTZ-oP-EMB"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -294,6 +313,9 @@
                                                     <rect key="frame" x="25" y="11" width="330" height="39"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="5bF-C5-Doq" id="TAi-mD-BsB"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -363,6 +385,7 @@
                         <connections>
                             <outlet property="dataSource" destination="5bF-C5-Doq" id="sWb-2r-ggu"/>
                             <outlet property="delegate" destination="5bF-C5-Doq" id="ush-Ac-h6Q"/>
+                            <outletCollection property="gestureRecognizers" destination="CMP-3F-AWT" appends="YES" id="nD8-y5-zQd"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="9wD-AS-p4r">
@@ -406,6 +429,11 @@
                 <tapGestureRecognizer id="eCk-b4-kta">
                     <connections>
                         <action selector="tap:" destination="5bF-C5-Doq" id="f3a-ve-4ap"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="CMP-3F-AWT">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="5bF-C5-Doq" id="Pnf-Mp-lcb"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -545,6 +573,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="tDd-bz-542" id="FZz-bD-NkJ"/>
+                                        </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izi-YG-qna">
                                         <rect key="frame" x="334" y="8" width="36" height="30"/>
@@ -584,6 +615,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sY4-ev-Zy3"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Apl-Ps-aaz" firstAttribute="top" secondItem="qVN-mk-Ukx" secondAttribute="top" id="J3N-56-Se2"/>
                             <constraint firstItem="sY4-ev-Zy3" firstAttribute="trailing" secondItem="Apl-Ps-aaz" secondAttribute="trailing" id="JcL-xW-xdP"/>
@@ -593,8 +625,12 @@
                             <constraint firstItem="OYH-bC-OeW" firstAttribute="leading" secondItem="sY4-ev-Zy3" secondAttribute="leading" id="YBb-se-lsS"/>
                             <constraint firstItem="OYH-bC-OeW" firstAttribute="top" secondItem="Apl-Ps-aaz" secondAttribute="bottom" id="vQM-xa-WMt"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="6r4-Nh-80L" appends="YES" id="ru2-gu-v31"/>
+                        </connections>
                     </view>
                     <connections>
+                        <outlet property="bottomConstraint" destination="Tqa-Tq-tN7" id="30T-cI-Qiy"/>
                         <outlet property="inputTextView" destination="pmn-Jm-H1n" id="IzB-WQ-DAF"/>
                         <outlet property="mediaButton" destination="PPD-sY-2ch" id="yzN-nv-vLq"/>
                         <outlet property="sendBtn" destination="izi-YG-qna" id="Sh7-it-Cr3"/>
@@ -602,6 +638,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vlL-u4-zdr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="6r4-Nh-80L">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="tDd-bz-542" id="Zcq-F5-If9"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3519" y="1260"/>
         </scene>
@@ -893,11 +934,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="215" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="yLy-4m-PzX" id="9aJ-Ez-BKc"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VdZ-ZL-hXa">
                                         <rect key="frame" x="0.0" y="74" width="215" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="yLy-4m-PzX" id="pBa-NZ-rz0"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWd-tf-215">
                                         <rect key="frame" x="0.0" y="148" width="215" height="30"/>
@@ -925,6 +972,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0BV-Oa-rzO"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="0BV-Oa-rzO" firstAttribute="trailing" secondItem="vlq-TP-RJf" secondAttribute="trailing" constant="10" id="42l-N2-Kwm"/>
                             <constraint firstItem="lQv-xC-RbW" firstAttribute="leading" secondItem="0BV-Oa-rzO" secondAttribute="leading" constant="67" id="GL2-IU-bWI"/>
@@ -937,6 +985,9 @@
                             <constraint firstItem="0BV-Oa-rzO" firstAttribute="bottom" secondItem="vlq-TP-RJf" secondAttribute="bottom" id="s5a-x0-ZsV"/>
                             <constraint firstItem="ltb-7B-s5s" firstAttribute="top" secondItem="lQv-xC-RbW" secondAttribute="bottom" constant="48.5" id="tPE-1u-sbc"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Muu-UG-Hon" appends="YES" id="9Zz-ug-6IT"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="RrB-dw-WdR" id="wyJ-ft-biW"/>
@@ -947,6 +998,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kU-g2-HvN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Muu-UG-Hon">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="yLy-4m-PzX" id="cT0-ht-9nq"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1537" y="-1092"/>
         </scene>
@@ -983,6 +1039,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="VVi-t1-gIJ" id="27g-iB-YAw"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1003,6 +1062,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="VVi-t1-gIJ" id="Tw4-Nh-Cfi"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1023,6 +1085,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="VVi-t1-gIJ" id="Vlb-ef-QRP"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1055,6 +1120,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PUJ-j9-GUi"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="bNh-6D-hMN" firstAttribute="leading" secondItem="PUJ-j9-GUi" secondAttribute="leading" constant="20" id="0Ry-Kc-I1h"/>
                             <constraint firstItem="PUJ-j9-GUi" firstAttribute="trailing" secondItem="HNA-70-WC1" secondAttribute="trailing" constant="20" id="4Zn-Hz-n7s"/>
@@ -1076,6 +1142,9 @@
                             <constraint firstItem="PUJ-j9-GUi" firstAttribute="trailing" secondItem="fJF-68-6Dx" secondAttribute="trailing" constant="41" id="vI9-KV-he5"/>
                             <constraint firstItem="KIh-mK-yZv" firstAttribute="leading" secondItem="PUJ-j9-GUi" secondAttribute="leading" constant="20" id="zjt-Sk-PiZ"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="lC7-ah-YTl" appends="YES" id="8B3-yf-gwb"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="nKG-6Y-ywe"/>
                     <connections>
@@ -1092,6 +1161,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="umG-Y2-mnt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Vta-IT-5jw" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="lC7-ah-YTl">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="VVi-t1-gIJ" id="XSr-UX-bPD"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2860" y="-1134"/>
         </scene>

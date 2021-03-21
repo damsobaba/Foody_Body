@@ -19,6 +19,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var inputTextView: UITextView!
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var imagePartner: UIImage!
     var detailImageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
@@ -41,9 +42,9 @@ class ChatViewController: UIViewController {
     }
     
     
-    
-    
-    
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        inputTextView.resignFirstResponder()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

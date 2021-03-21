@@ -9,7 +9,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate{
     
     
     
@@ -24,6 +24,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
   
     
+
     private let authService: AuthService = AuthService()
     var image:UIImage? = nil
     
@@ -32,7 +33,8 @@ class SignUpViewController: UIViewController {
         changeButtonsAspect()
         setUpAvatar()
     }
-    
+  
+  
     
     func changeButtonsAspect() {
        
@@ -62,10 +64,18 @@ class SignUpViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+       emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        fullnameTextField.resignFirstResponder()
+    }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        emailTextField.resignFirstResponder()
+         passwordTextField.resignFirstResponder()
+         fullnameTextField.resignFirstResponder()
+     return true
+ }
     func validateFields() {
         guard let username = self.fullnameTextField.text, !username.isEmpty else {
          presentAlert(title: "", message: "please enter a username")

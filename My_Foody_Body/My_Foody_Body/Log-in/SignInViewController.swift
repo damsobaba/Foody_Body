@@ -27,12 +27,8 @@ class SignInViewController: UIViewController {
         
         logoImageView.layer.cornerRadius = 20
         logoImageView.clipsToBounds = true
-    }
-    
-    
-    @IBAction func dismissAction(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
+       
+        }
     
     
     func validateFields() {
@@ -49,8 +45,21 @@ class SignInViewController: UIViewController {
         
     }
     
- 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        emailTextField.resignFirstResponder()
+         passwordTextField.resignFirstResponder()
+     return true
+    }
     
+    
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+       emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+        
+        @IBAction func dismissAction(_ sender: Any) {
+            navigationController?.popViewController(animated: true)
+        }
     @IBAction func signInButtonDidTapped(_ sender: Any) {
         self.view.endEditing(true)
         self.validateFields()

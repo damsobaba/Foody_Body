@@ -51,12 +51,33 @@ class ProfileTableViewController: UITableViewController {
     func setupView() {
         setupAvatar()
         setUpFoodImage()
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+   
+    
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        ageTextField.resignFirstResponder()
+        usernameTextField.resignFirstResponder()
+        emailTextField.resignFirstResponder()
+        statusTextField.resignFirstResponder()
+        foodDescriptionTextField.resignFirstResponder()
+        foodDescription2TextField.resignFirstResponder()
+        foodDescription3TextField.resignFirstResponder()
     }
+      
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        ageTextField.resignFirstResponder()
+        usernameTextField.resignFirstResponder()
+        emailTextField.resignFirstResponder()
+        statusTextField.resignFirstResponder()
+        foodDescriptionTextField.resignFirstResponder()
+        foodDescription2TextField.resignFirstResponder()
+        foodDescription3TextField.resignFirstResponder()
+     return true
+ }
+    
+    
     
     func setupAvatar() {
         avatar.layer.cornerRadius = 40

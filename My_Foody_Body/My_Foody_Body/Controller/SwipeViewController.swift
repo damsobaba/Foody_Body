@@ -88,7 +88,6 @@ class SwipeViewController:UIViewController   {
         observeData()
         let curent = Api.User.currentUserId
         databaseManager.observeUsers { (user) in
-            print(user.email)
             if user.uid == curent {
                 return
             }
@@ -195,14 +194,9 @@ class SwipeViewController:UIViewController   {
                     
                     card.removeFromSuperview()
                 }
-                
-                //                if swipeUsers.contains(card.user.uid) {
-                //                    return
-                //                } else {
+            
                 
                 swipeUsers.append(card.user.uid)
-                print(card.user.uid)
-                //               }
                 saveToFirebase(like: true, card: card)
                 
                 self.updateCards(card: card)
@@ -214,7 +208,6 @@ class SwipeViewController:UIViewController   {
                 }) { (bool) in
                     card.removeFromSuperview()
                 }
-                
                 saveToFirebase(like: false, card: card)
                 self.updateCards(card: card)
                 return
@@ -299,7 +292,6 @@ class SwipeViewController:UIViewController   {
         dict["swiped"] = swipe
         
         Api.User.saveUserProfile(dict: dict) {_ in
-            print(dict.count)
         } onError: { (errorMesage) in
             print(errorMesage)
         }
