@@ -17,7 +17,7 @@ final class DadabaseManagerTests: XCTestCase {
      
         // observe data from all users
         func observeUsers(onSuccess: @escaping (UserCompletion)) {
-            guard let getUser = User.transformUser(dict: ["username":"pierre", "email":"pierre@gmail.com", "profileImageUrl": "blabla", "uid": "uUs63keFW1NiuHtW85bbFMHn12v2", "status":"salut, je suis nouveau" ]) else { return }
+            guard let getUser = User.transformUser(dict: ["username":"pierre", "email":"pierre@gmail.com", "profileImageUrl": "kdkdkfjfjfj", "uid": "uUs63keFW1NiuHtW85bbFMHn12v2", "status":"salut, je suis nouveau" ]) else { return }
 
             onSuccess(getUser)
 
@@ -45,8 +45,6 @@ final class DadabaseManagerTests: XCTestCase {
 
 
     // MARK: - Tests
-
- 
 
     func testGetUserDataMethod_WhenTheDictInfoArecorrect_ThenShouldReturnAUser() {
         let sut: DatabaseManager = DatabaseManager(database: DatabaseStub())

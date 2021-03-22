@@ -14,32 +14,23 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var statusTextField: UITextField!
-    
-    
     @IBOutlet weak var cookingImageView: UIImageView!
     @IBOutlet weak var cookingImageView2: UIImageView!
     @IBOutlet weak var cookingImageView3: UIImageView!
-    
-    
     @IBOutlet weak var genderSegment: UISegmentedControl!
     @IBOutlet weak var ageTextField: UITextField!
-    
     @IBOutlet var foodDescriptionTextField: UITextField!
     @IBOutlet weak var foodDescription2TextField: UITextField!
     @IBOutlet weak var foodDescription3TextField: UITextField!
     
-    
     private let authService: AuthService = AuthService()
     private let databaseManager: DatabaseManager = DatabaseManager()
-    
-    var imageTag = 0
-    
-    var ppImage: UIImage?
+    private var imageTag = 0
+    private var ppImage: UIImage?
     private var currentImageView: UIImageView? = nil
-    
-    var favoriteFoodImage:UIImage?
-    var favoriteFoodImage2: UIImage?
-    var favoriteFoodImage3: UIImage?
+    private var favoriteFoodImage:UIImage?
+    private var favoriteFoodImage2: UIImage?
+    private var favoriteFoodImage3: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +44,6 @@ class ProfileTableViewController: UITableViewController {
         setUpFoodImage()
     }
     
-   
-    
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         ageTextField.resignFirstResponder()
         usernameTextField.resignFirstResponder()
@@ -64,7 +53,6 @@ class ProfileTableViewController: UITableViewController {
         foodDescription2TextField.resignFirstResponder()
         foodDescription3TextField.resignFirstResponder()
     }
-      
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         ageTextField.resignFirstResponder()
@@ -74,10 +62,8 @@ class ProfileTableViewController: UITableViewController {
         foodDescriptionTextField.resignFirstResponder()
         foodDescription2TextField.resignFirstResponder()
         foodDescription3TextField.resignFirstResponder()
-     return true
- }
-    
-    
+        return true
+    }
     
     func setupAvatar() {
         avatar.layer.cornerRadius = 40
@@ -89,11 +75,11 @@ class ProfileTableViewController: UITableViewController {
         [cookingImageView,cookingImageView2,cookingImageView3].forEach { $0?.layer.cornerRadius = 20}
         [cookingImageView,cookingImageView2,cookingImageView3].forEach { $0?.clipsToBounds = true }
         [cookingImageView,cookingImageView2,cookingImageView3].forEach { $0?.isUserInteractionEnabled = true
-            
         }
         
     }
-// load the profila data from the firebase
+    
+    // load the profila data from the firebase
     func observeData() {
         databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
             self.usernameTextField.text = user.username
@@ -103,7 +89,6 @@ class ProfileTableViewController: UITableViewController {
             self.cookingImageView.loadImage(user.foodImage)
             self.cookingImageView2.loadImage(user.foodImage2)
             self.cookingImageView3.loadImage(user.foodImage3)
-            
             if let age = user.age {
                 self.ageTextField.text = "\(age)"
             } else {
@@ -112,19 +97,16 @@ class ProfileTableViewController: UITableViewController {
             if let isMale = user.isMale {
                 self.genderSegment.selectedSegmentIndex = (isMale == true) ? 0 : 1
             }
-            
             if let foodDescription = user.foodDescription {
                 self.foodDescriptionTextField.text = foodDescription
             } else {
                 self.foodDescriptionTextField.placeholder = "add ingredients"
             }
-            
             if let foodDescription2 = user.foodDesciption2 {
                 self.foodDescription2TextField.text = foodDescription2
             } else {
                 self.foodDescription2TextField.placeholder = "add ingredients"
             }
-            
             if let foodDescription3 = user.foodDescription3 {
                 self.foodDescription3TextField.text = foodDescription3
             } else {
@@ -134,8 +116,6 @@ class ProfileTableViewController: UITableViewController {
         
     }
     
-    
-    
     @IBAction func logoutBtnDidTapped(_ sender: Any) {
         authService.logOut { isSuccess in
             (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
@@ -143,9 +123,7 @@ class ProfileTableViewController: UITableViewController {
                 self.presentAlert(title: "error", message: "We having trouble tryng to log you out")
             }
         }
-        
     }
-    
     
     // saves all the informations into firebase database
     @IBAction func saveBtnDidTapped(_ sender: Any) {
@@ -180,7 +158,6 @@ class ProfileTableViewController: UITableViewController {
         authService.saveUserProfile(dict: dict, onSuccess: { _ in 
             if let saveFoodImage = self.favoriteFoodImage?.jpeg  {
                 self.authService.saveFoodPhoto(image: saveFoodImage, uid: Api.User.currentUserId, dictValue:"foodImage") { (errorMessage)  in
-                    
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             }
@@ -190,9 +167,8 @@ class ProfileTableViewController: UITableViewController {
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
             }
-            
             if let saveFoodImage3 = self.favoriteFoodImage3?.jpeg  {
-
+                
                 self.authService.saveFoodPhoto(image: saveFoodImage3, uid: Api.User.currentUserId, dictValue:"foodImage3") { (errorMessage)  in
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
@@ -200,15 +176,12 @@ class ProfileTableViewController: UITableViewController {
             if let ppimg = self.ppImage?.jpeg {
                 self.authService.savePhotoProfile(image: ppimg, uid: Api.User.currentUserId) {
                     (errorMessage) in
-                    
                     self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
                 }
-                
             }
         }) { (errorMessage) in
             self.presentAlert(title: "Error", message: "they have been issues trying to change you profile")
         }
-        
         self.dismissLoadAlertWithMessage(alert: self.loadingAlert(), title: "", message: "Changes has been saved")
     }
     
@@ -226,13 +199,9 @@ class ProfileTableViewController: UITableViewController {
     }
 }
 
-
-
-
 extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         let imageSelected = info[UIImagePickerController.InfoKey.editedImage]
         currentImageView?.image = imageSelected as? UIImage
         
@@ -245,25 +214,20 @@ extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigat
             favoriteFoodImage2 = imageSelected as? UIImage
         case 3:
             favoriteFoodImage3 = imageSelected as? UIImage
-            
         default:
             break
         }
-        
         let imageOriginal = info[UIImagePickerController.InfoKey.originalImage]
         currentImageView?.image = imageOriginal as? UIImage
         switch imageTag {
         case 0:
-            
             ppImage = imageOriginal as? UIImage
-            
         case 1:
             favoriteFoodImage = imageOriginal as? UIImage
         case 2:
             favoriteFoodImage2 = imageOriginal as? UIImage
         case 3:
             favoriteFoodImage3 = imageOriginal as? UIImage
-            
         default:
             break
         }

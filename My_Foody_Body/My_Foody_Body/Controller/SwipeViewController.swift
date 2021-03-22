@@ -11,7 +11,7 @@ import FirebaseDatabase
 
 
 class SwipeViewController:UIViewController   {
-
+    
     @IBOutlet weak var cardStack: UIView!
     @IBOutlet weak var likeImg: UIImageView!
     @IBOutlet weak var nopeImg: UIImageView!
@@ -29,8 +29,8 @@ class SwipeViewController:UIViewController   {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       enableUserInteractionOnButton()
-       findUsers()
+        enableUserInteractionOnButton()
+        findUsers()
         
     }
     
@@ -44,7 +44,7 @@ class SwipeViewController:UIViewController   {
         likeImg.isUserInteractionEnabled = true
         let tapLikeImg = UITapGestureRecognizer(target: self, action: #selector(likeImgDidTap))
         likeImg.addGestureRecognizer(tapLikeImg)
-
+        
     }
     
     @objc func nopeImgDidTap() {
@@ -85,23 +85,21 @@ class SwipeViewController:UIViewController   {
     
     // syncronyse the users of the data base
     func findUsers() {
-        observeData()
         let curent = Api.User.currentUserId
         databaseManager.observeUsers { (user) in
             if user.uid == curent {
                 return
             }
-            
             self.users.append(user)
-        
+            
             let displayUser = self.users.filter {
                 !self.swipeUsers.contains($0.uid)
                 
             }
-           self.filteredUser = displayUser
+            self.filteredUser = displayUser
             self.setupCard(user: user)
         }
-
+        
     }
     
     
@@ -194,7 +192,7 @@ class SwipeViewController:UIViewController   {
                     
                     card.removeFromSuperview()
                 }
-            
+                
                 
                 swipeUsers.append(card.user.uid)
                 saveToFirebase(like: true, card: card)
@@ -263,11 +261,8 @@ class SwipeViewController:UIViewController   {
             card.transform = transform
         }
     }
-    
-    
     //update info in dataBase
     func saveToFirebase(like: Bool, card: CardView) {
-        saveSwipe()
         Reference().databaseActionForUser(uid: Api.User.currentUserId)
             .updateChildValues([card.user.uid: like]) { (error, ref) in
                 if error == nil, like == true {
@@ -284,28 +279,5 @@ class SwipeViewController:UIViewController   {
             })
         }
     }
-    
-    // save swipe users into the data base
-    func saveSwipe() {
-        var dict = Dictionary<String, Any>()
-        let swipe = swipeUsers
-        dict["swiped"] = swipe
-        
-        Api.User.saveUserProfile(dict: dict) {_ in
-        } onError: { (errorMesage) in
-            print(errorMesage)
-        }
-    }
-    
-    
-    // get info from the swiped node in data base
-    func observeData() {
-        databaseManager.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
-            if let userSwipe = user.swipeUser {
-                self.swipeUsers = userSwipe
-            }
-        }
-    }
 }
-
 

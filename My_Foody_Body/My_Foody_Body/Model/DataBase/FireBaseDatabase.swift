@@ -70,5 +70,10 @@ final class FirebaseDatabase: DatabaseType {
         }
     }
 }
+struct Api {
+    static var User = AuthManager()
+    static var Message = MessageApi()
+   
+}
 
 

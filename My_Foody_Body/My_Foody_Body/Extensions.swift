@@ -37,9 +37,6 @@ extension UIImage {
     var png: Data? { pngData() }
 }
 
-
-
-
 extension String {
     func estimateFrameForText(_ text: String) -> CGRect {
         let size = CGSize(width: 250, height: 1000)

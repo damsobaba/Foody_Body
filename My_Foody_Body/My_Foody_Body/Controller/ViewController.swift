@@ -21,7 +21,6 @@ class ViewController: UIViewController {
 
     private func changeButtonsAspect(){
         createAccountButton.layer.cornerRadius = 6
-    
     }
     
     

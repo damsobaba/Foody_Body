@@ -11,8 +11,6 @@ import FirebaseStorage
 
 class SignUpViewController: UIViewController, UITextFieldDelegate{
     
-    
-    
     @IBOutlet weak var titleTextLabel: UILabel!
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var fullnameContainterView: UIView!
@@ -24,9 +22,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var signUpButton: UIButton!
   
     
-
     private let authService: AuthService = AuthService()
-    var image:UIImage? = nil
+    private var image:UIImage? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,19 +31,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate{
         setUpAvatar()
     }
   
-  
-    
     func changeButtonsAspect() {
-       
         signUpButton.layer.cornerRadius = 6
-        
     }
     
     func setUpAvatar() {
         avatar.layer.cornerRadius = 40
         avatar.clipsToBounds = true
         avatar.isUserInteractionEnabled = true
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentPicker))
         avatar.addGestureRecognizer(tapGesture)
     }
@@ -76,25 +68,21 @@ class SignUpViewController: UIViewController, UITextFieldDelegate{
          fullnameTextField.resignFirstResponder()
      return true
  }
+    
     func validateFields() {
         guard let username = self.fullnameTextField.text, !username.isEmpty else {
          presentAlert(title: "", message: "please enter a username")
             return
         }
         guard let email = self.emailTextField.text, !email.isEmpty else {
-            
             presentAlert(title: "", message: "Please enter a valide email")
-            
             return
         }
         guard let password = self.passwordTextField.text, !password.isEmpty else {
             presentAlert(title: "", message: "Please enter a valid password")
-            
             return
         }
-        
     }
-    
     
     @IBAction func signUpButtonDidTapped(_ sender: Any) {
         self.view.endEditing(true)
@@ -122,12 +110,10 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
             image = imageSelected
             avatar.image = imageSelected
         }
-        
         if let imageOriginal = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             image = imageOriginal
             avatar.image = imageOriginal
         }
-        
         picker.dismiss(animated: true, completion: nil)
     }
 }

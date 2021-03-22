@@ -9,11 +9,7 @@ import UIKit
 import MobileCoreServices
 import AVFoundation
 
-
 class ChatViewController: UIViewController {
-    
-    let authService: AuthService = AuthService()
-
     
     @IBOutlet weak var mediaButton: UIButton!
     @IBOutlet weak var inputTextView: UITextView!
@@ -21,6 +17,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    let authService: AuthService = AuthService()
     var imagePartner: UIImage!
     var detailImageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
     var avatarImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
@@ -35,12 +32,9 @@ class ChatViewController: UIViewController {
             avatarImageView.loadImage(partnerUser?.profileImageUrl) {
                 (image) in
                 self.partnerUser?.profileImage = image
-
-
             }
         }
     }
-    
     
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         inputTextView.resignFirstResponder()
@@ -50,13 +44,10 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
         setupPicker()
         setupInputContainer()
-        
         setupNativationBar()
         setupTableView()
         observeMessages()
     }
-    
-  
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -78,29 +69,19 @@ class ChatViewController: UIViewController {
     
     @IBAction func mediaBtnDidTapped(_ sender: Any) {
         let alert = UIAlertController(title: "My_Foody_Body", message: "Select source", preferredStyle: UIAlertController.Style.actionSheet)
-
-        
         let library = UIAlertAction(title: "Choose an Image ", style: UIAlertAction.Style.default) { (_) in
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
                 self.picker.sourceType = .photoLibrary
                 self.picker.mediaTypes = [String(kUTTypeImage), String(kUTTypeMovie)]
-                
                 self.present(self.picker, animated: true, completion: nil)
             } else {
                 print("Unavailable")
             }
         }
-        
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
-
         alert.addAction(cancel)
-
         alert.addAction(library)
-        
         present(alert, animated: true, completion: nil)
-        
-    
     }
-    
 }
 

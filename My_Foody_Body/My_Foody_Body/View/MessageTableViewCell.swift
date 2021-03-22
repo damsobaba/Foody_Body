@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//import AVFoundation
+
 
 class MessageTableViewCell: UITableViewCell {
 
@@ -20,8 +20,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var bubbleRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
-//    var playerLayer: AVPlayerLayer?
-//    var player: AVPlayer?
+
     var message: Message!
     
     override func awakeFromNib() {

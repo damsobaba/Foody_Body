@@ -15,9 +15,6 @@ class AuthServiceTest: XCTestCase {
 
     
         private let isSuccess: Bool
-
-     
-//  
         
         var currentUserId: String { return isSuccess ? "uUs63keFW1NiuHtW85bbFMHn12v2" : "" }
 
@@ -26,19 +23,13 @@ class AuthServiceTest: XCTestCase {
 
         }
 
-
-
-
         func signIn(email: String, password: String, callback: @escaping (Bool) -> Void) {
             callback(isSuccess)
         }
 
-
         func signUp(userName: String, email: String, password: String, image: Data?, callback: @escaping (Bool) -> Void) {
             callback(isSuccess)
         }
-
-
 
         func logOut(callback: @escaping (Bool) -> Void) {
             callback(isSuccess)
@@ -48,11 +39,8 @@ class AuthServiceTest: XCTestCase {
             callback(isSuccess)
         }
 
-
-
         func saveUserProfile(dict: Dictionary<String, Any>, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void) {
             onSuccess(isSuccess)
-
         }
 
         func savePhotoProfile(image: Data, uid: String, onError: @escaping (String) -> Void) {
@@ -70,8 +58,6 @@ class AuthServiceTest: XCTestCase {
         func savePhotoMessage(image: UIImage?, id: String, callback: @escaping (Result<Any, Error>) -> Void) {
             callback(.success(isSuccess))
         }
-
-
     }
 
 

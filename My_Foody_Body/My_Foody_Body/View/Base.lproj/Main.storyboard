@@ -1004,7 +1004,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1537" y="-1092"/>
+            <point key="canvasLocation" x="1513" y="-678"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="M9P-jd-7ZO">
@@ -1167,7 +1167,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2860" y="-1134"/>
+            <point key="canvasLocation" x="2678" y="-702"/>
         </scene>
     </scenes>
     <resources>

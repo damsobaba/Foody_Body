@@ -35,7 +35,6 @@ final class AuthService {
 
     func logOut(callback: @escaping (Bool) -> Void) {
          auth.logOut(callback: callback)
-
     }
 
     func isUserConnected(callback: @escaping (Bool) -> Void) {
@@ -61,6 +60,4 @@ final class AuthService {
     func savePhotoMessage(image: UIImage?, id: String, callback: @escaping (Result<Any, Error>)  -> Void) {
         auth.savePhotoMessage(image: image, id: id, callback: callback)
     }
-    
-    
 }

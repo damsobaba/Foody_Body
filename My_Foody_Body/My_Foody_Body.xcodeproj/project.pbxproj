@@ -43,10 +43,13 @@
 		CE92479E25F941840069C950 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92479C25F941840069C950 /* DatabaseManager.swift */; };
 		CE9247A425F9418D0069C950 /* FireBaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9247A325F9418D0069C950 /* FireBaseDatabase.swift */; };
 		CE9247A525F9418D0069C950 /* FireBaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9247A325F9418D0069C950 /* FireBaseDatabase.swift */; };
-		CE9247AB25F941990069C950 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9247AA25F941990069C950 /* Api.swift */; };
-		CE9247AC25F941990069C950 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9247AA25F941990069C950 /* Api.swift */; };
 		CEA4193F25E020A600822294 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4193E25E020A600822294 /* DetailViewController.swift */; };
 		CEC8B87B25DEE9AD00A995E6 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC8B87A25DEE9AD00A995E6 /* Alert.swift */; };
+		CEDE2AED26089F16006F8AB3 /* UserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE2AEC26089F16006F8AB3 /* UserTest.swift */; };
+		CEDE2AF12608A45B006F8AB3 /* MessageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE2AF02608A45B006F8AB3 /* MessageTest.swift */; };
+		CEDE2AF52608A6CD006F8AB3 /* MessageApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE2AF42608A6CD006F8AB3 /* MessageApiTest.swift */; };
+		CEDE2AFD2608AB29006F8AB3 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE2AFC2608AB29006F8AB3 /* MessageManager.swift */; };
+		CEDE2B002608AFDE006F8AB3 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE2AFC2608AB29006F8AB3 /* MessageManager.swift */; };
 		CEDEC97A25DEFE9B00497262 /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDEC97925DEFE9B00497262 /* SwipeViewController.swift */; };
 		CEE3B07925DD9F5F00834968 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B07825DD9F5F00834968 /* ProfileTableViewController.swift */; };
 		CEE3B07E25DD9FC400834968 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B07D25DD9FC400834968 /* ChatViewController.swift */; };
@@ -95,9 +98,12 @@
 		CE92479525F9416B0069C950 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		CE92479C25F941840069C950 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		CE9247A325F9418D0069C950 /* FireBaseDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FireBaseDatabase.swift; sourceTree = "<group>"; };
-		CE9247AA25F941990069C950 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		CEA4193E25E020A600822294 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		CEC8B87A25DEE9AD00A995E6 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		CEDE2AEC26089F16006F8AB3 /* UserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTest.swift; sourceTree = "<group>"; };
+		CEDE2AF02608A45B006F8AB3 /* MessageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTest.swift; sourceTree = "<group>"; };
+		CEDE2AF42608A6CD006F8AB3 /* MessageApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageApiTest.swift; sourceTree = "<group>"; };
+		CEDE2AFC2608AB29006F8AB3 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		CEDEC96425DEFAFC00497262 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = /Users/adammabrouki/Desktop/P12/My_Foody_Body/My_Foody_Body/View/CardView.xib; sourceTree = "<absolute>"; };
 		CEDEC97925DEFE9B00497262 /* SwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		CEE3B07825DD9F5F00834968 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +185,9 @@
 			children = (
 				CE0D6D2A25F134A90093DFF5 /* AuthServiceTest.swift */,
 				CE0D6D2225F133E00093DFF5 /* DatabaseManagerTest.swift */,
+				CEDE2AEC26089F16006F8AB3 /* UserTest.swift */,
+				CEDE2AF02608A45B006F8AB3 /* MessageTest.swift */,
+				CEDE2AF42608A6CD006F8AB3 /* MessageApiTest.swift */,
 				CE08AA1D25D5BC7000C6F688 /* Info.plist */,
 			);
 			path = My_Foody_BodyTests;
@@ -207,10 +216,10 @@
 			children = (
 				CE9247B225F941F00069C950 /* Auth */,
 				CE9247B125F941CC0069C950 /* DataBase */,
-				CE9247AA25F941990069C950 /* Api.swift */,
 				CE88A21125DD574800BFB8F8 /* User.swift */,
 				CEE3B09A25DDA3D600834968 /* Message.swift */,
 				CEE3B09F25DDA3FE00834968 /* MessageApi.swift */,
+				CEDE2AFC2608AB29006F8AB3 /* MessageManager.swift */,
 				CE88A20725DD55D900BFB8F8 /* Reference.swift */,
 			);
 			path = Model;
@@ -457,12 +466,12 @@
 				CEA4193F25E020A600822294 /* DetailViewController.swift in Sources */,
 				CE08AA0525D5BC6D00C6F688 /* AppDelegate.swift in Sources */,
 				CEE3B0A025DDA3FE00834968 /* MessageApi.swift in Sources */,
-				CE9247AB25F941990069C950 /* Api.swift in Sources */,
 				CE08AA5025D5BDEC00C6F688 /* SignUpViewController.swift in Sources */,
 				CEE3B07925DD9F5F00834968 /* ProfileTableViewController.swift in Sources */,
 				CE88A21225DD574800BFB8F8 /* User.swift in Sources */,
 				CE08AA5525D5BE1600C6F688 /* SignInViewController.swift in Sources */,
 				CEE3B08925DDA14500834968 /* MessageTableViewCell.swift in Sources */,
+				CEDE2AFD2608AB29006F8AB3 /* MessageManager.swift in Sources */,
 				CEE3B08325DDA05200834968 /* ChatViewControllerExtension.swift in Sources */,
 				CE88A1F125DD542C00BFB8F8 /* PeopleTableViewController.swift in Sources */,
 				CE80EF3125DFD18B002520AC /* CardView.swift in Sources */,
@@ -482,12 +491,15 @@
 				CE92479E25F941840069C950 /* DatabaseManager.swift in Sources */,
 				CE92479725F9416B0069C950 /* AuthService.swift in Sources */,
 				CE9247A525F9418D0069C950 /* FireBaseDatabase.swift in Sources */,
+				CEDE2AF12608A45B006F8AB3 /* MessageTest.swift in Sources */,
+				CEDE2B002608AFDE006F8AB3 /* MessageManager.swift in Sources */,
 				CE5E9EAF25FA60E200F5AA7F /* MessageApi.swift in Sources */,
 				CE5E9EAC25FA60BF00F5AA7F /* Reference.swift in Sources */,
+				CEDE2AED26089F16006F8AB3 /* UserTest.swift in Sources */,
 				CE2B44A325FA855400B7D264 /* AppDelegate.swift in Sources */,
 				CE2B44A925FA855A00B7D264 /* Extensions.swift in Sources */,
+				CEDE2AF52608A6CD006F8AB3 /* MessageApiTest.swift in Sources */,
 				CE2B449925FA6AD500B7D264 /* Message.swift in Sources */,
-				CE9247AC25F941990069C950 /* Api.swift in Sources */,
 				CE0D6D2B25F134A90093DFF5 /* AuthServiceTest.swift in Sources */,
 				CE2B44AC25FA855C00B7D264 /* Alert.swift in Sources */,
 				CE2B449325FA6AB200B7D264 /* User.swift in Sources */,

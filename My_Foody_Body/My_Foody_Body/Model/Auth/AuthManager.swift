@@ -29,7 +29,6 @@ protocol AuthType {
 class AuthManager: AuthType {
     
     private let ref = Reference()
-    
     var currentUserId: String {
         return Auth.auth().currentUser != nil ? Auth.auth().currentUser!.uid : ""
     }
@@ -83,7 +82,6 @@ class AuthManager: AuthType {
         }
     }
     
-    
     // allowed user to log out
     func logOut(callback: @escaping (Bool) -> Void) {
         do {
@@ -93,6 +91,7 @@ class AuthManager: AuthType {
             callback(false)
         }
     }
+    
     // check if user is already connected
     func isUserConnected(callback: @escaping (Bool) -> Void) {
         _ = Auth.auth().addStateDidChangeListener { _, user in
@@ -141,7 +140,6 @@ class AuthManager: AuthType {
         let storageProfileRef = Reference().storageSpecificProfile(uid: uid)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
-        
         storageProfileRef.putData(image, metadata: metadata, completion: { (storageMetaData, error) in
             if error != nil {
                 onError(error!.localizedDescription)
@@ -199,7 +197,6 @@ class AuthManager: AuthType {
         if let imagePhoto = image {
             let ref = Reference().storageSpecificImageMessage(id: id)
             if let data = imagePhoto.jpegData(compressionQuality: 0.5) {
-                
                 ref.putData(data, metadata: nil) { (metadata, error) in
                     if error != nil {
                         callback(.failure(error!))
