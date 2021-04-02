@@ -1,3 +1,4 @@
+
 # Foody_Body
 
 En quelques mots Foody Body c’est quoi ?
@@ -11,3 +12,4 @@ Il entrera ensuite dans l’application ou il pourra soit choisir de swiper des 
 
 # Sign in - Sign up
 
+<img width="1022" alt="Capture d’écran 2021-04-02 à 13 21 56" src="https://user-images.githubusercontent.com/59175268/113411627-8fc02f80-93b6-11eb-922c-b059d2e76acd.png">
