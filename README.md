@@ -12,10 +12,13 @@ Il entrera ensuite dans l’application ou il pourra soit choisir de swiper des 
 
 # Sign in - Sign up
 
-<img width="1022" alt="Capture d’écran 2021-04-02 à 13 21 56" src="https://user-images.githubusercontent.com/59175268/113411627-8fc02f80-93b6-11eb-922c-b059d2e76acd.png">
+
+<img width="982" alt="Capture d’écran 2021-04-02 à 13 31 28" src="https://user-images.githubusercontent.com/59175268/113412111-bdf23f00-93b7-11eb-91b5-aae13044eb6f.png">
+
 
 # Swipe
-<img width="1022" alt="Capture d’écran 2021-04-02 à 13 24 20" src="https://user-images.githubusercontent.com/59175268/113411713-cf871700-93b6-11eb-8234-eda650c0ce03.png">
+ <img width="982" alt="Capture d’écran 2021-04-02 à 13 32 04" src="https://user-images.githubusercontent.com/59175268/113412148-d3676900-93b7-11eb-8db7-d346d8489028.png">
+
 
 # Match
 <img width="1022" alt="Capture d’écran 2021-04-02 à 13 25 53" src="https://user-images.githubusercontent.com/59175268/113411790-f6454d80-93b6-11eb-83d5-111d0c2017f6.png">
@@ -25,6 +28,7 @@ Il entrera ensuite dans l’application ou il pourra soit choisir de swiper des 
 
 # Detail
 <img width="982" alt="Capture d’écran 2021-04-02 à 13 27 37" src="https://user-images.githubusercontent.com/59175268/113411895-3f959d00-93b7-11eb-9442-ac2250e3d069.png">
+
 # Profil
 
 <img width="982" alt="Capture d’écran 2021-04-02 à 13 29 56" src="https://user-images.githubusercontent.com/59175268/113412044-926f5480-93b7-11eb-8e93-1950c3803ab1.png">
